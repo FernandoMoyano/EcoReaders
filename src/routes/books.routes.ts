@@ -6,8 +6,8 @@ export const bookRoutes: Router = express.Router()
 const bookController = new BookController()
 
 //GET /api/books
-bookRoutes.get('/', bookController.getBooksController)
+bookRoutes.get('/', bookController.getBooks)
 //POST /api/books
-bookRoutes.post('/new', bookController.creteBookController)
+bookRoutes.post('/new', bookController.creteBook)
 //DELETE /api/books/:id
-bookRoutes.delete('/:id', bookController.deleteBookController)
+bookRoutes.delete('/:id', bookController.deleteBook)

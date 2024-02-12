@@ -6,7 +6,7 @@ import { BookId, CreateBook, IBookRow } from '../interfaces/Book.interface'
 export class BookService {
   //Obtener todos los libros
   async getAll() {
-    const books = await selectQuery<IBookRow>('SELECT * FROM books')
+    const [books] = await selectQuery<IBookRow>('SELECT * FROM books')
     return books
   }
 

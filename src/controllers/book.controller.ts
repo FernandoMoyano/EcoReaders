@@ -5,7 +5,7 @@ import { BookService } from '../services/book.service'
 const bookService = new BookService()
 
 export class BookController {
-  async getBooksController(req: Request, res: Response) {
+  async getBooks(req: Request, res: Response) {
     try {
       const books = await bookService.getAll()
       res.json(books)
@@ -14,7 +14,7 @@ export class BookController {
     }
   }
 
-  async creteBookController(req: Request, res: Response) {
+  async creteBook(req: Request, res: Response) {
     try {
       const bookData: CreateBook = req.body
       // Log de depuración
@@ -26,7 +26,7 @@ export class BookController {
     }
   }
 
-  async deleteBookController(req: Request, res: Response) {
+  async deleteBook(req: Request, res: Response) {
     try {
       const id: BookId = req.params.id
       //Log depuración
