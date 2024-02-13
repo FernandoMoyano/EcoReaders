@@ -5,7 +5,7 @@ export const handleError = (error: ZodError, req: Request, res: Response, next: 
   if (error instanceof ZodError) {
     const errorDetail = error.errors.map((err) => ({
       message: err.message,
-      path: err.path.join('.'),
+      corregir: err.path.join('.'),
       code: err.code,
     }))
     console.log('Error de validación' + errorDetail)

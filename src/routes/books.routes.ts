@@ -8,7 +8,9 @@ const bookController = new BookController()
 
 //GET /api/books
 bookRoutes.get('/', bookController.getBooks)
-//POST /api/books
+//GET/api/books/:id
+bookRoutes.get('/:id', bookController.getBook)
+//POST /api/books/new
 bookRoutes.post('/new', dataValidator, bookController.creteBook)
 //DELETE /api/books/:id
 bookRoutes.delete('/:id', bookController.deleteBook)

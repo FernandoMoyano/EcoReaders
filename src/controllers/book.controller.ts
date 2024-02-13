@@ -5,6 +5,7 @@ import { BookService } from '../services/book.service'
 const bookService = new BookService()
 
 export class BookController {
+  //GET
   async getBooks(req: Request, res: Response) {
     try {
       const books = await bookService.getAll()
@@ -14,6 +15,18 @@ export class BookController {
     }
   }
 
+  //GET
+  async getBook(req: Request, res: Response) {
+    try {
+      const id: BookId = req.params.id
+      const book = await bookService.getOne(id)
+      res.json(book)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  //POST
   async creteBook(req: Request, res: Response) {
     try {
       const bookData: CreateBook = req.body
@@ -25,7 +38,7 @@ export class BookController {
       console.log(error)
     }
   }
-
+  //DELETE
   async deleteBook(req: Request, res: Response) {
     try {
       const id: BookId = req.params.id
