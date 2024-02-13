@@ -1,5 +1,6 @@
 import z from 'zod'
 
+const bookStatusEnum = ['Available', 'Sold', 'Reserved'] as const
 const bookConditionEnum = ['new', 'Like new', 'Lined'] as const
 const bookCategoryEnum = [
   'Fiction',
@@ -23,4 +24,7 @@ export const bookSchema = z.object({
   price: z.number(),
   bookCondition: z.enum(bookConditionEnum),
   bookCategory: z.enum(bookCategoryEnum),
+  sellerId: z.number(),
+  status: z.enum(bookStatusEnum),
+  isbn: z.string().optional(),
 })
