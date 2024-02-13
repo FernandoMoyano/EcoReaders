@@ -3,6 +3,7 @@ dotenv.config()
 
 import express, { Application } from 'express'
 import apiRouter from './routes/index'
+import { handleError } from './middlewares/handleError'
 
 //Clase App -----------------------------------------
 export class App {
@@ -29,6 +30,7 @@ export class App {
 
   middlewares() {
     this.app.use(express.json())
+    this.app.use(handleError)
     this.app.use('/api', apiRouter)
   }
 }

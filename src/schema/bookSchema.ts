@@ -23,7 +23,7 @@ export const bookSchema = z.object({
   author: z.string(),
   price: z.number(),
   bookCondition: z.enum(bookConditionEnum),
-  bookCategory: z.enum(bookCategoryEnum),
+  category: z.enum(bookCategoryEnum),
   sellerId: z.number(),
   status: z.enum(bookStatusEnum),
   isbn: z.string().optional(),
