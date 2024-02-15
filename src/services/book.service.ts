@@ -35,4 +35,17 @@ export class BookService {
 
     return results as ResultSetHeader
   }
+
+  //Actualizar un libro
+  async update(id: BookId, changes: Partial<IBookRow>) {
+    const book = await this.getOne(id)
+    const query = 'SELECT FROM books WHERE id=?'
+    const values = {
+      ...book,
+      ...changes,
+    }
+
+    const bookWithChanges = pool.execute(query, values)
+    return bookWithChanges
+  }
 }

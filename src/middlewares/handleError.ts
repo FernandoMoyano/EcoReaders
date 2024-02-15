@@ -3,6 +3,7 @@ import { ZodError } from 'zod'
 
 export const handleError = (error: ZodError, req: Request, res: Response, next: NextFunction) => {
   if (error instanceof ZodError) {
+    console.log('log desde middleware 2')
     const errorDetail = error.errors.map((err) => ({
       message: err.message,
       corregir: err.path.join('.'),

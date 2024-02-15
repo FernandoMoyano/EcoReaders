@@ -1,7 +1,7 @@
 import express from 'express'
 import { Router } from 'express'
 import { BookController } from '../controllers/book.controller'
-import { validatorSchema } from '../middlewares/dataValidator'
+import { validatorSchema } from '../middlewares/validatorSchema'
 import { bookSchema } from '../schema/bookSchema'
 
 export const bookRoutes: Router = express.Router()
@@ -14,5 +14,7 @@ bookRoutes.get('/:id', bookController.getBook)
 //POST /api/books/new
 bookRoutes.post('/new', validatorSchema(bookSchema, 'body'), bookController.creteBook)
 //DELETE /api/books/:id
+bookRoutes.patch('/:id', bookController.updateBook)
+
 bookRoutes.delete('/:id', bookController.deleteBook)
 //UPDATE /api/books/:id
