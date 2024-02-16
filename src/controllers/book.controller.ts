@@ -2,10 +2,11 @@ import { Request, Response } from 'express'
 import { BookId, CreateBook } from '../interfaces/Book.interface'
 import { BookService } from '../services/book.service'
 
+//Instancia del servicio
 const bookService = new BookService()
 
 export class BookController {
-  //GET-Obtener
+  //GET-Obtener todos los libros
   async getBooks(req: Request, res: Response) {
     try {
       const books = await bookService.getAll()
@@ -15,7 +16,7 @@ export class BookController {
     }
   }
 
-  //GET-Obtener
+  //GET-Obtener un libro
   async getBook(req: Request, res: Response) {
     try {
       const id: BookId = req.params.id
@@ -25,7 +26,7 @@ export class BookController {
       console.log(error)
     }
   }
-  //PATCH-Actualizar
+  //PATCH-Actualizar lo datos de un libro
   async updateBook(req: Request, res: Response) {
     try {
       const id = req.params.id
@@ -37,7 +38,7 @@ export class BookController {
     }
   }
 
-  //POST-Crear
+  //POST-Crear un nuevo libro
   async creteBook(req: Request, res: Response) {
     try {
       const bookData: CreateBook = req.body
@@ -49,7 +50,7 @@ export class BookController {
       console.log(error)
     }
   }
-  //DELETE-Eliminar
+  //DELETE-Eliminar un linbro
   async deleteBook(req: Request, res: Response) {
     try {
       const id: BookId = req.params.id

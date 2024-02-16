@@ -38,14 +38,13 @@ export class BookService {
 
   //Actualizar un libro
   async update(id: BookId, changes: Partial<IBookRow>) {
-    const book = await this.getOne(id)
-    const query = 'SELECT FROM books WHERE id=?'
-    const values = {
-      ...book,
-      ...changes,
-    }
-
-    const bookWithChanges = pool.execute(query, values)
-    return bookWithChanges
+    const bookId = id
+    const columnsToUpdate = Object.keys(changes)
+      .map((column) => `${column} = ?`)
+      .join(', ')
+    const query = `UPDATE books SET ${columnsToUpdate} WHERE id = ?;`
+    const values = [...Object.values(changes), bookId]
+    const booksWithChanges = await pool.execute(query, values)
+    return booksWithChanges
   }
 }

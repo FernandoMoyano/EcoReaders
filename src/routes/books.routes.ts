@@ -9,12 +9,15 @@ const bookController = new BookController()
 
 //GET /api/books
 bookRoutes.get('/', bookController.getBooks)
+
 //GET/api/books/:id
 bookRoutes.get('/:id', bookController.getBook)
+
 //POST /api/books/new
 bookRoutes.post('/new', validatorSchema(bookSchema, 'body'), bookController.creteBook)
-//DELETE /api/books/:id
+
+//UPDATE /api/books/:id
 bookRoutes.patch('/:id', bookController.updateBook)
 
+//DELETE /api/books/:id
 bookRoutes.delete('/:id', bookController.deleteBook)
-//UPDATE /api/books/:id
