@@ -1,10 +1,14 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-import express, { Application, NextFunction, Request, Response } from 'express'
+//Express
+import express, { Application } from 'express'
+//Routes
 import apiRouter from './routes/index'
+
+//Middlewares
 import { handleError } from './middlewares/handleError'
-import { loggError } from './middlewares/logError'
+import { loggError1 } from './middlewares/loggError1'
 
 //Clase App -----------------------------------------
 export class App {
@@ -31,13 +35,9 @@ export class App {
 
   middlewares() {
     this.app.use(express.json())
+    this.app.use(loggError1)
     this.app.use(handleError)
-    this.app.use((req: Request, res: Response, next: NextFunction) => {
-      // Simula un error intencional
-      const error = new Error('Este es un error intencional para probar el middleware de registro de errores')
-      next(error)
-    })
+
     this.app.use('/api', apiRouter)
-    this.app.use(loggError)
   }
 }

@@ -10,8 +10,8 @@ export const validatorSchema = <T extends ZodRawShape>(schema: ZodSchema<T>, pro
       const validate = schema.parse(data)
       console.log('validación exitosa' + validate)
     } catch (error) {
-      console.log('log desde middleware 1')
-      next()
+      console.log('log desde middleware 2')
+      next(error)
     }
   }
 }
