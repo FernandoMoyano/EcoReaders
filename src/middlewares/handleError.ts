@@ -11,6 +11,6 @@ export const handleError = (error: ZodError, req: Request, res: Response, next: 
     }))
     console.log('Error de validación' + errorDetail)
     res.status(400).json({ error: 'Datos de entrada no validos', errorDetail })
-    next(error)
+    next()
   }
 }

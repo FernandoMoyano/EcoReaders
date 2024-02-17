@@ -4,6 +4,7 @@ dotenv.config()
 import express, { Application } from 'express'
 import apiRouter from './routes/index'
 import { handleError } from './middlewares/handleError'
+import { loggError } from './middlewares/logError'
 
 //Clase App -----------------------------------------
 export class App {
@@ -31,6 +32,7 @@ export class App {
   middlewares() {
     this.app.use(express.json())
     this.app.use(handleError)
+    this.app.use(loggError)
     this.app.use('/api', apiRouter)
   }
 }

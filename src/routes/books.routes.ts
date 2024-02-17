@@ -3,6 +3,7 @@ import { Router } from 'express'
 import { BookController } from '../controllers/book.controller'
 import { validatorSchema } from '../middlewares/validatorSchema'
 import { bookSchema } from '../schema/bookSchema'
+import { loggError } from '../middlewares/logError'
 
 export const bookRoutes: Router = express.Router()
 const bookController = new BookController()
@@ -21,3 +22,5 @@ bookRoutes.patch('/:id', bookController.updateBook)
 
 //DELETE /api/books/:id
 bookRoutes.delete('/:id', bookController.deleteBook)
+
+bookRoutes.get('/ruta-de-prueba', loggError)

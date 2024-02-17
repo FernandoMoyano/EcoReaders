@@ -11,7 +11,7 @@ export const validatorSchema = <T extends ZodRawShape>(schema: ZodSchema<T>, pro
       console.log('validación exitosa' + validate)
     } catch (error) {
       console.log('log desde middleware 1')
-      next(error)
+      next()
     }
   }
 }
