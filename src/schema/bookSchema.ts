@@ -17,7 +17,7 @@ const bookCategoryEnum = [
   'Other',
 ] as const
 
-export const bookSchema = z.object({
+export const BookSchema = z.object({
   title: z.string().toLowerCase(),
   description: z.string(),
   author: z.string(),

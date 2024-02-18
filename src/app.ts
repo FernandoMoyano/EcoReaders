@@ -3,10 +3,9 @@ dotenv.config()
 
 //Express
 import express, { Application } from 'express'
-//Routes
+//Import routes
 import apiRouter from './routes/index'
-
-//Middlewares
+//Importacion Middlewares
 import { handleError } from './middlewares/handleError'
 import { loggError } from './middlewares/loggError'
 
