@@ -21,8 +21,13 @@ export class BookService {
 
   //Obtener todos los libros
   async getAll() {
-    const books = await selectQuery<IBookRow>('SELECT * FROM books')
-    return books
+    try {
+      const books = await selectQuery<IBookRow>('SELECT * FROM books')
+      return { foundBooks: books.length > 0, books }
+    } catch (error) {
+      console.error(error)
+      throw new Error('Error interno al obtener libros desde la base de datos')
+    }
   }
 
   //Crear un nuevo libro

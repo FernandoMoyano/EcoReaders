@@ -8,7 +8,7 @@ import apiRouter from './routes/index'
 
 //Middlewares
 import { handleError } from './middlewares/handleError'
-import { loggError1 } from './middlewares/loggError1'
+import { loggError } from './middlewares/loggError'
 
 //Clase App -----------------------------------------
 export class App {
@@ -34,8 +34,9 @@ export class App {
   }
 
   middlewares() {
+    this.app.use(express.urlencoded({ extended: false }))
     this.app.use(express.json())
-    this.app.use(loggError1)
+    this.app.use(loggError)
     this.app.use(handleError)
 
     this.app.use('/api', apiRouter)

@@ -12,7 +12,7 @@ export class BookController {
       const books = await bookService.getAll()
       res.json(books)
     } catch (error) {
-      console.log(error)
+      res.status(500).json({ error: 'Error interno del servidor' })
     }
   }
 
