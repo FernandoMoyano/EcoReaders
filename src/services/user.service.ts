@@ -11,11 +11,10 @@ export class UserService {
     return newUser as ResultSetHeader
   }
 
-  //Obtener un usuario
-  async getUser(id: UserId) {
-    const UserId = id
-    const query = 'SELECT FROM users WHERE id = ?'
-    const [user] = await pool.execute(query, [UserId])
+  //Encontrar un usuario
+  async foundUser(username: string, password: string) {
+    const query = 'SELECT * FROM users WHERE username = ? AND password = ?'
+    const [user] = await pool.execute(query, [username, password])
     return user
   }
 }
