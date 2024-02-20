@@ -16,7 +16,11 @@ export class AuthController {
         console.log('data ==>', data)
         if (data[0].username === userInfo.username && data[0].password === userInfo.password) {
           res.json(`Hola ${userInfo.username} Bienvenido a Read Cycle`)
+        } else {
+          res.json('credenciales invalidas')
         }
+      } else {
+        res.json('Usuario no encontrado')
       }
     } catch (error) {
       console.log(error)
