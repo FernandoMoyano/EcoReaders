@@ -5,6 +5,6 @@ export interface IUser {
   password: string
 }
 
-export type IUserLogin = Omit<IUser, 'id' | 'username'>
+export type IUserLogin = Omit<IUser, 'id' | 'email'>
 
 export type UserId = string
