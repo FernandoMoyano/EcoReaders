@@ -1,12 +1,11 @@
-import { RowDataPacket } from 'mysql2'
 import { pool } from '../db/connection'
-import { IUserLogin } from '../interfaces/User.interface'
+import { IUser, IUserLogin } from '../interfaces/User.interface'
 
 export class AuthService {
-  async foundUser(data: IUserLogin): Promise<RowDataPacket[]> {
+  async foundUser(data: IUserLogin): Promise<IUser[]> {
     try {
       const query = 'SELECT * FROM users WHERE username = ? AND password = ?'
-      const [user] = await pool.execute<RowDataPacket[]>(query, [data.username, data.password])
+      const [user] = await pool.execute<IUser[]>(query, [data.username, data.password])
       return user
     } catch (error) {
       throw error

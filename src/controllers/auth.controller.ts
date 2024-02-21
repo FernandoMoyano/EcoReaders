@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { AuthService } from '../services/auth.service'
-/* import { IUserLogin } from '../interfaces/User.interface' */
+import { sign } from '../auth'
 
 //Instancia AuthService
 const authService = new AuthService()
@@ -13,14 +13,15 @@ export class AuthController {
       console.log(userInfo)
       const data = await authService.foundUser(userInfo)
       if (data) {
-        console.log('data ==>', data)
+        //console.log('data ==>', data)
         if (data[0].username === userInfo.username && data[0].password === userInfo.password) {
-          res.json(`Hola ${userInfo.username} Bienvenido a Read Cycle`)
+          //generar token
+          return res.json(sign(data[0]))
         } else {
           res.json('credenciales invalidas')
         }
       } else {
-        res.json('Usuario no encontrado')
+        throw new Error('Usuario no encontrado')
       }
     } catch (error) {
       console.log(error)
