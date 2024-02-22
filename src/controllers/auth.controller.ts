@@ -1,9 +1,11 @@
 import { Request, Response } from 'express'
 import { AuthService } from '../services/auth.service'
-import { sign } from '../auth'
+import { Auth } from '../auth'
 
 //Instancia AuthService
 const authService = new AuthService()
+//Instancia de Auth
+const auth = new Auth()
 
 export class AuthController {
   //Login
@@ -14,7 +16,7 @@ export class AuthController {
       const user = await authService.foundUser(username, password)
 
       if (user) {
-        const token = sign(user)
+        const token = auth.sign(user)
         return res.json(token)
       } else {
         res.status(401).json({ error: 'Credenciales invalidas' })
