@@ -15,6 +15,17 @@ export class Auth {
       },
     )
   }
+
+  refreshToken(data: IUser) {
+    return jwt.sign(
+      {
+        username: data.username,
+      },
+      process.env.REFRESH_TOKEN,
+      { expiresIn: '1d' },
+    )
+  }
+
   //Verify
   async verifyToken(token: string) {
     try {
