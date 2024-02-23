@@ -16,15 +16,20 @@ export class BookService {
       return results
     } catch (error) {
       console.error(error)
-      throw new Error('Error al intentar obtener el libro')
+      throw error
     }
   }
 
   //Eliminar un libro
   async delete(id: BookId): Promise<ResultSetHeader> {
-    const query = 'DELETE FROM books WHERE id = ?;'
-    const [results] = await pool.execute(query, [id])
-    return results as ResultSetHeader
+    try {
+      const query = 'DELETE FROM books WHERE id = ?;'
+      const [results] = await pool.execute(query, [id])
+      return results as ResultSetHeader
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
   }
 
   //Obtener todos los libros
@@ -37,7 +42,7 @@ export class BookService {
       return { foundBooks: books.length > 0, books }
     } catch (error) {
       console.error(error)
-      throw new Error('Error interno al obtener libros desde la base de datos')
+      throw error
     }
   }
 

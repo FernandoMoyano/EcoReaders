@@ -10,7 +10,9 @@ export class BookController {
   async getBooks(req: Request, res: Response) {
     try {
       const books = await bookService.getAll()
-      res.json(books)
+      if (!books) {
+        res.status(400).json('No se encontraron libros')
+      }
     } catch (error) {
       res.status(500).json({ error: 'Error interno del servidor' })
     }
@@ -21,6 +23,9 @@ export class BookController {
     try {
       const id: BookId = req.params.id
       const book = await bookService.getOne(id)
+      if (!book) {
+        res.status(400).json('No se encontraron libros')
+      }
       res.json(book)
     } catch (error) {
       console.log(error)
@@ -31,8 +36,8 @@ export class BookController {
     try {
       const id = req.params.id
       const body = req.body
-      const changeBook = await bookService.update(id, body)
-      return res.json(changeBook)
+      const editedBook = await bookService.update(id, body)
+      return res.json(editedBook)
     } catch (error) {
       console.log(error)
     }

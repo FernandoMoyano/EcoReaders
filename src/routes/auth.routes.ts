@@ -7,3 +7,4 @@ export const authRoutes = express.Router()
 const authController = new AuthController()
 
 authRoutes.post('/login', authController.login)
+authRoutes.post('/register', authController.register)
