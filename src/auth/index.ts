@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken'
+import jwt, { Secret } from 'jsonwebtoken'
 import { IUser } from '../interfaces/User.interface'
 //import { Request } from 'express'
 //import { config } from '../config'
@@ -8,12 +8,21 @@ import { IUser } from '../interfaces/User.interface'
 export class Auth {
   //Sign
   sign = (data: IUser) => {
-    return jwt.sign(data, 'secret')
+    return jwt.sign(
+      {
+        id: data.id,
+        role: data.role,
+      },
+      process.env.JWT_TOKEN as string,
+      {
+        expiresIn: '2hs',
+      },
+    )
   }
   //Verify
   async verifyToken(token: string) {
     try {
-      return jwt.verify(token, process.env.JWT_TOKEN)
+      return jwt.verify(token, process.env.JWT_SECRET as Secret)
     } catch (error) {
       return null
     }

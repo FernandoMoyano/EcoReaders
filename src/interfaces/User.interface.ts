@@ -10,4 +10,4 @@ export interface IUser extends RowDataPacket {
 export type IUserLogin = Omit<IUser, 'id' | 'email'>
 
 export type UserId = string
-export type authToken = string | undefined
+export type authToken = string

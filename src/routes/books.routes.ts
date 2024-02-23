@@ -3,12 +3,13 @@ import { Router } from 'express'
 import { BookController } from '../controllers/book.controller'
 import { validatorSchema } from '../middlewares/validatorSchema'
 import { BookSchema } from '../schema/bookSchema'
+import { checkAuth } from '../middlewares/checkAuth'
 
 export const bookRoutes: Router = express.Router()
 const bookController = new BookController()
 
 //GET /api/books
-bookRoutes.get('/', bookController.getBooks)
+bookRoutes.get('/', checkAuth, bookController.getBooks)
 
 //GET/api/books/:id
 bookRoutes.get('/:id', bookController.getBook)
