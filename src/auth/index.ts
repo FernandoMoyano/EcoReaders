@@ -1,9 +1,5 @@
 import jwt, { Secret } from 'jsonwebtoken'
 import { IUser } from '../interfaces/User.interface'
-//import { Request } from 'express'
-//import { config } from '../config'
-
-//const secret = config.jwt.secret
 
 export class Auth {
   //Sign
