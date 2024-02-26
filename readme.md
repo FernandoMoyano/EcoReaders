@@ -1,9 +1,3 @@
-### Documentación de la api - Copia y pega la url 👇
-
-```bash
-  localhost:3000/api-docs
-
-```
 
 ### Clona el repositorio👇
 
@@ -35,5 +29,12 @@
 
 ```bash
   npm run dev
+
+```
+
+### Documentación de la api - Copia y pega la url 👇
+
+```bash
+  localhost:3000/api-docs
 
 ```
