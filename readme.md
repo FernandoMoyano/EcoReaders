@@ -1,4 +1,8 @@
+## Bienvenidos a ecoReaders
+¡Conectamos lectores y reducimos residuos para un futuro más verde! 🌱📖
 
+## Objetivo de ecoReaders
+Facilitamos el intercambio de libros usados para promover la reutilización y reducir el impacto ambiental. 🔄🌍
 ### Clona el repositorio👇
 
 ```bash
