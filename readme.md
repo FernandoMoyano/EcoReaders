@@ -25,9 +25,9 @@
 
 ```
 
-### Ver documentacion en progreso👇
+### Inicia el servidor👇
 
 ```bash
-  git clone
+  npm run dev
 
 ```
