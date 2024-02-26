@@ -30,8 +30,8 @@ Facilitamos el intercambio de libros usados para promover la reutilización. �
   DB_PORT="..."//Especifica el puerto al que se conectará la base de datos. 
   DB_HOST="..."//Indica la dirección del servidor de la base de datos. "localhost"
   DB_USER="..."// Especifica el nombre de usuario que la aplicación utilizará para conectarse a la base de datos
-  DB_PASSWORD="..."
-  DB_DATABASE="..."
+  DB_PASSWORD="..."//Proporciona la contraseña correspondiente al usuario de la base de datos.
+  DB_DATABASE="..."//Indica el nombre de la base de datos con la que la aplicación interactuará.
 
 ```
 
