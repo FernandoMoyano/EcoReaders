@@ -2,8 +2,11 @@
 ¡Conectamos lectores y reducimos residuos para un futuro más verde! 🌱📖
 
 
-### 🚀Objetivo de ecoReaders
+### 🚀Objetivo de EcoReaders
 Facilitamos el intercambio de libros usados para promover la reutilización. 🔄🌍
+
+
+# Para probar la API sigue los siguientes pasos
 
 
 ### 🎯Clona el repositorio👇
