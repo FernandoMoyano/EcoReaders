@@ -32,7 +32,7 @@
 
 ```
 
-### Documentación de la api - Copia y pega la siguiente url en tu navegador de preferencia 👇
+### Documentación de la api( en progreso ) - Copia y pega la siguiente url en tu navegador de preferencia 👇
 
 ```bash
   localhost:3000/api-docs/
