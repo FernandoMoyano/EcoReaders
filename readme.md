@@ -1,4 +1,4 @@
-# Bienvenidos a ecoReaders
+# 📚 Bienvenidos a EcoReaders📚
 ¡Conectamos lectores y reducimos residuos para un futuro más verde! 🌱📖
 
 
