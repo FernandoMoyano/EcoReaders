@@ -1,10 +1,14 @@
+//Import de dotenv
 import dotenv from 'dotenv'
 dotenv.config()
-
 //Express
 import express, { Application } from 'express'
 //Import routes
 import apiRouter from './routes/index'
+//Import Swagger
+import swaggerUi from 'swagger-ui-express'
+//Importación de archivo swagger
+import swaggerDocumentation from '../openapi.json'
 //Importacion Middlewares
 import { handleError } from './middlewares/handleError'
 import { loggError } from './middlewares/loggError'
@@ -39,5 +43,6 @@ export class App {
     this.app.use(handleError)
 
     this.app.use('/api', apiRouter)
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocumentation))
   }
 }

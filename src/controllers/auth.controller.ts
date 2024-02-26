@@ -1,7 +1,6 @@
 import { Request, Response } from 'express'
 import { AuthService } from '../services/auth.service'
 import { Auth } from '../auth'
-import jwt from 'jsonwebtoken'
 
 //Instancia AuthService
 const authService = new AuthService()
@@ -9,6 +8,7 @@ const authService = new AuthService()
 const auth = new Auth()
 
 export class AuthController {
+  //Logout
   async logout(req: Request, res: Response) {
     const cookies = req.cookies
     if (!cookies?.jwt) {
@@ -38,8 +38,15 @@ export class AuthController {
       const user = await authService.foundUser(username, password)
 
       if (user) {
-        const token = auth.sign(user)
-        return res.json(token)
+        const accesToken = auth.sign(user)
+        const refreshToken = auth.refreshToken(user)
+        res.cookie('myCookie', refreshToken, {
+          httpOnly: true,
+          secure: true,
+          sameSite: 'none',
+          maxAge: 7 * 24 * 60 * 60 * 1000,
+        })
+        return res.json({ accesToken })
       } else {
         res.status(401).json({ error: 'Credenciales invalidas' })
       }
