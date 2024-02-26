@@ -1,4 +1,4 @@
-# 📚 Bienvenidos a EcoReaders📚
+# 📚 Bienvenidos a EcoReaders 📚
 ¡Conectamos lectores y reducimos residuos para un futuro más verde! 🌱📖
 
 
@@ -6,7 +6,7 @@
 Facilitamos el intercambio de libros usados para promover la reutilización. 🔄🌍
 
 
-# Para probar la API sigue los siguientes pasos
+# 🚀Para probar la API sigue los siguientes pasos
 
 
 ### 🎯Clona el repositorio👇
