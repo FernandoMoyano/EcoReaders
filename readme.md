@@ -1,3 +1,9 @@
+###Documentación de la api👇
+
+```bash
+  localhost:3000/api-docs
+
+```
 
 ### Clona el repositorio👇
 
