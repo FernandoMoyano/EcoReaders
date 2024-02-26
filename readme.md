@@ -26,10 +26,10 @@ Facilitamos el intercambio de libros usados para promover la reutilización. �
 ### 🎯Configura las variables de entorno👇
 
 ```bash
-  PORT="..."//Define el número de puerto en el que tu aplicación o servidor web estará escuchando. En este                   caso, se ha configurado para escuchar en el puerto 3000.
+  PORT="..."//Define el número de puerto en el que tu aplicación o servidor web estará escuchando
   DB_PORT="..."//Especifica el puerto al que se conectará la base de datos. 
   DB_HOST="..."//Indica la dirección del servidor de la base de datos. "localhost"
-  DB_USER="..."// Especifica el nombre de usuario que la aplicación utilizará para conectarse a la base de                       datos
+  DB_USER="..."// Especifica el nombre de usuario que la aplicación utilizará para conectarse a la base de       datos
   DB_PASSWORD="..."
   DB_DATABASE="..."
 
