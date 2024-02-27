@@ -44,7 +44,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Pet"
+                "$ref": "#/components/schemas/Book"
               }
             }
           },
@@ -56,7 +56,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Pet"
+                  "$ref": "#/components/schemas/RowDataPacket"
                 }
               }
             }
@@ -84,224 +84,105 @@
   },
   "components": {
     "schemas": {
-      "Order": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "example": 10
-          },
-          "petId": {
-            "type": "integer",
-            "format": "int64",
-            "example": 198772
-          },
-          "quantity": {
-            "type": "integer",
-            "format": "int32",
-            "example": 7
-          },
-          "shipDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "status": {
-            "type": "string",
-            "description": "Order Status",
-            "example": "approved",
-            "enum": [
-              "placed",
-              "approved",
-              "delivered"
-            ]
-          },
-          "complete": {
-            "type": "boolean"
-          }
-        },
-        "xml": {
-          "name": "order"
-        }
+      "BookStatus": {
+        "type": "string",
+        "enum": [
+          "Available",
+          "Sold",
+          "Reserved"
+        ]
       },
-      "Customer": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "example": 100000
-          },
-          "username": {
-            "type": "string",
-            "example": "fehguy"
-          },
-          "address": {
-            "type": "array",
-            "xml": {
-              "name": "addresses",
-              "wrapped": true
-            },
-            "items": {
-              "$ref": "#/components/schemas/Address"
-            }
-          }
-        },
-        "xml": {
-          "name": "customer"
-        }
-      },
-      "Address": {
-        "type": "object",
-        "properties": {
-          "street": {
-            "type": "string",
-            "example": "437 Lytton"
-          },
-          "city": {
-            "type": "string",
-            "example": "Palo Alto"
-          },
-          "state": {
-            "type": "string",
-            "example": "CA"
-          },
-          "zip": {
-            "type": "string",
-            "example": "94301"
-          }
-        },
-        "xml": {
-          "name": "address"
-        }
+      "BookCondition": {
+        "type": "string",
+        "enum": [
+          "new",
+          "Like new",
+          "Lined"
+        ]
       },
       "Category": {
+        "type": "string",
+        "enum": [
+          "Fiction",
+          "No Fiction",
+          "Mistery",
+          "Adventure",
+          "Romance",
+          "Science Fiction",
+          "Fancy",
+          "Biography",
+          "History",
+          "Terror",
+          "Sport",
+          "Other"
+        ]
+      },
+      "Book": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
-            "format": "int64",
-            "example": 1
+            "example": 10
           },
-          "name": {
+          "title": {
             "type": "string",
-            "example": "Dogs"
+            "example": "100 años de soledad"
+          },
+          "description": {
+            "type": "string",
+            "example": "Novela"
+          },
+          "author": {
+            "type": "string",
+            "example": "Gabriel Garcia Marquez"
+          },
+          "price": {
+            "type": "number",
+            "example": 57
+          },
+          "bookCondition": {
+            "$ref": "#/components/schemas/BookCondition"
+          },
+          "category": {
+            "$ref": "#/components/schemas/Category"
+          },
+          "sellerId": {
+            "type": "number",
+            "example": 8
+          },
+          "status": {
+            "$ref": "#/components/schemas/BookStatus"
+          },
+          "isbn": {
+            "type": "string"
           }
-        },
-        "xml": {
-          "name": "category"
         }
       },
       "User": {
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
-            "example": 10
+            "type": "number",
+            "example": "xxxxxxxxxxxxxxxxxxxxx"
           },
           "username": {
-            "type": "string",
-            "example": "theUser"
-          },
-          "firstName": {
-            "type": "string",
-            "example": "John"
-          },
-          "lastName": {
-            "type": "string",
-            "example": "James"
+            "type": "number",
+            "example": "Fernando"
           },
           "email": {
-            "type": "string",
-            "example": "john@email.com"
+            "type": "number",
+            "example": "fernandomoyano21@gmail.com"
           },
           "password": {
             "type": "string",
-            "example": "12345"
-          },
-          "phone": {
-            "type": "string",
-            "example": "12345"
-          },
-          "userStatus": {
-            "type": "integer",
-            "description": "User Status",
-            "format": "int32",
-            "example": 1
+            "example": "xxxxxxxxxxxxxxxxxxxxxxx"
           }
-        },
-        "xml": {
-          "name": "user"
         }
       },
-      "Tag": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          }
-        },
-        "xml": {
-          "name": "tag"
-        }
-      },
-      "Pet": {
-        "required": [
-          "name",
-          "photoUrls"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "example": 10
-          },
-          "name": {
-            "type": "string",
-            "example": "doggie"
-          },
-          "category": {
-            "$ref": "#/components/schemas/Category"
-          },
-          "photoUrls": {
-            "type": "array",
-            "xml": {
-              "wrapped": true
-            },
-            "items": {
-              "type": "string",
-              "xml": {
-                "name": "photoUrl"
-              }
-            }
-          },
-          "tags": {
-            "type": "array",
-            "xml": {
-              "wrapped": true
-            },
-            "items": {
-              "$ref": "#/components/schemas/Tag"
-            }
-          },
-          "status": {
-            "type": "string",
-            "description": "pet status in the store",
-            "enum": [
-              "available",
-              "pending",
-              "sold"
-            ]
-          }
-        },
-        "xml": {
-          "name": "pet"
+      "RowDataPacket": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Book"
         }
       },
       "ApiResponse": {
@@ -317,24 +198,16 @@
           "message": {
             "type": "string"
           }
-        },
-        "xml": {
-          "name": "##default"
         }
       }
     },
     "requestBodies": {
-      "Pet": {
-        "description": "Pet object that needs to be added to the store",
+      "Book": {
+        "description": "Objeto Libro que se agregara",
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/Pet"
-            }
-          },
-          "application/xml": {
-            "schema": {
-              "$ref": "#/components/schemas/Pet"
+              "$ref": "#/components/schemas/Book"
             }
           }
         }

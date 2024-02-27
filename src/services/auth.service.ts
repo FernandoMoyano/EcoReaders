@@ -13,6 +13,7 @@ export class AuthService {
       if (user.length > 0) {
         const passwordMatch = await bcrypt.compare(password, user[0].password)
         if (passwordMatch) {
+          //console.log(passwordMatch)
           return user[0] as IUser
         } else {
           throw new Error('No se Encontraron coincidencias')

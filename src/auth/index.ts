@@ -9,9 +9,9 @@ export class Auth {
         username: data.username,
         role: data.role,
       },
-      process.env.JWT_TOKEN as string,
+      process.env.ACCESS_TOKEN_SECRET as string,
       {
-        expiresIn: '2hs',
+        expiresIn: '2h',
       },
     )
   }
@@ -21,7 +21,7 @@ export class Auth {
       {
         username: data.username,
       },
-      process.env.REFRESH_TOKEN as string,
+      process.env.REFRESH_TOKEN_SECRET as string,
       { expiresIn: '1d' },
     )
   }
@@ -29,7 +29,7 @@ export class Auth {
   //Verify
   async verifyToken(token: string) {
     try {
-      return jwt.verify(token, process.env.JWT_SECRET as Secret)
+      return jwt.verify(token, process.env.REFRESH_TOKEN_SECRET as Secret)
     } catch (error) {
       return null
     }

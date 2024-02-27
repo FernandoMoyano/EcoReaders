@@ -4,6 +4,7 @@ import { Auth } from '../auth'
 
 //Instancia AuthService
 const authService = new AuthService()
+
 //Instancia de Auth
 const auth = new Auth()
 
@@ -39,6 +40,7 @@ export class AuthController {
 
       if (user) {
         const accesToken = auth.sign(user)
+        //console.log(accesToken)
         const refreshToken = auth.refreshToken(user)
         res.cookie('myCookie', refreshToken, {
           httpOnly: true,

@@ -6,8 +6,7 @@ declare namespace NodeJS {
     readonly DB_USER: string
     readonly DB_PASSWORD: string
     readonly DB_DATABASE: string
-    readonly JWT_TOKEN: string
-    readonly JWT_SECRET: string
-    readonly REFRESH_TOKEN: string
+    readonly ACCESS_TOKEN_SECRET: string
+    readonly REFRESH_TOKEN_SECRET: string
   }
 }
