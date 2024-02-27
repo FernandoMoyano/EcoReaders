@@ -49,9 +49,8 @@ Facilitamos el intercambio de libros usados para promover la reutilización. �
 
 ```
 
-### devDependencies
 
-## devDependencies
+### 🎯devDependencies
 
 | Paquete                               | Versión    | Descripción                                           |
 | ------------------------------------- | ---------- | ----------------------------------------------------- |
@@ -66,7 +65,7 @@ Facilitamos el intercambio de libros usados para promover la reutilización. �
 | eslint                                | ^8.56.0    | Herramienta para identificar y corregir problemas de estilo en JavaScript/TypeScript. |
 | eslint-config-prettier                | ^9.1.0     | Configuración que desactiva reglas que entran en conflicto con Prettier en ESLint. |
 | eslint-plugin-prettier                | ^5.1.3     | Plugin de ESLint que ejecuta Prettier como una regla de ESLint. |
-| prettier                              | 3.2.4      | Formateador de código que mantiene un estilo consistente en tu código. |
+| prettier                              | 3.2.4      | Formateador de código que mantiene un estilo consistente en el código. |
 | ts-node-dev                           | ^2.0.0     | Desarrollador de Node.js con soporte para TypeScript. |
 | typescript                            | ^5.3.3     | Lenguaje de programación que agrega tipado estático a JavaScript. |
 
