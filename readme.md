@@ -9,21 +9,21 @@ Facilitamos el intercambio de libros usados para promover la reutilización. �
 # 🚀Para probar la API sigue los siguientes pasos
 
 
-### 🎯Clona el repositorio👇
+### 1️⃣Clona el repositorio👇
 
 ```bash
   git clone
 
 ```
 
-### 🎯Instala las dependencias👇
+### 2️⃣Instala las dependencias👇
 
 ```bash
   npm install
 
 ```
 
-### 🎯Configura las variables de entorno en el directorio raiz del proyecto👇
+### 3️⃣Configura las variables de entorno en el directorio raiz del proyecto👇
 
 ```bash
   PORT="..."//Define el número de puerto en el que tu aplicación o servidor web estará escuchando
@@ -35,14 +35,14 @@ Facilitamos el intercambio de libros usados para promover la reutilización. �
 
 ```
 
-### 🎯Inicia el servidor👇
+### 4️⃣Inicia el servidor👇
 
 ```bash
   npm run dev
 
 ```
 
-### 🎯Documentación de la api( en progreso ⌛ ) - Copia y pega la siguiente url en tu navegador de preferencia 👇
+### 5️⃣Documentación de la api( en progreso ⌛ ) - Copia y pega la siguiente url en tu navegador de preferencia 👇
 
 ```bash
   localhost:3000/api-docs/
@@ -50,7 +50,7 @@ Facilitamos el intercambio de libros usados para promover la reutilización. �
 ```
 
 
-### 🎯devDependencies
+### 6️⃣devDependencies
 
 | Paquete                               | Versión    | Descripción                                           |
 | ------------------------------------- | ---------- | ----------------------------------------------------- |
