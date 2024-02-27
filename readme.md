@@ -23,7 +23,7 @@ Facilitamos el intercambio de libros usados para promover la reutilización. �
 
 ```
 
-### 🎯Configura las variables de entorno👇
+### 🎯Configura las variables de entorno en el directorio raiz del proyecto👇
 
 ```bash
   PORT="..."//Define el número de puerto en el que tu aplicación o servidor web estará escuchando
