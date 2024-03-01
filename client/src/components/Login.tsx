@@ -1,6 +1,5 @@
-import { useLoginMutation } from '../app/api/api'
 import { useDispatch } from 'react-redux'
-import { setToken, setUser } from '../features/auth/authSlice'
+import { setCredentials, logOut } from '../features/auth/authSlice'
 import { useState } from 'react'
 
 interface Credentials {
@@ -30,9 +29,9 @@ const LoginComponent = () => {
   const handleLogin = async (credentials: Credentials) => {
     try {
       const result = await login(credentials).unwrap()
-      dispatch(setToken(result.token))
+      dispatch(setCredentials(result))
       //  información del usuario
-      dispatch(setUser(result.user))
+
       //  acciónes necesarias después del inicio de sesión
     } catch (error) {
       // Manejo de errores
@@ -93,8 +92,11 @@ const LoginComponent = () => {
                 onClick={() => handleLogin(credentials)}
                 disabled={isLoading}
               >
-                Log in
+                {isLoading ? 'cargando...' : 'Login'}
               </button>
+              <a href="" className="text-sm text-center">
+                Sign up
+              </a>
             </div>
           </form>
         </div>
