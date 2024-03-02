@@ -6,7 +6,7 @@ import { messageCreated } from '../../features/notifications/notificationsSlice'
 
 export const bookApi = createApi({
   reducerPath: 'bookApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api' }),
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (credentials) => ({
@@ -18,12 +18,12 @@ export const bookApi = createApi({
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
           const result = await queryFulfilled
+          const myToken = result.data.accesToken
+          // establecer el token en la cookie y almacénarlo en el estado
+          const cookie = Cookies.set('myCookie', myToken)
 
-          // Extrae el token de la cookie y almacénalo en el estado
-          const token = Cookies.get('myCookie')
-
-          if (token) {
-            dispatch(loginSuccess({ token, user: result.data.user }))
+          if (cookie) {
+            dispatch(loginSuccess({ token: myToken, user: result.data.user }))
           } else {
             console.error('No se encontró la cookie "myCookie" en la respuesta.')
             dispatch(messageCreated('Cookie "myCookie" no encontrada en la respuesta.'))
@@ -35,6 +35,7 @@ export const bookApi = createApi({
         }
       },
     }),
+
     logout: builder.mutation({
       query: () => ({
         url: '/auth/logout',

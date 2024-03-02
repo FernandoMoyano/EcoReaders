@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { loginSuccess } from '../features/auth/authSlice'
 import { useState } from 'react'
-import { useLoginMutation } from '../app/api/apiSlice'
+import { useLoginMutation } from '../app/api/api'
 
 interface Credentials {
   username: string

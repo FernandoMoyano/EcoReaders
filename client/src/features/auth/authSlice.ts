@@ -1,8 +1,12 @@
 // authSlice.ts
 import { createSlice } from '@reduxjs/toolkit'
-import { bookApi } from '../../app/api/apiSlice'
+import { bookApi } from '../../app/api/api'
 import Cookies from 'js-cookie'
 
+interface User {
+  unsername: string
+  password: string
+}
 type AuthState = {
   user: User | null
   token: string | null

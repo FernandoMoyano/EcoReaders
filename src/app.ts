@@ -3,6 +3,8 @@ import dotenv from 'dotenv'
 dotenv.config()
 //Express
 import express, { Application } from 'express'
+//import cors
+import cors from 'cors'
 //Import routes
 import apiRouter from './routes/index'
 //Import Swagger
@@ -41,6 +43,7 @@ export class App {
     this.app.use(express.json())
     this.app.use(loggError)
     this.app.use(handleError)
+    this.app.use(cors())
     this.app.use('/api', apiRouter)
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocumentation))
   }
