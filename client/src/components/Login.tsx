@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux'
-import { setCredentials, logOut } from '../features/auth/authSlice'
+import { loginSuccess } from '../features/auth/authSlice'
 import { useState } from 'react'
+import { useLoginMutation } from '../app/api/apiSlice'
 
 interface Credentials {
   username: string
@@ -29,10 +30,9 @@ const LoginComponent = () => {
   const handleLogin = async (credentials: Credentials) => {
     try {
       const result = await login(credentials).unwrap()
-      dispatch(setCredentials(result))
-      //  información del usuario
-
-      //  acciónes necesarias después del inicio de sesión
+      dispatch(loginSuccess(result))
+      // Realizar acciones después del inicio de sesión
+      console.log('Sesión activa:', result)
     } catch (error) {
       // Manejo de errores
       console.error('Error al iniciar sesión:', error)

@@ -39,9 +39,9 @@ export class App {
   middlewares() {
     this.app.use(express.urlencoded({ extended: false }))
     this.app.use(express.json())
-    this.app.use('/api', apiRouter)
     this.app.use(loggError)
     this.app.use(handleError)
+    this.app.use('/api', apiRouter)
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocumentation))
   }
 }

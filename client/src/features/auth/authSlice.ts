@@ -1,34 +1,36 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+// authSlice.ts
+import { createSlice } from '@reduxjs/toolkit'
+import { bookApi } from '../../app/api/apiSlice'
+import Cookies from 'js-cookie'
 
-// Define el tipo del estado inicial
-interface AuthState {
+type AuthState = {
+  user: User | null
   token: string | null
-  user: string | null // Aquí deberías proporcionar el tipo correcto para el usuario
 }
 
-// Define el estado inicial con el tipo que acabas de crear
-const initialState: AuthState = {
-  token: null,
-  user: null,
-}
-const authSlice = createSlice({
+const slice = createSlice({
   name: 'auth',
-  initialState,
+  initialState: { user: null, token: null } as AuthState,
   reducers: {
-    setCredentials: (state, action: PayloadAction<{ user: string; accessToken: string }>) => {
-      const { user, accessToken } = action.payload
-      state.user = user
-      state.token = accessToken
+    loginSuccess: (state, action) => {
+      state.token = action.payload.token
+      state.user = action.payload.user
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    logOut: (state, action) => {
-      state.user = null
+    logoutSuccess: (state) => {
       state.token = null
+      state.user = null
+
+      // Elimina la cookie al cerrar sesión
+      Cookies.remove('token')
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(bookApi.endpoints.login.matchFulfilled, (state, { payload }) => {
+      state.token = payload.token
+      state.user = payload.user
+    })
   },
 })
 
-export const { setCredentials, logOut } = authSlice.actions
-export default authSlice.reducer
-export const selectCurrentUser = (state: { auth: AuthState }) => state.auth.user
-export const selectCurrentToken = (state: { auth: AuthState }) => state.auth.token
+export const { loginSuccess, logoutSuccess } = slice.actions
+export default slice.reducer

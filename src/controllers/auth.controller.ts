@@ -58,6 +58,7 @@ export class AuthController {
     }
   }
 
+  //Registro
   async register(req: Request, res: Response) {
     try {
       const data = req.body
