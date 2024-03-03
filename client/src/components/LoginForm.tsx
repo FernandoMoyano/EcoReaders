@@ -1,48 +1,8 @@
-import { useDispatch } from 'react-redux'
-import { loginSuccess } from '../features/auth/authSlice'
-import { useState } from 'react'
-import { useLoginMutation } from '../app/api/api'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Spinner from './spinner'
+import { LoginComponentProps } from '../interfaces/LoginPropsI'
 
-interface Credentials {
-  username: string
-  password: string
-}
-
-const LoginComponent = () => {
-  //Estado Inicial
-  const [credentials, setCredetentials] = useState({
-    username: '',
-    password: '',
-  })
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [login, { isLoading }] = useLoginMutation()
-
-  //Manejo de los inputs
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setCredetentials((prevCredentials) => ({
-      ...prevCredentials,
-      [name]: value,
-    }))
-  }
-
-  //Manejo de Login
-  const handleLogin = async (credentials: Credentials) => {
-    try {
-      const result = await login(credentials).unwrap()
-      dispatch(loginSuccess(result))
-      navigate('/')
-      // Realizar acciones después del inicio de sesión
-      console.log('Sesión activa:', result)
-    } catch (error) {
-      // Manejo de errores
-      console.error('Error al iniciar sesión:', error)
-    }
-  }
-
+const LoginComponent: React.FC<LoginComponentProps> = ({ handleLogin, handleInputChange, credentials, isLoading }) => {
   return (
     <div className="bg-gray-50 font-[sans-serif] text-[#333]">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
