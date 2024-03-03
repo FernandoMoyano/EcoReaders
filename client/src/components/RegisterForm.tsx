@@ -17,12 +17,12 @@ const RegisterForm = () => {
             </div>
             <div>
               <input
-                name="password"
-                type="password"
-                autoComplete="current-password"
+                name="email"
+                type="email"
+                autoComplete="current-email"
                 required
                 className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-emerald-500"
-                placeholder="Password"
+                placeholder="Email"
               />
             </div>
             <div className="flex items-center justify-between gap-4">

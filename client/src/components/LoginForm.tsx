@@ -2,7 +2,8 @@ import { useDispatch } from 'react-redux'
 import { loginSuccess } from '../features/auth/authSlice'
 import { useState } from 'react'
 import { useLoginMutation } from '../app/api/api'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import Spinner from './spinner'
 
 interface Credentials {
   username: string
@@ -16,6 +17,7 @@ const LoginComponent = () => {
     password: '',
   })
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [login, { isLoading }] = useLoginMutation()
 
   //Manejo de los inputs
@@ -32,6 +34,7 @@ const LoginComponent = () => {
     try {
       const result = await login(credentials).unwrap()
       dispatch(loginSuccess(result))
+      navigate('/')
       // Realizar acciones después del inicio de sesión
       console.log('Sesión activa:', result)
     } catch (error) {
@@ -93,7 +96,7 @@ const LoginComponent = () => {
                 onClick={() => handleLogin(credentials)}
                 disabled={isLoading}
               >
-                {isLoading ? 'cargando...' : 'Iniciar Sesion'}
+                {isLoading ? <Spinner /> : 'Iniciar Sesion'}
               </button>
               <Link to={'/register'} className="text-sm mt-3">
                 Crear Cuenta
