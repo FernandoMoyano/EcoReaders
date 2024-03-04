@@ -25,7 +25,7 @@ const slice = createSlice({
       state.user = null
 
       // Elimina la cookie al cerrar sesión
-      Cookies.remove('token')
+      Cookies.remove('myCookie')
     },
   },
   extraReducers: (builder) => {
