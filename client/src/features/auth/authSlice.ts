@@ -2,30 +2,34 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { bookApi } from '../../app/api/api'
 import Cookies from 'js-cookie'
+import { AuthState } from '../../interfaces/authStateI'
 
-interface User {
-  unsername: string
-  password: string
-}
-type AuthState = {
-  user: User | null
-  token: string | null
-}
-
-const slice = createSlice({
+const authSlice = createSlice({
   name: 'auth',
-  initialState: { user: null, token: null } as AuthState,
+  initialState: {
+    user: null,
+    token: null,
+    registerInfo: {
+      username: null,
+      email: null,
+      password: null,
+    },
+  } as AuthState,
+
   reducers: {
     loginSuccess: (state, action) => {
       state.token = action.payload.token
       state.user = action.payload.user
     },
+
     logoutSuccess: (state) => {
       state.token = null
       state.user = null
-
-      // Elimina la cookie al cerrar sesión
       Cookies.remove('myCookie')
+    },
+
+    registerSuccess: (state, action) => {
+      state.registerInfo = action.payload
     },
   },
   extraReducers: (builder) => {
@@ -36,5 +40,5 @@ const slice = createSlice({
   },
 })
 
-export const { loginSuccess, logoutSuccess } = slice.actions
-export default slice.reducer
+export const { loginSuccess, logoutSuccess, registerSuccess } = authSlice.actions
+export default authSlice.reducer

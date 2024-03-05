@@ -1,7 +1,7 @@
 // apiSlice.ts
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import Cookies from 'js-cookie'
-import { loginSuccess } from '../../features/auth/authSlice'
+import { loginSuccess, registerSuccess } from '../../features/auth/authSlice'
 import { messageCreated } from '../../features/notifications/notificationsSlice'
 
 export const bookApi = createApi({
@@ -14,12 +14,11 @@ export const bookApi = createApi({
         method: 'POST',
         body: { ...credentials },
       }),
-      // Agrega la configuración para manejar la cookie
+
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
           const result = await queryFulfilled
           const myToken = result.data.accesToken
-          // establecer el token en la cookie y almacénarlo en el estado
           const cookie = Cookies.set('myCookie', myToken)
 
           if (cookie) {
@@ -29,7 +28,6 @@ export const bookApi = createApi({
             dispatch(messageCreated('Cookie "myCookie" no encontrada en la respuesta.'))
           }
         } catch (error) {
-          // Manejo de errores
           console.error('Error al iniciar sesión:', error)
           dispatch(messageCreated('Error fetching post!'))
         }
@@ -42,7 +40,25 @@ export const bookApi = createApi({
         method: 'POST',
       }),
     }),
+
+    register: builder.mutation({
+      query: (dataRegister) => ({
+        url: '/auth/register',
+        method: 'POST',
+        body: { ...dataRegister },
+      }),
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          // Manejar el éxito del registro aquí si es necesario
+          const result = await queryFulfilled
+          dispatch(registerSuccess(result.data)) // Suponiendo que tu endpoint de registro devuelve datos de usuario al registrarse con éxito
+        } catch (error) {
+          console.error('Error al registrar:', error)
+          dispatch(messageCreated('Error al registrar usuario.'))
+        }
+      },
+    }),
   }),
 })
 
-export const { useLoginMutation, useLogoutMutation } = bookApi
+export const { useLoginMutation, useLogoutMutation, useRegisterMutation } = bookApi
