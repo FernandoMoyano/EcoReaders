@@ -5,6 +5,7 @@ import { registerSuccess } from '../features/auth/authSlice'
 import { useRegisterMutation } from '../app/api/api'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { createNotication } from '../features/notifications/notificationsSlice'
 
 const Register = () => {
   const dispatch = useDispatch()
@@ -28,6 +29,7 @@ const Register = () => {
     try {
       const result = await register(dataRegister).unwrap()
       dispatch(registerSuccess(result.dataRegister))
+      dispatch(createNotication('Te has registrado con éxito'))
       navigate('/login'), 3000
     } catch (error) {
       console.log(error)
