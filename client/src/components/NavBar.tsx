@@ -10,22 +10,29 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = () => {
-  //Estados
+  //README: Estados locales
   const [isOpen, setIsOpen] = useState(false)
+  const [userSessionModal, setUserSessionModal] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  //Manejo del cierre de sesion
+  //README: Manejo del cierre de sesion
   const handleLogout = async () => {
     dispatch(logoutSuccess())
     navigate('/login')
   }
 
-  //manejo del menuhamburguesa abrir/cerrar
+  //README: manejo del menuhamburguesa abrir/cerrar
   const handleToggle = () => {
     setIsOpen(!isOpen)
   }
 
+  //README: Manejo del modal abrir/cerrar
+  const handleModalToggle = () => {
+    setUserSessionModal(!userSessionModal)
+  }
+
+  //README: Array de Enlaces
   const links = [
     { id: 1, text: 'Enlace 1', href: '#' },
     { id: 2, text: 'Enlace 2', href: '#' },
@@ -35,13 +42,13 @@ const Navbar: React.FC<NavbarProps> = () => {
   return (
     <nav className="bg-emerald-600 p-4">
       <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
+        README: Logo
         <div>
           <a href="#" className="text-white text-lg font-bold">
             EcoReaders
           </a>
         </div>
-        {/* Button hamburguesa */}
+        README: Button hamburguesa
         <div className="lg:hidden">
           <button
             onClick={handleToggle}
@@ -64,24 +71,27 @@ const Navbar: React.FC<NavbarProps> = () => {
             </svg>
           </button>
         </div>
-
         <div className="hidden lg:flex lg:items-center lg:space-x-4">
-          {/* Enlaces visibles en desktop */}
+          README: Enlaces visibles en desktop
           {links.map((link) => (
             <a key={link.id} href={link.href} className="text-white">
               {link.text}
             </a>
           ))}
-          {/* Ícono de usuario y nombre aleatorio en el menú hamburguesa */}
-          <div className="bg-black rounded-full p-2 mr-2 h-10 w-10 flex items-center justify-center">
+          README: Ícono de usuario
+          <div
+            onClick={handleModalToggle}
+            className="bg-black rounded-full p-2 mr-2 h-9 w-9 flex items-center justify-center"
+          >
             <FontAwesomeIcon icon={faUser} className="text-white" />
           </div>
+          README: Modal del usuario
           <h6>
             <button onClick={handleLogout}>Cerrar Sesion</button>
           </h6>
         </div>
       </div>
-      {/* comportamiento cuando el menu hamburguesa esta abierto */}
+      {/* README: comportamiento cuando el menu hamburguesa esta abierto */}
       {isOpen && (
         <div className="lg:hidden mt-4">
           {links.map((link) => (
