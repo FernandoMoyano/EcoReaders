@@ -1,6 +1,6 @@
 import { Credentials } from './CredentialsI'
 
-export interface LoginComponentProps {
+export interface LoginFormProps {
   handleLogin: (credentials: Credentials) => void
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   credentials: Credentials

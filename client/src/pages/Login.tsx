@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import LoginComponent from '../components/LoginForm'
+import LoginForm from '../components/LoginForm'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { loginSuccess } from '../features/auth/authSlice'
@@ -30,7 +30,7 @@ const Login = () => {
     try {
       const result = await login(credentials).unwrap()
       dispatch(loginSuccess(result))
-      navigate('/')
+      navigate('/dashboard')
       // Realizar acciones después del inicio de sesión
       console.log('Sesión activa:', result)
     } catch (error) {
@@ -39,7 +39,7 @@ const Login = () => {
     }
   }
   return (
-    <LoginComponent
+    <LoginForm
       handleLogin={handleLogin}
       handleInputChange={handleInputChange}
       isLoading={isLoading}

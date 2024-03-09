@@ -1,10 +1,11 @@
 import { useDispatch } from 'react-redux'
 import { logoutSuccess } from '../features/auth/authSlice'
 import { useNavigate } from 'react-router-dom'
+import NavBar from '../components/NavBar'
 
 const Dashboard = () => {
-  const navigate = useNavigate()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleLogout = async () => {
     dispatch(logoutSuccess())
@@ -12,10 +13,13 @@ const Dashboard = () => {
   }
 
   return (
-    <h1>
-      <div>Dashboard</div>
-      <button onClick={handleLogout}>Cerrar Sesion</button>
-    </h1>
+    <div>
+      <NavBar />
+      <h1>
+        <div>Dashboard</div>
+        <button onClick={handleLogout}>Cerrar Sesion</button>
+      </h1>
+    </div>
   )
 }
 

@@ -1,4 +1,7 @@
-const RegisterForm = () => {
+import { RegisterFormProps } from '../interfaces/RegisterFormPropsI'
+import Spinner from '../components/Spinner'
+
+const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister, isLoading, handleInputChange, dataRegister }) => {
   return (
     <div className="bg-gray-50 font-[sans-serif] text-[#333]">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
@@ -13,6 +16,7 @@ const RegisterForm = () => {
                 required
                 className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-emerald-500"
                 placeholder="usernsme"
+                onChange={(e) => handleInputChange(e)}
               />
             </div>
             <div>
@@ -23,6 +27,7 @@ const RegisterForm = () => {
                 required
                 className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-emerald-500"
                 placeholder="Email"
+                onChange={(e) => handleInputChange(e)}
               />
             </div>
             <div className="flex items-center justify-between gap-4">
@@ -33,14 +38,16 @@ const RegisterForm = () => {
                 required
                 className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-emerald-500"
                 placeholder="Password"
+                onChange={(e) => handleInputChange(e)}
               />
             </div>
             <div className="!mt-10">
               <button
                 type="button"
                 className="w-full py-2.5 px-4 text-sm rounded text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none"
+                onClick={() => handleRegister(dataRegister)}
               >
-                Registrarse
+                {isLoading ? <Spinner /> : 'Registrarse'}
               </button>
             </div>
           </form>
