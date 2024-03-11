@@ -1,8 +1,14 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { logoutSuccess } from '../features/auth/authSlice'
+import { useNavigate } from 'react-router-dom'
 
 const NavBar = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const toggleUserMenu = () => {
     setIsUserMenuOpen(!isUserMenuOpen)
@@ -16,6 +22,11 @@ const NavBar = () => {
     if (isUserMenuOpen) {
       setIsUserMenuOpen(false)
     }
+  }
+
+  const handleLogout = () => {
+    dispatch(logoutSuccess())
+    navigate('/login')
   }
 
   return (
@@ -151,6 +162,7 @@ const NavBar = () => {
                     Settings
                   </a>
                   <a
+                    onClick={handleLogout}
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700"
                     role="menuitem"
