@@ -4,7 +4,7 @@ import { selectQuery } from '../db/queryUtils'
 import { BookId, CreateBook, IBookRow } from '../interfaces/Book.interface'
 
 export class BookService {
-  //Obtener un libro
+  //➡️Obtener un libro
   async getOne(id: BookId) {
     try {
       const bookId = id
@@ -20,7 +20,7 @@ export class BookService {
     }
   }
 
-  //Eliminar un libro
+  //➡️Eliminar un libro
   async delete(id: BookId): Promise<ResultSetHeader> {
     try {
       const query = 'DELETE FROM books WHERE id = ?;'
@@ -32,7 +32,7 @@ export class BookService {
     }
   }
 
-  //Obtener todos los libros
+  //➡️Obtener todos los libros
   async getAll() {
     try {
       const books = await selectQuery<IBookRow>('SELECT * FROM books')
@@ -46,12 +46,12 @@ export class BookService {
     }
   }
 
-  //Crear un nuevo libro
+  //➡️Crear un nuevo libro
   async create(data: CreateBook): Promise<ResultSetHeader> {
     try {
       console.log('Datos recibidos en create:', data)
       const query =
-        'INSERT INTO books (title, author, description, price, bookCondition, category, sellerId, status, isbn) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);'
+        'INSERT INTO books (title, author, description, price, images, bookCondition, category, publisherId, status, isbn) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'
       const values: CreateBook = Object.values(data)
       if (!values) {
         throw new Error('Faltan datos necesarios para la solicitud')
@@ -64,7 +64,7 @@ export class BookService {
     }
   }
 
-  //Actualizar un libro
+  //➡️Actualizar un libro
   async update(id: BookId, changes: Partial<IBookRow>) {
     try {
       const bookId = id

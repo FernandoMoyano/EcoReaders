@@ -1,7 +1,7 @@
 import z from 'zod'
 
 const bookStatusEnum = ['Available', 'Sold', 'Reserved'] as const
-const bookConditionEnum = ['new', 'Like new', 'Lined'] as const
+const bookConditionEnum = ['New', 'Like new', 'Lined'] as const
 const bookCategoryEnum = [
   'Fiction',
   'No Fiction',
@@ -22,9 +22,13 @@ export const BookSchema = z.object({
   description: z.string(),
   author: z.string(),
   price: z.number(),
+  images: z.object({
+    frontCover: z.string(),
+    backCover: z.string(),
+  }),
   bookCondition: z.enum(bookConditionEnum),
   category: z.enum(bookCategoryEnum),
-  sellerId: z.number(),
+  publisherId: z.number(),
   status: z.enum(bookStatusEnum),
   isbn: z.string().optional(),
 })

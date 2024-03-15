@@ -4,12 +4,18 @@ import { BookCondition } from '../enums/BookCondition.enum'
 import { BookStatus } from '../enums/BookStatus.enum'
 import { ZodObject, ZodRawShape } from 'zod'
 
+export interface Images {
+  frontCover: string
+  backCover: string
+}
+
 export interface IBookRow extends RowDataPacket {
   id: number | string
   title: string
   author: string
   description: string
   price: number
+  images: Images
   bookCondition: BookCondition
   category: BookCategory
   sellerId: number

@@ -3,13 +3,13 @@ import { Router } from 'express'
 import { BookController } from '../controllers/book.controller'
 import { validatorSchema } from '../middlewares/validatorSchema'
 import { BookSchema } from '../schema/bookSchema'
-import { checkAuth } from '../middlewares/checkAuth'
+//import { checkAuth } from '../middlewares/checkAuth'
 
 export const bookRoutes: Router = express.Router()
 const bookController = new BookController()
 
 //GET /api/books
-bookRoutes.get('/', checkAuth, bookController.getBooks)
+bookRoutes.get('/', bookController.getBooks)
 
 //GET/api/books/:id
 bookRoutes.get('/:id', bookController.getBook)
@@ -18,7 +18,7 @@ bookRoutes.get('/:id', bookController.getBook)
 bookRoutes.post('/new', validatorSchema(BookSchema, 'body'), bookController.creteBook)
 
 //UPDATE /api/books/:id
-bookRoutes.patch('/:id', bookController.updateBook)
+bookRoutes.patch('/:id', validatorSchema(BookSchema, 'body'), bookController.updateBook)
 
 //DELETE /api/books/:id
 bookRoutes.delete('/:id', bookController.deleteBook)

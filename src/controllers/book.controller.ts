@@ -10,15 +10,18 @@ export class BookController {
   async getBooks(req: Request, res: Response) {
     try {
       const books = await bookService.getAll()
+      console.log(books)
       if (!books) {
         res.status(400).json('No se encontraron libros')
+      } else {
+        res.json(books)
       }
     } catch (error) {
       res.status(500).json({ error: 'Error interno del servidor' })
     }
   }
 
-  //GET-Obtener un libro
+  //➡️GET-Obtener un libro
   async getBook(req: Request, res: Response) {
     try {
       const id: BookId = req.params.id
@@ -31,7 +34,7 @@ export class BookController {
       console.log(error)
     }
   }
-  //PATCH-Actualizar lo datos de un libro
+  //➡️PATCH-Actualizar lo datos de un libro
   async updateBook(req: Request, res: Response) {
     try {
       const id = req.params.id
@@ -43,7 +46,7 @@ export class BookController {
     }
   }
 
-  //POST-Crear un nuevo libro
+  //➡️POST-Crear un nuevo libro
   async creteBook(req: Request, res: Response) {
     try {
       const bookData: CreateBook = req.body
@@ -55,7 +58,7 @@ export class BookController {
       console.log(error)
     }
   }
-  //DELETE-Eliminar un linbro
+  //➡️DELETE-Eliminar un linbro
   async deleteBook(req: Request, res: Response) {
     try {
       const id: BookId = req.params.id
