@@ -9,7 +9,7 @@ const authService = new AuthService()
 const auth = new Auth()
 
 export class AuthController {
-  //Logout
+  //➡️Logout
   async logout(req: Request, res: Response) {
     const cookies = req.cookies
     if (!cookies?.jwt) {
@@ -19,7 +19,7 @@ export class AuthController {
     res.json({ message: 'Cookie cleared' })
   }
 
-  //refresh token
+  //➡️refresh token
   async refresh(req: Request, res: Response) {
     const cookies = req.cookies
     if (!cookies?.jwt) {
@@ -28,7 +28,7 @@ export class AuthController {
       return refreshToken
     }
   }
-  //Login
+  //➡️Login
   async login(req: Request, res: Response) {
     try {
       const { username, password } = req.body
@@ -58,7 +58,7 @@ export class AuthController {
     }
   }
 
-  //Registro
+  //➡️Registro
   async register(req: Request, res: Response) {
     try {
       const data = req.body

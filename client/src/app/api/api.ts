@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import Cookies from 'js-cookie'
 import { loginSuccess, registerSuccess } from '../../features/auth/authSlice'
 import { messageCreated } from '../../features/notifications/notificationsSlice'
+import { GetBooks } from '../../interfaces/BookI'
 
 export const bookApi = createApi({
   reducerPath: 'bookApi',
@@ -18,7 +19,8 @@ export const bookApi = createApi({
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled
-          const myToken = data.accessToken
+          const myToken = data.accesToken
+          //console.log(myToken)
           Cookies.set('myCookie', myToken)
 
           if (myToken) {
@@ -57,7 +59,11 @@ export const bookApi = createApi({
         }
       },
     }),
+
+    getBooks: builder.query<GetBooks, void>({
+      query: () => '/books',
+    }),
   }),
 })
 
-export const { useLoginMutation, useLogoutMutation, useRegisterMutation } = bookApi
+export const { useLoginMutation, useLogoutMutation, useRegisterMutation, useGetBooksQuery } = bookApi
