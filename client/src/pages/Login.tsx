@@ -30,7 +30,7 @@ const Login = () => {
     try {
       const result = await login(credentials).unwrap()
       dispatch(loginSuccess(result))
-      navigate('/dashboard')
+      navigate('/books')
       // Realizar acciones después del inicio de sesión
       console.log('Sesión activa:', result)
     } catch (error) {

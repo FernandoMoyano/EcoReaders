@@ -1,6 +1,6 @@
 
 
-USE ecoreaders
+USE eco_readers
 
 -- Definición de la tabla users
 CREATE TABLE users (
@@ -31,6 +31,7 @@ CREATE TABLE books (
   category VARCHAR(50) NOT NULL,
   publisherId INT NOT NULL,
   status VARCHAR(50) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (publisherId) REFERENCES users(id)
   
 );
