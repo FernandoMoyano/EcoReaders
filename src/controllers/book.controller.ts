@@ -50,7 +50,6 @@ export class BookController {
   async creteBook(req: Request, res: Response) {
     try {
       const bookData: CreateBook = req.body
-      // Log de depuración
       console.log('Datos del libro recibidos:', bookData)
       const newBook = await bookService.create(bookData)
       res.json(newBook)

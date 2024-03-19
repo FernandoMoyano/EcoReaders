@@ -1,4 +1,4 @@
-//SessionModal.ts
+/* //SessionModal.ts
 import { logoutSuccess } from '../features/auth/authSlice'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
@@ -12,7 +12,6 @@ const SessionModal: React.FC<SessionModalProps> = ({ onClose }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  // Manejo del cierre de sesion
   const handleLogout = async () => {
     dispatch(logoutSuccess())
     navigate('/login')
@@ -36,4 +35,4 @@ const SessionModal: React.FC<SessionModalProps> = ({ onClose }) => {
   )
 }
 
-export default SessionModal
+export default SessionModal */

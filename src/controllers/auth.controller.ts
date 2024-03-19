@@ -48,7 +48,7 @@ export class AuthController {
           sameSite: 'none',
           maxAge: 7 * 24 * 60 * 60 * 1000,
         })
-        return res.json({ accesToken })
+        return res.json({ accesToken, username })
       } else {
         res.status(401).json({ error: 'Credenciales invalidas' })
       }

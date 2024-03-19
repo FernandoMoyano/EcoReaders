@@ -28,7 +28,6 @@ export const BookSchema = z.object({
   }),
   bookCondition: z.enum(bookConditionEnum),
   category: z.enum(bookCategoryEnum),
-  publisherId: z.number(),
+  publisherId: z.string(),
   status: z.enum(bookStatusEnum),
-  isbn: z.string().optional(),
 })

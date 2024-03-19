@@ -30,7 +30,7 @@ const NavBar = () => {
   }
 
   return (
-    <nav className="bg-emerald-700">
+    <nav className="bg-indigo-600">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -38,7 +38,7 @@ const NavBar = () => {
             <button
               onClick={toggleMobileMenu}
               type="button"
-              className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              className="relative inline-flex items-center justify-center rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-controls="mobile-menu"
               aria-expanded="false"
             >
@@ -76,42 +76,27 @@ const NavBar = () => {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
-              <Link to={'/'}>
-                <img
-                  className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                  alt="Your Company"
-                />
+              <Link to={'/books'} className="font-medium">
+                <h1 className="bold">EcoReaders</h1>
               </Link>
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
-                {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white"  */}
-                <Link
-                  to="/dashboard"
-                  className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                  aria-current="page"
-                >
-                  Dashboard
+                <Link to="/books" className="text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
+                  Books
                 </Link>
                 <Link
                   to="/mypublished"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  className="text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 >
                   Mis Publicados
                 </Link>
                 <Link
                   to="/favorites"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  className="text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 >
                   Favoritos
                 </Link>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                >
-                  Calendar
-                </a>
               </div>
             </div>
           </div>
@@ -144,7 +129,6 @@ const NavBar = () => {
                   aria-labelledby="user-menu-button"
                   tabIndex={-1}
                 >
-                  {/* Active: "bg-gray-100", Not Active: ""  */}
                   <a
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700"
@@ -152,7 +136,7 @@ const NavBar = () => {
                     tabIndex={-1}
                     id="user-menu-item-0"
                   >
-                    Your Profile
+                    Mi Perfil
                   </a>
                   <a
                     href="#"
@@ -161,7 +145,7 @@ const NavBar = () => {
                     tabIndex={-1}
                     id="user-menu-item-1"
                   >
-                    Settings
+                    Configuración
                   </a>
                   <a
                     onClick={handleLogout}

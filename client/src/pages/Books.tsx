@@ -1,8 +1,7 @@
 //books.tsx
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-regular-svg-icons'
 
 import { useGetBooksQuery } from '../app/api/api'
+import ModalNewBook from '../components/ModalNewBook'
 import NavBar from '../components/NavBar'
 import Spinner from '../components/Spinner'
 import { BookI } from '../interfaces/BookI'
@@ -35,15 +34,14 @@ const Books: React.FC = () => {
                 <p className="text-lg font-bold text-black truncate block capitalize">{book.title}</p>
                 <div className="flex items-center">
                   <p className="text-lg font-semibold text-black cursor-auto my-3">${book.price}</p>
-                  <div className="ml-auto">
-                    <FontAwesomeIcon icon={faHeart} />
-                  </div>
+                  <div className="ml-auto"></div>
                 </div>
               </div>
             </Link>
           </div>
         ))}
       </section>
+      <ModalNewBook />
     </div>
   )
 }

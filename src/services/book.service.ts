@@ -2,6 +2,7 @@ import { ResultSetHeader } from 'mysql2'
 import { pool } from '../db/connection'
 import { selectQuery } from '../db/queryUtils'
 import { BookId, CreateBook, IBookRow } from '../interfaces/Book.interface'
+import { v4 as uuidv4 } from 'uuid'
 
 export class BookService {
   //➡️Obtener un libro
@@ -50,13 +51,15 @@ export class BookService {
   async create(data: CreateBook): Promise<ResultSetHeader> {
     try {
       console.log('Datos recibidos en create:', data)
+
       const query =
-        'INSERT INTO books (title, author, description, price, images, bookCondition, category, publisherId, status, isbn) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'
+        'INSERT INTO books (id, title, author, description, price, images, bookCondition, category, publisherId, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'
       const values: CreateBook = Object.values(data)
       if (!values) {
         throw new Error('Faltan datos necesarios para la solicitud')
       }
-      const [results] = await pool.execute(query, values)
+      const bookId = uuidv4()
+      const [results] = await pool.execute(query, [bookId, values])
       return results as ResultSetHeader
     } catch (error) {
       console.error(error)

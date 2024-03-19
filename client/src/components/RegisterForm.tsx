@@ -15,7 +15,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister, isLoading, 
                 autoComplete="username"
                 required
                 className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-emerald-500"
-                placeholder="usernsme"
+                placeholder="username"
                 onChange={(e) => handleInputChange(e)}
               />
             </div>

@@ -19,12 +19,13 @@ export const bookApi = createApi({
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled
+          console.log(data)
           const myToken = data.accesToken
           //console.log(myToken)
           Cookies.set('myCookie', myToken)
 
           if (myToken) {
-            dispatch(loginSuccess({ token: myToken, user: data.user }))
+            dispatch(loginSuccess({ token: myToken, user: data.username }))
           } else {
             console.error('No se encontró la cookie "myCookie" en la respuesta.')
             dispatch(messageCreated('Cookie "myCookie" no encontrada en la respuesta.'))

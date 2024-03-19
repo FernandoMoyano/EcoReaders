@@ -1,8 +1,7 @@
-import { useDispatch } from 'react-redux'
 import LoginForm from '../components/LoginForm'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { loginSuccess } from '../features/auth/authSlice'
+
 import { useLoginMutation } from '../app/api/api'
 import { Credentials } from '../interfaces/CredentialsI'
 
@@ -12,7 +11,7 @@ const Login = () => {
     username: '',
     password: '',
   })
-  const dispatch = useDispatch()
+
   const navigate = useNavigate()
   const [login, { isLoading }] = useLoginMutation()
 
@@ -29,12 +28,10 @@ const Login = () => {
   const handleLogin = async (credentials: Credentials) => {
     try {
       const result = await login(credentials).unwrap()
-      dispatch(loginSuccess(result))
       navigate('/books')
       // Realizar acciones después del inicio de sesión
       console.log('Sesión activa:', result)
     } catch (error) {
-      // Manejo de errores
       console.error('Error al iniciar sesión:', error)
     }
   }
