@@ -54,12 +54,24 @@ export class BookService {
 
       const query =
         'INSERT INTO books (id, title, author, description, price, images, bookCondition, category, publisherId, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'
-      const values: CreateBook = Object.values(data)
+      //const values: CreateBook = Object.values(data)
+      const values = [
+        uuidv4(), // id
+        data.title, // title
+        data.author, // author
+        data.description, // description
+        data.price, // price
+        JSON.stringify(data.images), // images (convertido a JSON)
+        data.bookCondition, // bookCondition
+        data.category, // category
+        data.publisherId, // publisherId
+        data.status, // status
+      ]
       if (!values) {
         throw new Error('Faltan datos necesarios para la solicitud')
       }
-      const bookId = uuidv4()
-      const [results] = await pool.execute(query, [bookId, values])
+
+      const [results] = await pool.execute(query, values)
       return results as ResultSetHeader
     } catch (error) {
       console.error(error)

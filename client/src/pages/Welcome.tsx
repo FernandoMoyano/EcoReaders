@@ -2,20 +2,31 @@ import { Link } from 'react-router-dom'
 
 const Welcome = () => {
   return (
-    <div>
-      <header className="flex justify justify-around bg-emerald-500 py-4 ">
+    <div className="">
+      <header className="container m-auto flex justify-around lg:justify-between items-center py-4 ">
         <div>
-          <h1 className="text-xl font-bold text-white">EcoReaders</h1>
+          <h1 className="text-xl font-bold text-black">EcoReaders</h1>
         </div>
         <nav className="flex gap-3 text-white">
-          <Link to={'/login'}>Login</Link>
-          <Link to={'/register'}>SignUp</Link>
+          <Link className="w-20 text-center bg-violet-500 p-2 rounded-md" to={'/login'}>
+            Login
+          </Link>
+          <Link className=" p-2 rounded-md text-black" to={'/register'}>
+            SignUp
+          </Link>
         </nav>
       </header>
-      <div className=" flex justify-evenly items-center h-screen bg-gray-300">
-        <div className="font-medium">La plataforma para publicar tus libros usados</div>
-        <div className="w-1/3">
-          <img className="bg-auto" src="https://cdn.pixabay.com/photo/2017/08/06/22/01/books-2596809_1280.jpg"></img>
+
+      <div className="h-screen container grid grid-cols-1 gap-3 lg:grid-cols-4 m-auto content-center">
+        <div className=" font-Poppins text-3xl md:text-4xl lg:text-5xl font-bold text-center leading-normal lg:col-span-2  flex align-center justify-center self-center whitespace-pre-line">
+          <p>
+            La plataforma para <br /> publicar tus libros <span className="text-violet-500">usados.</span>
+          </p>
+        </div>
+        <div className="col-span-2 flex align-center justify-center  ">
+          <div className="w-2/3 mx-auto">
+            <img className="w-full h-auto" src="../../public/Books.jpg" />
+          </div>
         </div>
       </div>
       <div>j</div>

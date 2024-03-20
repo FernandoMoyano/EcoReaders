@@ -69,6 +69,7 @@ const PublicationForm: React.FC<Props> = () => {
         </select>
       </div>
       <div className="flex items-center justify-between gap-4">
+        <label htmlFor="category">Categoria:</label>
         {/* Categoria */}
         <select name="category" id="category">
           <option value="value1">Fiction</option>

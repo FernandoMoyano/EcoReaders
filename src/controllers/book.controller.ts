@@ -53,6 +53,7 @@ export class BookController {
       console.log('Datos del libro recibidos:', bookData)
       const newBook = await bookService.create(bookData)
       res.json(newBook)
+      return
     } catch (error) {
       console.log(error)
     }

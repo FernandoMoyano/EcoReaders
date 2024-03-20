@@ -15,7 +15,7 @@ const LoginComponent: React.FC<LoginFormProps> = ({ handleLogin, handleInputChan
                 type="text"
                 autoComplete="username"
                 required
-                className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-emerald-500"
+                className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-violet-300"
                 placeholder="usernsme"
                 onChange={(e) => handleInputChange(e)}
               />
@@ -26,7 +26,7 @@ const LoginComponent: React.FC<LoginFormProps> = ({ handleLogin, handleInputChan
                 type="password"
                 autoComplete="current-password"
                 required
-                className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-emerald-500"
+                className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-violet-300"
                 placeholder="Password"
                 onChange={(e) => handleInputChange(e)}
               />
@@ -37,14 +37,14 @@ const LoginComponent: React.FC<LoginFormProps> = ({ handleLogin, handleInputChan
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
-                  className="h-4 w-4 shrink-0 text-emerald-600 focus:ring-emerald-700 border-gray-300 rounded"
+                  className="h-4 w-4 shrink-0 text-violet-400 focus:ring-violet-500 border-gray-300 rounded"
                 />
                 <label htmlFor="remember-me" className="ml-3 block text-sm">
                   Remember me
                 </label>
               </div>
               <div>
-                <a href="jajvascript:void(0);" className="text-sm text-emerald-600 hover:text-emerald-700">
+                <a href="jajvascript:void(0);" className="text-sm text-violet-500 hover:text-violet-700">
                   Ovido su contraseña?
                 </a>
               </div>
@@ -52,7 +52,7 @@ const LoginComponent: React.FC<LoginFormProps> = ({ handleLogin, handleInputChan
             <div className="flex flex-col items-center">
               <button
                 type="button"
-                className="w-full py-2.5 px-4 text-sm rounded text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none"
+                className="w-full py-2.5 px-4 text-sm rounded text-white bg-violet-500 hover:bg-violet-600 focus:outline-none"
                 onClick={() => handleLogin(credentials)}
                 disabled={isLoading}
               >

@@ -23,6 +23,6 @@ export interface IBookRow extends RowDataPacket {
   isbn?: string
 }
 
-export type CreateBook = Omit<IBookRow, 'sellerId' | 'id'>
+export type CreateBook = Omit<IBookRow, 'publisherId' | 'id'>
 export type BookId = string | number
 export type ZodSchema<T extends ZodRawShape> = ZodObject<T>

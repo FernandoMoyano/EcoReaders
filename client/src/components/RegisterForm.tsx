@@ -14,7 +14,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister, isLoading, 
                 type="text"
                 autoComplete="username"
                 required
-                className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-emerald-500"
+                className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-violet-500"
                 placeholder="username"
                 onChange={(e) => handleInputChange(e)}
               />
@@ -25,7 +25,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister, isLoading, 
                 type="email"
                 autoComplete="current-email"
                 required
-                className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-emerald-500"
+                className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-violet-500"
                 placeholder="Email"
                 onChange={(e) => handleInputChange(e)}
               />
@@ -36,7 +36,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister, isLoading, 
                 type="password"
                 autoComplete="current-password"
                 required
-                className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-emerald-500"
+                className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-violet-500"
                 placeholder="Password"
                 onChange={(e) => handleInputChange(e)}
               />
@@ -44,7 +44,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister, isLoading, 
             <div className="!mt-10">
               <button
                 type="button"
-                className="w-full py-2.5 px-4 text-sm rounded text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none"
+                className="w-full py-2.5 px-4 text-sm rounded text-white bg-violet-600 hover:bg-violet-500 focus:outline-none"
                 onClick={() => handleRegister(dataRegister)}
               >
                 {isLoading ? <Spinner /> : 'Registrarse'}

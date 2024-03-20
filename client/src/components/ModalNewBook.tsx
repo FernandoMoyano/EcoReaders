@@ -15,7 +15,7 @@ const ModalNewBook = () => {
   return (
     <div>
       <button
-        className="fixed bottom-10 right-10 bg-indigo-600 text-white px-4 py-2 rounded-full shadow-md"
+        className="fixed bottom-10 right-10 bg-violet-500 text-white px-4 py-2 rounded-full shadow-md"
         onClick={openModal}
       >
         Publicar Libro +
