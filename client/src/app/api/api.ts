@@ -1,9 +1,10 @@
-// apiSlice.ts
+// api.ts
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import Cookies from 'js-cookie'
 import { loginSuccess, registerSuccess } from '../../features/auth/authSlice'
 import { messageCreated } from '../../features/notifications/notificationsSlice'
 import { BookI, GetBooks } from '../../interfaces/BookI'
+import { publishBooks } from '../../features/books/booksSlie'
 
 export const bookApi = createApi({
   reducerPath: 'bookApi',
@@ -25,7 +26,7 @@ export const bookApi = createApi({
           Cookies.set('myCookie', myToken)
 
           if (myToken) {
-            dispatch(loginSuccess({ token: myToken, user: data.username }))
+            dispatch(loginSuccess({ token: myToken, user: data.username, userId: data.id }))
           } else {
             console.error('No se encontró la cookie "myCookie" en la respuesta.')
             dispatch(messageCreated('Cookie "myCookie" no encontrada en la respuesta.'))
@@ -60,15 +61,40 @@ export const bookApi = createApi({
         }
       },
     }),
-
+    //Obtener todos
     getBooks: builder.query<GetBooks, void>({
       query: () => '/books',
     }),
-
+    //Obtener uno
     getBook: builder.query<BookI[], string>({
       query: (id) => `/books/${id}`,
+    }),
+    //Publicar uno
+    postNewBook: builder.mutation({
+      query: (dataNewBook) => ({
+        url: '/books/new',
+        method: 'POST',
+        body: dataNewBook,
+      }),
+      onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled
+          console.log(data)
+          dispatch(publishBooks(data))
+        } catch (error) {
+          console.error('Error al registrar:', error)
+          dispatch(messageCreated('Error al publicar el libro.'))
+        }
+      },
     }),
   }),
 })
 
-export const { useLoginMutation, useLogoutMutation, useRegisterMutation, useGetBooksQuery, useGetBookQuery } = bookApi
+export const {
+  useLoginMutation,
+  useLogoutMutation,
+  useRegisterMutation,
+  useGetBooksQuery,
+  useGetBookQuery,
+  usePostNewBookMutation,
+} = bookApi

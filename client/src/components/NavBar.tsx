@@ -82,18 +82,22 @@ const NavBar = () => {
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
-                <Link to="/books" className="text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
+                <Link
+                  to="/books"
+                  className="text-white hover:bg-violet-700 rounded-md px-3 py-2 text-sm font-medium"
+                  aria-current="page"
+                >
                   Books
                 </Link>
                 <Link
                   to="/mypublished"
-                  className="text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  className="text-white hover:bg-violet-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 >
                   Mis Publicados
                 </Link>
                 <Link
                   to="/favorites"
-                  className="text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  className="text-white hover:bg-violet-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 >
                   Favoritos
                 </Link>

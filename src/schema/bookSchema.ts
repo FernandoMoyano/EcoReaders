@@ -1,7 +1,7 @@
 import z from 'zod'
 
 const bookStatusEnum = ['Available', 'Sold', 'Reserved'] as const
-const bookConditionEnum = ['New', 'Like new', 'Lined'] as const
+const bookConditionEnum = ['New', 'Like New', 'Lined'] as const
 const bookCategoryEnum = [
   'Fiction',
   'No Fiction',

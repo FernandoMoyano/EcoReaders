@@ -43,7 +43,12 @@ export class App {
     this.app.use(express.json())
     this.app.use(loggError)
     this.app.use(handleError)
-    this.app.use(cors())
+    this.app.use(
+      cors({
+        origin: 'http://localhost:5173',
+        credentials: true,
+      }),
+    )
     this.app.use('/api', apiRouter)
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocumentation))
   }

@@ -21,6 +21,7 @@ export enum BookCategory {
   HISTORY = 'History',
   TERROR = 'Terror',
   SPORT = 'Sport',
+  OTHER = 'Other',
 }
 
 export enum BookStatus {
@@ -30,7 +31,7 @@ export enum BookStatus {
 }
 
 export interface BookI {
-  id: number | string
+  id: string
   title: string
   author: string
   description: string
@@ -38,10 +39,11 @@ export interface BookI {
   images: Images
   bookCondition: BookCondition
   category: BookCategory
-  sellerId: number
+  publisherId: string | null
   status: BookStatus
-  isbn?: string
 }
+
+export type NewBook = Omit<BookI, 'id'>
 
 export interface GetBooks {
   foundBooks: boolean
