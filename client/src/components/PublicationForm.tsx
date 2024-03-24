@@ -1,12 +1,17 @@
 //PublicationForm.tsx
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { BookCategory, BookCondition, BookStatus, NewBook } from '../interfaces/BookI'
 import { usePostNewBookMutation } from '../app/api/api'
 import Spinner from './Spinner'
+import usePriceFormat from '../hooks/usePriceFormat'
 
 const PublicationForm: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(false) // Estado para manejar la carga
-  const [postNewBook] = usePostNewBookMutation() // Obtener la función para enviar el nuevo libro
+  const [price, setPrice] = useState('0')
+  const { formattedPrice, formatPrice } = usePriceFormat(price)
+  // Estado para manejar la carga
+  const [isLoading, setIsLoading] = useState(false)
+  // Obtener la función que me permite enviar el nuevo libro
+  const [postNewBook] = usePostNewBookMutation()
   const [dataNewBook, setDataNewBook] = useState<NewBook>({
     title: '',
     description: '',
@@ -22,27 +27,39 @@ const PublicationForm: React.FC = () => {
     publisherId: '31701e1e-579a-423c-9a22-a6c9a2a21188',
   })
 
+  //Manejo de los inputs
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target
-    const newValue = name === 'price' ? parseFloat(value) : value
-    setDataNewBook((prevState) => ({
-      ...prevState,
-      [name]: newValue,
-    }))
-  }
 
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = event.target
     setDataNewBook((prevState) => ({
       ...prevState,
       [name]: value,
     }))
   }
 
+  //Manejo de los select
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = event.target
+
+    setDataNewBook((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }))
+  }
+
+  //Manejo del input de precio
+  const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target
+
+    setPrice(value)
+    formatPrice(value)
+  }
+
+  //Manejo del botón que envia la data al endpoint
   const handleNewBook = async (dataNewBook: NewBook) => {
     try {
       setIsLoading(true)
-      console.log('Data del nuevo libro:', dataNewBook)
+      //console.log('Data del nuevo libro:', dataNewBook)
       const result = await postNewBook(dataNewBook)
       if ('data' in result) {
         console.log('Libro publicado:', result.data)
@@ -103,13 +120,14 @@ const PublicationForm: React.FC = () => {
       <div className="flex items-center justify-between gap-4">
         <input
           name="price"
-          type="number"
-          autoComplete="price"
-          placeholder="$2.000.00"
+          type="text"
+          placeholder="$00.00"
+          value={price}
           required
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-violet-500"
-          onChange={handleInputChange}
+          onChange={handlePriceChange}
         />
+        <div>Precio: ${formattedPrice}</div>
       </div>
 
       {/* -Imagen Frontal */}
