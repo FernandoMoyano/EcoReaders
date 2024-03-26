@@ -1,17 +1,18 @@
 //PublicationForm.tsx
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { BookCategory, BookCondition, BookStatus, NewBook } from '../interfaces/BookI'
 import { usePostNewBookMutation } from '../app/api/api'
 import Spinner from './Spinner'
-import usePriceFormat from '../hooks/usePriceFormat'
+//import usePriceFormat from '../hooks/usePriceFormat'
 
 const PublicationForm: React.FC = () => {
-  const [price, setPrice] = useState('0')
-  const { formattedPrice, formatPrice } = usePriceFormat(price)
-  // Estado para manejar la carga
-  const [isLoading, setIsLoading] = useState(false)
+  const inputPrice = useRef<HTMLInputElement>(null)
+  //const [price, setPrice] = useState<number>()
+
   // Obtener la función que me permite enviar el nuevo libro
-  const [postNewBook] = usePostNewBookMutation()
+  //desde api.tsx-Redux
+  const [postNewBook, { isLoading }] = usePostNewBookMutation()
+  //estado que maneja la data para hacer POST de un nuevo libro
   const [dataNewBook, setDataNewBook] = useState<NewBook>({
     title: '',
     description: '',
@@ -27,17 +28,32 @@ const PublicationForm: React.FC = () => {
     publisherId: '31701e1e-579a-423c-9a22-a6c9a2a21188',
   })
 
-  //Manejo de los inputs
+  //Manejo de los inputs_______________________
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target
 
-    setDataNewBook((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }))
+    if (name === 'frontCover' || name === 'backCover') {
+      setDataNewBook((prevState) => ({
+        ...prevState,
+        images: {
+          ...prevState.images,
+          [name]: value,
+        },
+      }))
+    } else if (name === 'price') {
+      setDataNewBook((prevState) => ({
+        ...prevState,
+        [name]: Number(value), // Convierte el valor a número
+      }))
+    } else {
+      setDataNewBook((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }))
+    }
   }
 
-  //Manejo de los select
+  //Manejo de los select___________________________
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target
 
@@ -47,18 +63,8 @@ const PublicationForm: React.FC = () => {
     }))
   }
 
-  //Manejo del input de precio
-  const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target
-
-    setPrice(value)
-    formatPrice(value)
-  }
-
-  //Manejo del botón que envia la data al endpoint
   const handleNewBook = async (dataNewBook: NewBook) => {
     try {
-      setIsLoading(true)
       //console.log('Data del nuevo libro:', dataNewBook)
       const result = await postNewBook(dataNewBook)
       if ('data' in result) {
@@ -71,18 +77,16 @@ const PublicationForm: React.FC = () => {
     } catch (error) {
       console.error('Error al publicar el libro:', error)
       //Aquí podrías mostrar una notificación de error
-    } finally {
-      setIsLoading(false)
     }
   }
 
   return (
     <form className="mt-10 space-y-4">
-      {/* Titulo */}
+      {/* Titulo__________________________________________ */}
       <div>
         <input
           name="title"
-          type="text"
+          type="number"
           autoComplete="title"
           required
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-violet-500"
@@ -91,7 +95,7 @@ const PublicationForm: React.FC = () => {
         />
       </div>
 
-      {/* description */}
+      {/* description__________________________________________ */}
       <div>
         <textarea
           name="description"
@@ -103,7 +107,7 @@ const PublicationForm: React.FC = () => {
         />
       </div>
 
-      {/* Autor */}
+      {/* Autor______________________________________________ */}
       <div className="flex items-center justify-between gap-4">
         <input
           name="author"
@@ -116,21 +120,21 @@ const PublicationForm: React.FC = () => {
         />
       </div>
 
-      {/* Precio */}
+      {/* Precio_______________________________________________*/}
       <div className="flex items-center justify-between gap-4">
         <input
           name="price"
-          type="text"
-          placeholder="$00.00"
-          value={price}
+          type="number"
+          placeholder="Precio"
+          ref={inputPrice}
+          value={dataNewBook.price || ''}
           required
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-violet-500"
-          onChange={handlePriceChange}
+          onChange={handleInputChange}
         />
-        <div>Precio: ${formattedPrice}</div>
       </div>
 
-      {/* -Imagen Frontal */}
+      {/* -Imagen Frontal____________________________________ */}
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="frontCover">Imagen de Tapa</label>
         <input
@@ -143,7 +147,7 @@ const PublicationForm: React.FC = () => {
         />
       </div>
 
-      {/* -Imagenes Contratapa */}
+      {/* -Imagenes Contratapa_____________________________ */}
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="backCover">Imagen de contratapa</label>
         <input
@@ -156,7 +160,7 @@ const PublicationForm: React.FC = () => {
         />
       </div>
 
-      {/* condition */}
+      {/* condition______________________________________ */}
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="bookCondition">Condición del libro</label>
         <select name="bookCondition" id="bookCondition" onChange={handleSelectChange}>
@@ -168,7 +172,7 @@ const PublicationForm: React.FC = () => {
         </select>
       </div>
 
-      {/* Categoria */}
+      {/* Categoria_________________________________________ */}
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="category">Categoria:</label>
         <select name="category" id="category" onChange={handleSelectChange}>
@@ -180,7 +184,7 @@ const PublicationForm: React.FC = () => {
         </select>
       </div>
 
-      {/* Status */}
+      {/* Status_______________________________________________ */}
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="">Estado</label>
         <select name="status" id="status" onChange={handleSelectChange}>
