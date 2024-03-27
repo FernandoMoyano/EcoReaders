@@ -3,12 +3,25 @@ import React, { useRef, useState } from 'react'
 import { BookCategory, BookCondition, BookStatus, NewBook } from '../interfaces/BookI'
 import { usePostNewBookMutation } from '../app/api/api'
 import Spinner from './Spinner'
-//import usePriceFormat from '../hooks/usePriceFormat'
 
 const PublicationForm: React.FC = () => {
-  const inputPrice = useRef<HTMLInputElement>(null)
-  //const [price, setPrice] = useState<number>()
+  const userDataString = localStorage.getItem('userData')
+  let userId = null
 
+  if (userDataString) {
+    try {
+      const userData = JSON.parse(userDataString)
+      if (userData && typeof userData === 'object' && 'userId' in userData) {
+        userId = userData.userId
+      }
+    } catch (error) {
+      console.error('Error al parsear userData:', error)
+    }
+  }
+
+  //console.log(userId)
+
+  const priceValueRef = useRef<HTMLInputElement>(null)
   // Obtener la función que me permite enviar el nuevo libro
   //desde api.tsx-Redux
   const [postNewBook, { isLoading }] = usePostNewBookMutation()
@@ -25,7 +38,7 @@ const PublicationForm: React.FC = () => {
     bookCondition: BookCondition.NEW,
     category: BookCategory.OTHER,
     status: BookStatus.AVAILABLE,
-    publisherId: '31701e1e-579a-423c-9a22-a6c9a2a21188',
+    publisherId: userId,
   })
 
   //Manejo de los inputs_______________________
@@ -39,11 +52,6 @@ const PublicationForm: React.FC = () => {
           ...prevState.images,
           [name]: value,
         },
-      }))
-    } else if (name === 'price') {
-      setDataNewBook((prevState) => ({
-        ...prevState,
-        [name]: Number(value), // Convierte el valor a número
       }))
     } else {
       setDataNewBook((prevState) => ({
@@ -63,9 +71,21 @@ const PublicationForm: React.FC = () => {
     }))
   }
 
-  const handleNewBook = async (dataNewBook: NewBook) => {
+  //Manejo del input de precio__________________________
+  const handlePriceChange = () => {
+    if (priceValueRef.current) {
+      const priceValue = parseFloat(priceValueRef.current.value)
+
+      setDataNewBook((prevState) => ({
+        ...prevState,
+        price: priceValue,
+      }))
+      console.log(priceValue)
+    }
+  }
+
+  const handlePostNewBook = async (dataNewBook: NewBook) => {
     try {
-      //console.log('Data del nuevo libro:', dataNewBook)
       const result = await postNewBook(dataNewBook)
       if ('data' in result) {
         console.log('Libro publicado:', result.data)
@@ -76,7 +96,7 @@ const PublicationForm: React.FC = () => {
       }
     } catch (error) {
       console.error('Error al publicar el libro:', error)
-      //Aquí podrías mostrar una notificación de error
+      //mostrar notificación de error
     }
   }
 
@@ -86,7 +106,7 @@ const PublicationForm: React.FC = () => {
       <div>
         <input
           name="title"
-          type="number"
+          type="text"
           autoComplete="title"
           required
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-violet-500"
@@ -126,11 +146,10 @@ const PublicationForm: React.FC = () => {
           name="price"
           type="number"
           placeholder="Precio"
-          ref={inputPrice}
-          value={dataNewBook.price || ''}
+          ref={priceValueRef}
           required
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-violet-500"
-          onChange={handleInputChange}
+          onChange={handlePriceChange}
         />
       </div>
 
@@ -196,12 +215,12 @@ const PublicationForm: React.FC = () => {
         </select>
       </div>
 
-      {/* botón de envio */}
+      {/* botón de envio__________________________________ */}
       <div className="!mt-10">
         <button
           type="button"
           className="w-full py-2.5 px-4 text-sm rounded text-white bg-violet-600 hover:bg-violet-700 focus:outline-none"
-          onClick={() => handleNewBook(dataNewBook)}
+          onClick={() => handlePostNewBook(dataNewBook)}
         >
           {isLoading ? <Spinner /> : 'Publicar'}
         </button>

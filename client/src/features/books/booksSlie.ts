@@ -1,23 +1,28 @@
 //booksSlice.tsx
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+interface bookState {
   published: {
-    title: '',
-    author: '',
-  },
+    title: string
+    author: string
+    publisherId: string
+  }
+}
+const initialState: bookState = {
+  published: JSON.parse(localStorage.getItem('publishedBooks') || '{}'),
 }
 
 const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
-    publishBooks: (state, action) => {
-      state.published.title = action.payload
-      state.published.author = action.payload
+    publishedBooks: (state, action) => {
+      const { title, author, publisherId } = action.payload
+      state.published = { title, author, publisherId }
+      localStorage.setItem('publishedBooks', JSON.stringify(action.payload))
     },
   },
 })
 
-export const { publishBooks } = booksSlice.actions
+export const { publishedBooks } = booksSlice.actions
 export default booksSlice.reducer

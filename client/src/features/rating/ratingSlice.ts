@@ -7,6 +7,7 @@ interface RatingState {
 const initialState: RatingState = {
   ratings: JSON.parse(localStorage.getItem('ratings') || '{}'),
 }
+
 export const ratingSlice = createSlice({
   name: 'ratings',
   initialState,

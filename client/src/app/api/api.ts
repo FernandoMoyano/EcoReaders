@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 import { loginSuccess, registerSuccess } from '../../features/auth/authSlice'
 import { messageCreated } from '../../features/notifications/notificationsSlice'
 import { BookI, GetBooks } from '../../interfaces/BookI'
-import { publishBooks } from '../../features/books/booksSlie'
+import { publishedBooks } from '../../features/books/booksSlie'
 
 export const bookApi = createApi({
   reducerPath: 'bookApi',
@@ -80,7 +80,7 @@ export const bookApi = createApi({
         try {
           const { data } = await queryFulfilled
           console.log(data)
-          dispatch(publishBooks(data))
+          dispatch(publishedBooks(data))
         } catch (error) {
           console.error('Error al registrar:', error)
           dispatch(messageCreated('Error al publicar el libro.'))

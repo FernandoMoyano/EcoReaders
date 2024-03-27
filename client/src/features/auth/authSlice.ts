@@ -9,6 +9,7 @@ const authSlice = createSlice({
   initialState: {
     user: null,
     token: null,
+    userId: null,
 
     registerInfo: {
       username: null,
@@ -21,6 +22,7 @@ const authSlice = createSlice({
     loginSuccess: (state, action) => {
       state.token = action.payload.token
       state.user = action.payload.user
+      state.userId = action.payload.userId
 
       localStorage.setItem('userData', JSON.stringify(action.payload))
     },
