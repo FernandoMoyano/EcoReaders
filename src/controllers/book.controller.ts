@@ -53,8 +53,8 @@ export class BookController {
     try {
       const bookData: CreateBook = req.body
       console.log('Datos del libro recibidos:', bookData)
-      const newBook = await bookService.create(bookData)
-      res.json({ message: 'Libro Creado', result: newBook, data: bookData })
+      const datesOfTheNewBook = await bookService.create(bookData)
+      res.json({ message: 'Libro Creado con Éxito', result: datesOfTheNewBook })
       return
     } catch (error) {
       console.log(error)

@@ -50,37 +50,38 @@ export class BookService {
   }
 
   //➡️Crear un nuevo libro
-  async create(data: CreateBook): Promise<CreateResult> {
+  async create(bookDetails: CreateBook): Promise<CreateResult> {
     try {
-      console.log('Datos recibidos en create:', data)
+      console.log('Datos recibidos en create:', bookDetails)
 
       const queryBook =
         'INSERT INTO books (id, title, author, description, price, images, bookCondition, category, publisherId, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'
       //const values: CreateBook = Object.values(data)
       const bookValues = [
         uuidv4(),
-        data.title,
-        data.author,
-        data.description,
-        data.price,
-        JSON.stringify(data.images), // images (convertido a JSON)
-        data.bookCondition,
-        data.category,
-        data.publisherId,
-        data.status,
+        bookDetails.title,
+        bookDetails.author,
+        bookDetails.description,
+        bookDetails.price,
+        JSON.stringify(bookDetails.images), // images (convertido a JSON)
+        bookDetails.bookCondition,
+        bookDetails.category,
+        bookDetails.publisherId,
+        bookDetails.status,
       ]
       if (!bookValues) {
         throw new Error('Faltan datos necesarios para la solicitud')
       }
 
       const [insertedBookResult] = await pool.execute(queryBook, bookValues)
-      const resultingBook: ResultSetHeader = insertedBookResult as ResultSetHeader
+      const queryResult: ResultSetHeader = insertedBookResult as ResultSetHeader
       const queryUser = 'SELECT * FROM users WHERE id = ?'
-      const [dataUserResult] = await pool.execute(queryUser, [data.publisherId])
+      const [dataUserResult] = await pool.execute(queryUser, [bookDetails.publisherId])
       const publishedBy: RowDataPacket[] = dataUserResult as RowDataPacket[]
 
       const result: CreateResult = {
-        resultingBook,
+        queryResult,
+        bookDetails,
         publishedBy,
       }
 
