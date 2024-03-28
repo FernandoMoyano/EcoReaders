@@ -40,6 +40,7 @@ export class AuthController {
 
       if (user) {
         const accesToken = auth.sign(user)
+        const id = user.id
         //console.log(accesToken)
         const refreshToken = auth.refreshToken(user)
         res.cookie('myCookie', refreshToken, {
@@ -48,7 +49,7 @@ export class AuthController {
           sameSite: 'none',
           maxAge: 7 * 24 * 60 * 60 * 1000,
         })
-        return res.json({ accesToken, username })
+        return res.json({ accesToken, username, id })
       } else {
         res.status(401).json({ error: 'Credenciales invalidas' })
       }

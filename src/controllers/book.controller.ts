@@ -7,7 +7,7 @@ import { BookService } from '../services/book.service'
 const bookService = new BookService()
 
 export class BookController {
-  //GET-Obtener todos los libros
+  //➡️GET-Obtener todos los libros
   async getBooks(req: Request, res: Response) {
     try {
       const books = await bookService.getAll()
@@ -35,6 +35,7 @@ export class BookController {
       console.log(error)
     }
   }
+
   //➡️PATCH-Actualizar lo datos de un libro
   async updateBook(req: Request, res: Response) {
     try {
@@ -53,12 +54,13 @@ export class BookController {
       const bookData: CreateBook = req.body
       console.log('Datos del libro recibidos:', bookData)
       const newBook = await bookService.create(bookData)
-      res.json(newBook)
+      res.json({ message: 'Libro Creado', result: newBook, data: bookData })
       return
     } catch (error) {
       console.log(error)
     }
   }
+
   //➡️DELETE-Eliminar un linbro
   async deleteBook(req: Request, res: Response) {
     try {

@@ -1,9 +1,10 @@
 //bookService.ts
-import { ResultSetHeader } from 'mysql2'
+import { ResultSetHeader, RowDataPacket } from 'mysql2'
 import { pool } from '../db/connection'
 import { selectQuery } from '../db/queryUtils'
 import { BookId, CreateBook, IBookRow } from '../interfaces/Book.interface'
 import { v4 as uuidv4 } from 'uuid'
+import { CreateResult } from '../interfaces/CreateResult.interface'
 
 export class BookService {
   //➡️Obtener un libro
@@ -49,31 +50,41 @@ export class BookService {
   }
 
   //➡️Crear un nuevo libro
-  async create(data: CreateBook): Promise<ResultSetHeader> {
+  async create(data: CreateBook): Promise<CreateResult> {
     try {
       console.log('Datos recibidos en create:', data)
 
-      const query =
+      const queryBook =
         'INSERT INTO books (id, title, author, description, price, images, bookCondition, category, publisherId, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'
       //const values: CreateBook = Object.values(data)
-      const values = [
-        uuidv4(), // id
-        data.title, // title
-        data.author, // author
-        data.description, // description
-        data.price, // price
+      const bookValues = [
+        uuidv4(),
+        data.title,
+        data.author,
+        data.description,
+        data.price,
         JSON.stringify(data.images), // images (convertido a JSON)
-        data.bookCondition, // bookCondition
-        data.category, // category
-        data.publisherId, // publisherId
-        data.status, // status
+        data.bookCondition,
+        data.category,
+        data.publisherId,
+        data.status,
       ]
-      if (!values) {
+      if (!bookValues) {
         throw new Error('Faltan datos necesarios para la solicitud')
       }
 
-      const [results] = await pool.execute(query, values)
-      return results as ResultSetHeader
+      const [insertedBookResult] = await pool.execute(queryBook, bookValues)
+      const resultingBook: ResultSetHeader = insertedBookResult as ResultSetHeader
+      const queryUser = 'SELECT * FROM users WHERE id = ?'
+      const [dataUserResult] = await pool.execute(queryUser, [data.publisherId])
+      const publishedBy: RowDataPacket[] = dataUserResult as RowDataPacket[]
+
+      const result: CreateResult = {
+        resultingBook,
+        publishedBy,
+      }
+
+      return result as CreateResult
     } catch (error) {
       console.error(error)
       throw error
