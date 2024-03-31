@@ -11,6 +11,7 @@ export const bookApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api' }),
 
   endpoints: (builder) => ({
+    //login
     login: builder.mutation({
       query: (credentials) => ({
         url: '/auth/login',
@@ -37,14 +38,14 @@ export const bookApi = createApi({
         }
       },
     }),
-
+    //logout
     logout: builder.mutation({
       query: () => ({
         url: '/auth/logout',
         method: 'POST',
       }),
     }),
-
+    //registro
     register: builder.mutation({
       query: (dataRegister) => ({
         url: '/auth/register',
@@ -61,15 +62,15 @@ export const bookApi = createApi({
         }
       },
     }),
-    //Obtener todos
+    //Obtener todos los libros
     getBooks: builder.query<GetBooks, void>({
       query: () => '/books',
     }),
-    //Obtener uno
+    //Obtener un libro
     getBook: builder.query<BookI[], string>({
       query: (id) => `/books/${id}`,
     }),
-    //Publicar uno
+    //Publicar un libro
     postNewBook: builder.mutation({
       query: (dataNewBook) => ({
         url: '/books/new',
@@ -79,8 +80,16 @@ export const bookApi = createApi({
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled
-          console.log(data)
-          dispatch(publishedBooks(data))
+          //DEBUG:↴
+          console.log('Data recibida de la API:', data)
+          const bookId = data.result.bookId
+          const bookDetails = data.result.bookDetails
+          const postedByUser = data.result.publishedBy[0].username
+
+          console //DEBUG:↴
+            .log('Detalles del libro recibido:', postedByUser)
+
+          dispatch(publishedBooks({ bookId, bookDetails, postedByUser }))
         } catch (error) {
           console.error('Error al registrar:', error)
           dispatch(messageCreated('Error al publicar el libro.'))

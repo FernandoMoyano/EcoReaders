@@ -84,7 +84,7 @@ const PublicationForm: React.FC = () => {
     }
   }
 
-  const handlePostNewBook = async (dataNewBook: NewBook) => {
+  const handlePostNewBook = async () => {
     try {
       const result = await postNewBook(dataNewBook)
       if ('data' in result) {
@@ -220,7 +220,7 @@ const PublicationForm: React.FC = () => {
         <button
           type="button"
           className="w-full py-2.5 px-4 text-sm rounded text-white bg-violet-600 hover:bg-violet-700 focus:outline-none"
-          onClick={() => handlePostNewBook(dataNewBook)}
+          onClick={handlePostNewBook}
         >
           {isLoading ? <Spinner /> : 'Publicar'}
         </button>

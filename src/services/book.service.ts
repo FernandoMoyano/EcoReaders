@@ -53,12 +53,13 @@ export class BookService {
   async create(bookDetails: CreateBook): Promise<CreateResult> {
     try {
       console.log('Datos recibidos en create:', bookDetails)
+      const bookId = uuidv4()
 
       const queryBook =
         'INSERT INTO books (id, title, author, description, price, images, bookCondition, category, publisherId, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'
       //const values: CreateBook = Object.values(data)
       const bookValues = [
-        uuidv4(),
+        bookId,
         bookDetails.title,
         bookDetails.author,
         bookDetails.description,
@@ -69,7 +70,7 @@ export class BookService {
         bookDetails.publisherId,
         bookDetails.status,
       ]
-      if (!bookValues) {
+      if (bookValues.length === 0) {
         throw new Error('Faltan datos necesarios para la solicitud')
       }
 
@@ -80,6 +81,7 @@ export class BookService {
       const publishedBy: RowDataPacket[] = dataUserResult as RowDataPacket[]
 
       const result: CreateResult = {
+        bookId,
         queryResult,
         bookDetails,
         publishedBy,

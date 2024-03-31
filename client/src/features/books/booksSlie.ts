@@ -1,25 +1,37 @@
 //booksSlice.tsx
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { NewBook } from '../../interfaces/BookI'
+
+interface BookWithUsername extends NewBook {
+  postedByUser: string
+}
 
 interface bookState {
-  published: {
-    title: string
-    author: string
-    publisherId: string
-  }
+  publishedBooks: { [bookId: string]: BookWithUsername }
 }
+
 const initialState: bookState = {
-  published: JSON.parse(localStorage.getItem('publishedBooks') || '{}'),
+  publishedBooks: JSON.parse(localStorage.getItem('publishedBooks') || '{}'),
 }
 
 const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
-    publishedBooks: (state, action) => {
-      const { title, author, publisherId } = action.payload
-      state.published = { title, author, publisherId }
-      localStorage.setItem('publishedBooks', JSON.stringify(action.payload))
+    publishedBooks: (state, action: PayloadAction<{ bookId: string; postedByUser: string; bookDetails: NewBook }>) => {
+      try {
+        //DEBUG:
+        console.log('Datos recibidos en publishedBooks:', action.payload)
+        const { bookId, bookDetails, postedByUser } = action.payload
+        state.publishedBooks[bookId] = { ...bookDetails, postedByUser }
+        //DEBUG:↴
+        console.log(postedByUser)
+
+        localStorage.setItem('publishedBooks', JSON.stringify(state.publishedBooks))
+      } catch (error) {
+        //DEBUG:
+        console.log('Error en publishedBooks:', error)
+      }
     },
   },
 })

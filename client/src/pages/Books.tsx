@@ -1,20 +1,21 @@
 //books.tsx
 
-import { useSelector } from 'react-redux'
+//import { useSelector } from 'react-redux'
 import { useGetBooksQuery } from '../app/api/api'
 import ModalNewBook from '../components/ModalNewBook'
 import NavBar from '../components/NavBar'
 import Spinner from '../components/Spinner'
 import { BookI } from '../interfaces/BookI'
 import { Link } from 'react-router-dom'
-import { RootState } from '../app/store'
-//import numeral from 'numeral'
+//import { RootState } from '../app/store'
 import { formatearNumero } from '../utilities'
+//import { useSelector } from 'react-redux'
+//import { useEffect, useState } from 'react'
 
 const Books: React.FC = () => {
-  const username = useSelector((state: RootState) => state.auth.user)
   const { data, isLoading, isError } = useGetBooksQuery()
-  console.log(data)
+  //console.log(data)
+
   if (isLoading) {
     return <Spinner />
   }
@@ -40,7 +41,7 @@ const Books: React.FC = () => {
                 <div className="flex items-center">
                   <p className="text-lg font-semibold text-black cursor-auto my-3">{formatearNumero(book.price)}</p>
                   <div className="ml-auto">
-                    <p>Publicado por {username}</p>
+                    <p>publicado por: {}</p>
                   </div>
                 </div>
               </div>
