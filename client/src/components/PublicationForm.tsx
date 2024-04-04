@@ -5,7 +5,7 @@ import { usePostNewBookMutation } from '../app/api/api'
 import Spinner from './Spinner'
 
 const PublicationForm: React.FC = () => {
-  const userDataString = localStorage.getItem('userData')
+  const userDataString = localStorage.getItem('userLoggedIn')
   let userId = null
 
   if (userDataString) {
@@ -18,8 +18,6 @@ const PublicationForm: React.FC = () => {
       console.error('Error al parsear userData:', error)
     }
   }
-
-  //console.log(userId)
 
   const priceValueRef = useRef<HTMLInputElement>(null)
   // Obtener la función que me permite enviar el nuevo libro

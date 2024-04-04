@@ -21,23 +21,28 @@ export const bookApi = createApi({
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled
+          //DEBUG:
           console.log(data)
           const myToken = data.accesToken
+          //DEBUG:
           //console.log(myToken)
           Cookies.set('myCookie', myToken)
 
           if (myToken) {
             dispatch(loginSuccess({ token: myToken, user: data.username, userId: data.id }))
           } else {
+            //DEBUG:
             console.error('No se encontró la cookie "myCookie" en la respuesta.')
             dispatch(messageCreated('Cookie "myCookie" no encontrada en la respuesta.'))
           }
         } catch (error) {
+          //DEBUG:
           console.error('Error al iniciar sesión:', error)
           dispatch(messageCreated('Error al iniciar sesión.'))
         }
       },
     }),
+
     //logout
     logout: builder.mutation({
       query: () => ({
@@ -45,6 +50,7 @@ export const bookApi = createApi({
         method: 'POST',
       }),
     }),
+
     //registro
     register: builder.mutation({
       query: (dataRegister) => ({
@@ -57,19 +63,23 @@ export const bookApi = createApi({
           const { data } = await queryFulfilled
           dispatch(registerSuccess(data))
         } catch (error) {
+          //DEBUG:
           console.error('Error al registrar:', error)
           dispatch(messageCreated('Error al registrar usuario.'))
         }
       },
     }),
+
     //Obtener todos los libros
     getBooks: builder.query<GetBooks, void>({
       query: () => '/books',
     }),
+
     //Obtener un libro
     getBook: builder.query<BookI[], string>({
       query: (id) => `/books/${id}`,
     }),
+
     //Publicar un libro
     postNewBook: builder.mutation({
       query: (dataNewBook) => ({
@@ -86,16 +96,22 @@ export const bookApi = createApi({
           const bookDetails = data.result.bookDetails
           const postedByUser = data.result.publishedBy[0].username
 
-          console //DEBUG:↴
-            .log('Detalles del libro recibido:', postedByUser)
+          //DEBUG:↴
+          console.log('Detalles del libro recibido:', postedByUser)
 
           dispatch(publishedBooks({ bookId, bookDetails, postedByUser }))
         } catch (error) {
+          //DEBUG:↴
           console.error('Error al registrar:', error)
           dispatch(messageCreated('Error al publicar el libro.'))
         }
       },
     }),
+
+    //getMyPublished
+    /* setMyPublishedBooks: builder.query<BookI[], string>({
+      query: (userId: UserId) => `/books/myPublishd/${userId}`,
+    }), */
   }),
 })
 

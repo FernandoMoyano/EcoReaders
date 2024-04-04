@@ -6,16 +6,18 @@ import Login from './pages/Login'
 import Welcome from './pages/Welcome'
 import BookDetail from './pages/BookDetail'
 import Books from './pages/Books'
+import MyPublished from './pages/MyPublished'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Welcome />}></Route>
-        <Route path="/books" element={<Books />}></Route>
-        <Route path="/books/:id" element={<BookDetail />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/register" element={<Register />}></Route>
+        <Route path="/" element={<Welcome />} />
+        <Route path="/books" element={<Books />} />
+        <Route path="/books/:id" element={<BookDetail />} />
+        <Route path="/mypublished" element={<MyPublished />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   )

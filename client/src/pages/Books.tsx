@@ -1,19 +1,19 @@
 //books.tsx
 
-//import { useSelector } from 'react-redux'
 import { useGetBooksQuery } from '../app/api/api'
 import ModalNewBook from '../components/ModalNewBook'
 import NavBar from '../components/NavBar'
 import Spinner from '../components/Spinner'
 import { BookI } from '../interfaces/BookI'
 import { Link } from 'react-router-dom'
-//import { RootState } from '../app/store'
 import { formatearNumero } from '../utilities'
-//import { useSelector } from 'react-redux'
-//import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '../app/store'
 
 const Books: React.FC = () => {
   const { data, isLoading, isError } = useGetBooksQuery()
+  const publishedBooks = useSelector((state: RootState) => state.books.publishedBooks)
+  //DEBUG:
   //console.log(data)
 
   if (isLoading) {
@@ -39,9 +39,12 @@ const Books: React.FC = () => {
                 <span className="text-gray-400 mr-3 uppercase text-xs">{book.author}</span>
                 <p className="text-lg font-bold text-black truncate block capitalize">{book.title}</p>
                 <div className="flex items-center">
-                  <p className="text-lg font-semibold text-black cursor-auto my-3">{formatearNumero(book.price)}</p>
+                  <p className="text-lg font-semibold text-black cursor-auto my-3">${formatearNumero(book.price)}</p>
                   <div className="ml-auto">
-                    <p>publicado por: {}</p>
+                    <p className="flex flex-wrap end justify-end mr-1">
+                      publicado por:
+                      <span className="text-black font-bold ml-2">{publishedBooks[book.id]?.postedByUser}</span>
+                    </p>
                   </div>
                 </div>
               </div>

@@ -1,3 +1,4 @@
+//Book.interface.ts
 import { RowDataPacket } from 'mysql2'
 import { BookCategory } from '../enums/BookCategory.enum'
 import { BookCondition } from '../enums/BookCondition.enum'
@@ -10,7 +11,7 @@ export interface Images {
 }
 
 export interface IBookRow extends RowDataPacket {
-  id: number | string
+  id: string
   title: string
   author: string
   description: string

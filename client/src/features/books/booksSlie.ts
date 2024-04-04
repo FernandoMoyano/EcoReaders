@@ -18,7 +18,7 @@ const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
-    publishedBooks: (state, action: PayloadAction<{ bookId: string; postedByUser: string; bookDetails: NewBook }>) => {
+    publishedBooks: (state, action: PayloadAction<{ bookId: string; bookDetails: NewBook; postedByUser: string }>) => {
       try {
         //DEBUG:
         console.log('Datos recibidos en publishedBooks:', action.payload)

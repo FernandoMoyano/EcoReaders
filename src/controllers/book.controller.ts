@@ -52,10 +52,10 @@ export class BookController {
   async creteBook(req: Request, res: Response) {
     try {
       const bookData: CreateBook = req.body
+      //DEBUG:
       console.log('Datos del libro recibidos:', bookData)
       const datesOfTheNewBook = await bookService.create(bookData)
       res.json({ message: 'Libro Creado con Éxito', result: datesOfTheNewBook })
-      return
     } catch (error) {
       console.log(error)
     }

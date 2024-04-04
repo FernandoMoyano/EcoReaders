@@ -53,8 +53,8 @@ export class BookService {
   async create(bookDetails: CreateBook): Promise<CreateResult> {
     try {
       console.log('Datos recibidos en create:', bookDetails)
-      const bookId = uuidv4()
 
+      const bookId = uuidv4()
       const queryBook =
         'INSERT INTO books (id, title, author, description, price, images, bookCondition, category, publisherId, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'
       //const values: CreateBook = Object.values(data)
@@ -64,7 +64,7 @@ export class BookService {
         bookDetails.author,
         bookDetails.description,
         bookDetails.price,
-        JSON.stringify(bookDetails.images), // images (convertido a JSON)
+        JSON.stringify(bookDetails.images),
         bookDetails.bookCondition,
         bookDetails.category,
         bookDetails.publisherId,
@@ -76,7 +76,7 @@ export class BookService {
 
       const [insertedBookResult] = await pool.execute(queryBook, bookValues)
       const queryResult: ResultSetHeader = insertedBookResult as ResultSetHeader
-      const queryUser = 'SELECT * FROM users WHERE id = ?'
+      const queryUser = 'SELECT * FROM users WHERE id = ?;'
       const [dataUserResult] = await pool.execute(queryUser, [bookDetails.publisherId])
       const publishedBy: RowDataPacket[] = dataUserResult as RowDataPacket[]
 
@@ -86,6 +86,7 @@ export class BookService {
         bookDetails,
         publishedBy,
       }
+      console.log(result)
 
       return result as CreateResult
     } catch (error) {

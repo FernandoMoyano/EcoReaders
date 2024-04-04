@@ -1,3 +1,4 @@
+//Book interface
 export interface Images {
   frontCover: string
   backCover: string
@@ -39,7 +40,7 @@ export interface BookI {
   images: Images
   bookCondition: BookCondition
   category: BookCategory
-  publisherId: string | null
+  publisherId: string
   status: BookStatus
 }
 

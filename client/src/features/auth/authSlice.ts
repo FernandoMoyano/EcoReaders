@@ -4,44 +4,40 @@ import { bookApi } from '../../app/api/api'
 import Cookies from 'js-cookie'
 import { AuthState } from '../../interfaces/authStateI'
 
+const initialState: AuthState = {
+  userLoggedIn: JSON.parse(localStorage.getItem('userLoggedIn') || '{}'),
+  registerInfo: JSON.parse(localStorage.getItem('registerInfo') || '{}'),
+}
+
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    user: null,
-    token: null,
-    userId: null,
-
-    registerInfo: {
-      username: null,
-      email: null,
-      password: null,
-    },
-  } as AuthState,
-
+  initialState,
   reducers: {
+    //login
     loginSuccess: (state, action) => {
-      state.token = action.payload.token
-      state.user = action.payload.user
-      state.userId = action.payload.userId
+      state.userLoggedIn.token = action.payload.token
+      state.userLoggedIn.username = action.payload.user
+      state.userLoggedIn.userId = action.payload.userId
 
-      localStorage.setItem('userData', JSON.stringify(action.payload))
+      localStorage.setItem('userLoggedIn', JSON.stringify(action.payload))
     },
-
+    //logout
     logoutSuccess: (state) => {
-      state.token = null
-      state.user = null
+      state.userLoggedIn.token = null
+      state.userLoggedIn.username = null
       Cookies.remove('myCookie')
       localStorage.removeItem('userData')
     },
-
+    //register
     registerSuccess: (state, action) => {
       state.registerInfo = action.payload
+      localStorage.setItem('registerInfo', JSON.stringify(action.payload))
     },
   },
   extraReducers: (builder) => {
     builder.addMatcher(bookApi.endpoints.login.matchFulfilled, (state, { payload }) => {
-      state.token = payload.token
-      state.user = payload.user
+      state.userLoggedIn.token = payload.token
+      state.userLoggedIn.username = payload.user
     })
   },
 })

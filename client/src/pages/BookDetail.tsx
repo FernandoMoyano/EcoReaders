@@ -5,8 +5,11 @@ import Spinner from '../components/Spinner'
 import { BookI } from '../interfaces/BookI'
 import NavBar from '../components/NavBar'
 import StarRating from '../components/StartRating'
+import { useSelector } from 'react-redux'
+import { RootState } from '../app/store'
 
 const BookDetail = () => {
+  const publishedBook = useSelector((state: RootState) => state.books.publishedBooks)
   const { id } = useParams<{ id: string }>()
   const { data, error, isLoading } = useGetBookQuery(id!)
 
@@ -48,14 +51,16 @@ const BookDetail = () => {
               <p className="leading-relaxed">{book.description}</p>
               <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
                 <div className="flex">
-                  <span className="mr-3">Publicado por:</span>
+                  <span className="mr-3">
+                    Publicado por:<span className="text-black font-bold"> {publishedBook[book.id]?.postedByUser}</span>
+                  </span>
                   <p></p>
                 </div>
                 <div className="flex ml-6 items-center"></div>
               </div>
               <div className="flex">
                 <span className="title-font font-medium text-2xl text-gray-900">${book.price}</span>
-                <button className="flex ml-auto text-white bg-violet-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-500 rounded">
+                <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-500 rounded">
                   Contactar al dueño
                 </button>
                 <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">

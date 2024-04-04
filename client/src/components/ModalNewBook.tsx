@@ -15,7 +15,7 @@ const ModalNewBook = () => {
   return (
     <div>
       <button
-        className="fixed bottom-10 right-10 bg-violet-500 text-white px-4 py-2 rounded-full shadow-md"
+        className="fixed bottom-10 right-10 bg-indigo-500 text-white px-4 py-2 rounded-full shadow-md"
         onClick={openModal}
       >
         Publicar Libro +
@@ -30,7 +30,7 @@ const ModalNewBook = () => {
                   <button onClick={closeModal}>X</button>
                 </div>
                 <div className="p-5" style={{ backgroundColor: 'white' }}>
-                  <PublicationForm onClose={closeModal} />
+                  <PublicationForm />
                 </div>
               </div>
             </div>
