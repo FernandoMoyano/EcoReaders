@@ -7,12 +7,12 @@ import Spinner from '../components/Spinner'
 import { BookI } from '../interfaces/BookI'
 import { Link } from 'react-router-dom'
 import { formatearNumero } from '../utilities'
-//import { useSelector } from 'react-redux'
-//import { RootState } from '../app/store'
+import { useSelector } from 'react-redux'
+import { RootState } from '../app/store'
 
 const Books: React.FC = () => {
   const { data, isLoading, isError } = useGetBooksQuery()
-  //const publishedBooks = useSelector((state: RootState) => state.books.publishedBooks)
+  const publishedBooks = useSelector((state: RootState) => state.books.publishedBooks)
   //DEBUG:
   console.log(data)
 
@@ -43,7 +43,9 @@ const Books: React.FC = () => {
                   <div className="ml-auto">
                     <p className="flex flex-wrap end justify-end mr-1">
                       publicado por:
-                      <span className="text-black font-bold ml-2">{book.publisherName}</span>
+                      <span className="text-black font-bold ml-2">
+                        {book.publisherName || publishedBooks[book.id].postedByUser}
+                      </span>
                     </p>
                   </div>
                 </div>

@@ -7,6 +7,36 @@ import { BookService } from '../services/book.service'
 const bookService = new BookService()
 
 export class BookController {
+  //➡️GET-Obtener un libro
+  async getBook(req: Request, res: Response) {
+    try {
+      const id: BookId = req.params.id
+      const book = await bookService.getOne(id)
+      if (!book) {
+        res.status(400).json('No se encontraron libros')
+      }
+      res.json(book)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  //➡️GET-Obtener todos los libros publicados por un usuario
+  async getBooksByUser(req: Request, res: Response) {
+    try {
+      const userId = req.params.userId // Asumiendo que el ID del usuario se pasa como parámetro en la URL
+      const books = await bookService.getAllByUserId(userId)
+      if (!books) {
+        res.status(400).json('No se encontraron libros para este usuario')
+      } else {
+        res.json(books)
+      }
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ error: 'Error interno del servidor' })
+    }
+  }
+
   //➡️GET-Obtener todos los libros
   async getBooks(req: Request, res: Response) {
     try {
@@ -19,20 +49,6 @@ export class BookController {
       }
     } catch (error) {
       res.status(500).json({ error: 'Error interno del servidor' })
-    }
-  }
-
-  //➡️GET-Obtener un libro
-  async getBook(req: Request, res: Response) {
-    try {
-      const id: BookId = req.params.id
-      const book = await bookService.getOne(id)
-      if (!book) {
-        res.status(400).json('No se encontraron libros')
-      }
-      res.json(book)
-    } catch (error) {
-      console.log(error)
     }
   }
 
