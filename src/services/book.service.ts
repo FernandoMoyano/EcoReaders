@@ -11,7 +11,8 @@ export class BookService {
   async getOne(id: BookId) {
     try {
       const bookId = id
-      const query = 'SELECT * FROM books WHERE id = ?'
+      const query =
+        'SELECT books.*, users.username AS publisherName FROM books JOIN users ON books.publisherId = users.id WHERE books.id = ?'
       const [results] = await pool.execute(query, [bookId])
       if (!results) {
         throw new Error('Error al intentar obtener el libro')

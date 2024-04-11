@@ -12,6 +12,8 @@ const BookDetail = () => {
   const publishedBook = useSelector((state: RootState) => state.books.publishedBooks)
   const { id } = useParams<{ id: string }>()
   const { data, error, isLoading } = useGetBookQuery(id!)
+  //DEBUG:↴
+  console.log(data)
 
   if (isLoading) {
     return <Spinner />
@@ -52,7 +54,11 @@ const BookDetail = () => {
               <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
                 <div className="flex">
                   <span className="mr-3">
-                    Publicado por:<span className="text-black font-bold"> {publishedBook[book.id]?.postedByUser}</span>
+                    Publicado por:
+                    <span className="text-black font-bold">
+                      {' '}
+                      {book.publisherName || publishedBook[book.id].postedByUser}
+                    </span>
                   </span>
                   <p></p>
                 </div>
