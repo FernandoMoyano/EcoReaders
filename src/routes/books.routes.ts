@@ -11,6 +11,9 @@ const bookController = new BookController()
 //GET /api/books
 bookRoutes.get('/', bookController.getBooks)
 
+// GET /api/books/:userId - Obtener todos los libros de un usuario
+bookRoutes.get('/user/:userId', bookController.getBooksByUser)
+
 //GET/api/books/:id
 bookRoutes.get('/:id', bookController.getBook)
 

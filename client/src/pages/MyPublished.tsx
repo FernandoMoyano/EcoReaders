@@ -1,17 +1,33 @@
-import { useSelector } from 'react-redux'
-import { RootState } from '../app/store'
+//MyPublished
+
+//import { useSelector } from 'react-redux'
+//import { RootState } from '../app/store'
 import NavBar from '../components/NavBar'
+import { useGetMyPublishedBooksQuery } from '../app/api/api'
+//import { UserId } from '../../../src/interfaces/User.interface'
+import { useParams } from 'react-router-dom'
 
 const MyPublished = () => {
-  const userId = useSelector((state: RootState) => state.auth.userLoggedIn.userId)
-  const publishedBook = useSelector((state: RootState) => state.books.publishedBooks)
+  //const userId = useSelector((state: RootState) => state.auth.userLoggedIn.userId)
+  //const publishedBook = useSelector((state: RootState) => state.books.publishedBooks)
+  const { userId } = useParams()
 
-  const myPublishedBooks = Object.values(publishedBook).filter((book) => book.publisherId === userId)
+  const { data, error, isLoading } = useGetMyPublishedBooksQuery(userId ?? '')
+  //DEBUG: ↴
+  console.log(data)
+
+  if (isLoading) return <div>Loading...</div>
+
+  if (error) {
+    return <div>Error al cargar los detalles</div>
+  }
+
+  //const myPublishedBooks = Object.values(publishedBook).filter((book) => book.publisherId === userId)
   return (
     <>
       <NavBar />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {myPublishedBooks.map((book) => (
+        {data?.map((book) => (
           <div className="me-4 block rounded-lg bg-white shadow-secondary-1 dark:bg-surface-dark dark:text-black text-surface">
             <div className="p-6">
               <h5 className="mb-2 text-xl font-medium leading-tight">{book.title}</h5>

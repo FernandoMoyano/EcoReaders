@@ -80,6 +80,11 @@ export const bookApi = createApi({
       query: (id) => `/books/${id}`,
     }),
 
+    // Obtener libros publicados por un usuario específico
+    getMyPublishedBooks: builder.query<BookI[], string>({
+      query: (userId) => `/books/user/${userId}`,
+    }),
+
     //Publicar un libro
     postNewBook: builder.mutation({
       query: (dataNewBook) => ({
@@ -114,7 +119,8 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useRegisterMutation,
+  usePostNewBookMutation,
   useGetBooksQuery,
   useGetBookQuery,
-  usePostNewBookMutation,
+  useGetMyPublishedBooksQuery,
 } = bookApi

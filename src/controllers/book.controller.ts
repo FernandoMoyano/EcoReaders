@@ -14,6 +14,7 @@ export class BookController {
       const book = await bookService.getOne(id)
       if (!book) {
         res.status(400).json('No se encontraron libros')
+        return
       }
       res.json(book)
     } catch (error) {

@@ -1,11 +1,15 @@
+//navBar
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { logoutSuccess } from '../features/auth/authSlice'
 import { Link, useNavigate } from 'react-router-dom'
+import { RootState } from '../app/store'
+//import { RootState } from '../app/store'
 
 const NavBar = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const userId = useSelector((state: RootState) => state.auth.userLoggedIn.userId)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -90,7 +94,7 @@ const NavBar = () => {
                   Books
                 </Link>
                 <Link
-                  to="/mypublished"
+                  to={`/user/${userId}`}
                   className="text-white hover:bg-violet-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
                 >
                   Mis Publicados
