@@ -38,7 +38,9 @@ export class BookService {
   //➡️Obtener todos los libros
   async getAll() {
     try {
-      const books = await selectQuery<IBookRow>('SELECT * FROM books')
+      const books = await selectQuery<IBookRow>(
+        'SELECT books.*, users.username AS publisherName FROM books JOIN users ON books.publisherId = users.id',
+      )
       if (books.length === 0) {
         throw new Error('No se encontraron libros')
       }

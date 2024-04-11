@@ -41,10 +41,11 @@ export interface BookI {
   bookCondition: BookCondition
   category: BookCategory
   publisherId: string
+  publisherName: string
   status: BookStatus
 }
 
-export type NewBook = Omit<BookI, 'id'>
+export type NewBook = Omit<BookI, 'id' | 'publisherName'>
 
 export interface GetBooks {
   foundBooks: boolean

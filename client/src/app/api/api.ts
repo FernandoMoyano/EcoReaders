@@ -25,7 +25,7 @@ export const bookApi = createApi({
           console.log(data)
           const myToken = data.accesToken
           //DEBUG:
-          //console.log(myToken)
+          console.log(myToken)
           Cookies.set('myCookie', myToken)
 
           if (myToken) {
@@ -107,11 +107,6 @@ export const bookApi = createApi({
         }
       },
     }),
-
-    //getMyPublished
-    /* setMyPublishedBooks: builder.query<BookI[], string>({
-      query: (userId: UserId) => `/books/myPublishd/${userId}`,
-    }), */
   }),
 })
 
