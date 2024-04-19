@@ -8,20 +8,20 @@ import { BookSchema } from '../schema/bookSchema'
 export const bookRoutes: Router = express.Router()
 const bookController = new BookController()
 
-//GET /api/books
-bookRoutes.get('/', bookController.getBooks)
-
-// GET /api/books/:userId - Obtener todos los libros de un usuario
-bookRoutes.get('/user/:userId', bookController.getBooksByUser)
+//UPDATE /api/books/:id
+bookRoutes.patch('/:id', validatorSchema(BookSchema, 'body'), bookController.updateBook)
 
 //GET/api/books/:id
 bookRoutes.get('/:id', bookController.getBook)
 
+//GET /api/books
+bookRoutes.get('/', bookController.getBooks)
+
+// GET /api/books/books-by-user/:id - Obtener todos los libros de un usuario
+bookRoutes.get('/user/:userId', bookController.getBooksByUser)
+
 //POST /api/books/new
 bookRoutes.post('/new', validatorSchema(BookSchema, 'body'), bookController.creteBook)
-
-//UPDATE /api/books/:id
-bookRoutes.patch('/:id', validatorSchema(BookSchema, 'body'), bookController.updateBook)
 
 //DELETE /api/books/:id
 bookRoutes.delete('/:id', bookController.deleteBook)

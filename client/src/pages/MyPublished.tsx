@@ -6,18 +6,20 @@ import NavBar from '../components/NavBar'
 import { useGetMyPublishedBooksQuery } from '../app/api/api'
 //import { UserId } from '../../../src/interfaces/User.interface'
 import { useParams } from 'react-router-dom'
+import { formatearNumero } from '../utilities'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
 const MyPublished = () => {
   //const userId = useSelector((state: RootState) => state.auth.userLoggedIn.userId)
   //const publishedBook = useSelector((state: RootState) => state.books.publishedBooks)
-  const { userId } = useParams()
 
+  const { userId } = useParams()
   const { data, error, isLoading } = useGetMyPublishedBooksQuery(userId ?? '')
   //DEBUG: ↴
   console.log(data)
 
   if (isLoading) return <div>Loading...</div>
-
   if (error) {
     return <div>Error al cargar los detalles</div>
   }
@@ -26,24 +28,23 @@ const MyPublished = () => {
   return (
     <>
       <NavBar />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <section className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
         {data?.map((book) => (
-          <div className="me-4 block rounded-lg bg-white shadow-secondary-1 dark:bg-surface-dark dark:text-black text-surface">
-            <div className="p-6">
-              <h5 className="mb-2 text-xl font-medium leading-tight">{book.title}</h5>
-              <p className="mb-4 text-base">{book.description}</p>
-              <button
-                type="button"
-                className="inline-block rounded bg-indigo-500 px-6 pb-2 pt-2.5 text-xs font-medium  leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-                data-twe-ripple-init
-                data-twe-ripple-color="light"
-              >
-                Edit
-              </button>
+          <div className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+            <div className="px-4 py-3 w-72">
+              <span className="text-gray-400 mr-3 uppercase text-xs">{book.author}</span>
+              <p className="text-lg font-bold text-black truncate block capitalize">{book.title}</p>
+              <div className="flex items-center justify-evenly">
+                <p className="text-lg font-semibold text-black cursor-auto my-3">${formatearNumero(book.price)}</p>
+                <FontAwesomeIcon icon={faTrashCan} />
+                <button className="w-24 py-2 px-6 bg-violet-500 p-2 rounded-md  text-white  hover:bg-violet-600 focus:outline-none">
+                  Edit
+                </button>
+              </div>
             </div>
           </div>
         ))}
-      </div>
+      </section>
     </>
   )
 }

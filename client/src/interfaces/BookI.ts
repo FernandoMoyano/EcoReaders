@@ -27,8 +27,8 @@ export enum BookCategory {
 
 export enum BookStatus {
   AVAILABLE = 'Available',
-  SOLD = 'sold',
-  RESERVED = 'reserved',
+  SOLD = 'Sold',
+  RESERVED = 'Reserved',
 }
 
 export interface BookI {

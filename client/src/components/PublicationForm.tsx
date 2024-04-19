@@ -20,8 +20,8 @@ const PublicationForm: React.FC = () => {
   }
 
   const priceValueRef = useRef<HTMLInputElement>(null)
-  // Obtener la función que me permite enviar el nuevo libro
-  //desde api.tsx-Redux
+  /*  Obtener la función que me permite enviar el nuevo libro
+  desde api.tsx-Redux */
   const [postNewBook, { isLoading }] = usePostNewBookMutation()
   //estado que maneja la data para hacer POST de un nuevo libro
   const [dataNewBook, setDataNewBook] = useState<NewBook>({
