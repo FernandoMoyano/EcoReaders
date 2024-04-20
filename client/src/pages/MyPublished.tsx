@@ -1,21 +1,21 @@
 //MyPublished
 
-//import { useSelector } from 'react-redux'
-//import { RootState } from '../app/store'
 import NavBar from '../components/NavBar'
-import { useGetMyPublishedBooksQuery } from '../app/api/api'
-//import { UserId } from '../../../src/interfaces/User.interface'
+import { useDeleteBookMutation, useGetMyPublishedBooksQuery } from '../app/api/api'
+
 import { useParams } from 'react-router-dom'
 import { formatearNumero } from '../utilities'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { useDispatch } from 'react-redux'
+import { deletePublishedBook } from '../features/books/booksSlie'
 
 const MyPublished = () => {
-  //const userId = useSelector((state: RootState) => state.auth.userLoggedIn.userId)
-  //const publishedBook = useSelector((state: RootState) => state.books.publishedBooks)
-
   const { userId } = useParams()
   const { data, error, isLoading } = useGetMyPublishedBooksQuery(userId ?? '')
+  const [deleteBook, { isLoading: isLoadingBook }] = useDeleteBookMutation()
+  const dispatch = useDispatch()
+
   //DEBUG: ↴
   console.log(data)
 
@@ -24,7 +24,18 @@ const MyPublished = () => {
     return <div>Error al cargar los detalles</div>
   }
 
-  //const myPublishedBooks = Object.values(publishedBook).filter((book) => book.publisherId === userId)
+  const handleDelete = async (bookId: string) => {
+    if (window.confirm('Desea eliminar este libro?')) {
+      try {
+        await deleteBook(bookId).unwrap()
+        dispatch(deletePublishedBook(bookId))
+        alert('Libro eliminado correctamente')
+      } catch (error) {
+        alert('Error al eliminar el libro')
+      }
+    }
+  }
+
   return (
     <>
       <NavBar />
@@ -36,7 +47,12 @@ const MyPublished = () => {
               <p className="text-lg font-bold text-black truncate block capitalize">{book.title}</p>
               <div className="flex items-center justify-evenly">
                 <p className="text-lg font-semibold text-black cursor-auto my-3">${formatearNumero(book.price)}</p>
-                <FontAwesomeIcon icon={faTrashCan} />
+                <FontAwesomeIcon
+                  onClick={() => handleDelete(book.id)}
+                  icon={faTrashCan}
+                  style={{ cursor: isLoadingBook ? 'not-allowed' : 'pointer' }}
+                  opacity={isLoadingBook ? 0.5 : 1}
+                />
                 <button className="w-24 py-2 px-6 bg-violet-500 p-2 rounded-md  text-white  hover:bg-violet-600 focus:outline-none">
                   Edit
                 </button>

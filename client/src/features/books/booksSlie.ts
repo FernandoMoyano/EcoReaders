@@ -22,20 +22,21 @@ const booksSlice = createSlice({
   reducers: {
     publishedBooks: (state, action: PayloadAction<{ bookId: string; bookDetails: NewBook; postedByUser: string }>) => {
       try {
-        //DEBUG:↴
+        //DEBUG:
         console.log('Datos recibidos en publishedBooks:', action.payload)
         const { bookId, bookDetails, postedByUser } = action.payload
         state.publishedBooks[bookId] = { ...bookDetails, postedByUser }
-        //DEBUG:↴
+        //DEBUG:
         console.log(postedByUser)
 
         localStorage.setItem('publishedBooks', JSON.stringify(state.publishedBooks))
       } catch (error) {
-        //DEBUG:↴
+        //DEBUG:
         console.log('Error en publishedBooks:', error)
       }
     },
 
+    //Elimina libro por medio del id recibido
     deletePublishedBook: (state, action: PayloadAction<string>) => {
       const bookId = action.payload
       delete state.publishedBooks[bookId]
