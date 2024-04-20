@@ -13,9 +13,9 @@ CREATE TABLE users (
 
 -- Inserción de datos en la tabla users
 INSERT INTO users (id,username, email, password) VALUES
-('550e8400-e29b-41d4-a716-446655440000','Usuario1', 'usuario1@example.com', 'falknhb9834523457nglangladfhdshh'),
-('93253a00-85cf-4f26-84a3-bc0d99e1355a','Usuario2', 'usuario2@example.com', '0286nwsnlb9wyth;sdkgshsksksk'),
-('6ba7b810-9dad-11d1-80b4-00c04fd430c8','Usuario3', 'usuario3@example.com', 'mzjqogl82390tyjslsnbsdhsksfskfgk');
+('550e8400-e29b-41d4-a716-446655440000','Usuario4', 'usuario4@example.com', 'falknhb9834523457nglangladfhdshh'),
+('93253a00-85cf-4f26-84a3-bc0d99e1355a','Usuario5', 'usuario2@example.com', '0286nwsnlb9wyth;sdkgshsksksk'),
+('6ba7b810-9dad-11d1-80b4-00c04fd430c8','Usuario6', 'usuario3@example.com', 'mzjqogl82390tyjslsnbsdhsksfskfgk');
 
 
 -- Definición de la tabla books

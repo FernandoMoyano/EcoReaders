@@ -5,8 +5,8 @@ import Cookies from 'js-cookie'
 import { AuthState } from '../../interfaces/authStateI'
 
 const initialState: AuthState = {
-  userLoggedIn: JSON.parse(localStorage.getItem('userLoggedIn') || '{}'),
-  registerInfo: JSON.parse(localStorage.getItem('registerInfo') || '{}'),
+  userLoggedIn: JSON.parse(localStorage?.getItem('userLoggedIn') || '{}'),
+  registerInfo: JSON.parse(localStorage?.getItem('registerInfo') || '{}'),
 }
 
 const authSlice = createSlice({
