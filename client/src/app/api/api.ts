@@ -112,7 +112,7 @@ export const bookApi = createApi({
         }
       },
     }),
-
+    //Eliminar un libro
     deleteBook: builder.mutation({
       query: (id) => ({
         url: `/books/${id}`,
