@@ -35,6 +35,7 @@ const Login = () => {
       console.error('Error al iniciar sesión:', error)
     }
   }
+
   return (
     <LoginForm
       handleLogin={handleLogin}

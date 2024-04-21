@@ -18,6 +18,7 @@ export const bookApi = createApi({
         method: 'POST',
         body: credentials,
       }),
+      //Tratamiento y extraccion de la data
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled
@@ -58,6 +59,7 @@ export const bookApi = createApi({
         method: 'POST',
         body: dataRegister,
       }),
+      //Tratamiento y extraccion de la data
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled
@@ -92,26 +94,28 @@ export const bookApi = createApi({
         method: 'POST',
         body: dataNewBook,
       }),
+      //Tratamiento y extraccion de la data
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled
-          //DEBUG:↴
+          //DEBUG:
           console.log('Data recibida de la API:', data)
           const bookId = data.result.bookId
           const bookDetails = data.result.bookDetails
           const postedByUser = data.result.publishedBy[0].username
 
-          //DEBUG:↴
+          //DEBUG:
           console.log('Detalles del libro recibido:', postedByUser)
 
           dispatch(publishedBooks({ bookId, bookDetails, postedByUser }))
         } catch (error) {
-          //DEBUG:↴
+          //DEBUG:
           console.error('Error al registrar:', error)
           dispatch(messageCreated('Error al publicar el libro.'))
         }
       },
     }),
+
     //Eliminar un libro
     deleteBook: builder.mutation({
       query: (id) => ({

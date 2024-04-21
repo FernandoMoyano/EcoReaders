@@ -2,24 +2,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { NewBook } from '../../interfaces/BookI'
 
+//Interfaz para armar el estado incial extendiendo de NewBook
 interface BookWithUsername extends NewBook {
   postedByUser: string
 }
 
+//Interfaz de estado inicial
 interface bookState {
   publishedBooks: { [bookId: string]: BookWithUsername }
 }
 
+//Estado inicial
 const initialState: bookState = {
   publishedBooks: JSON.parse(localStorage.getItem('publishedBooks') || '{}'),
 }
 
+//Slice
 const booksSlice = createSlice({
   name: 'books',
 
   initialState,
 
   reducers: {
+    //Libros publicados
     publishedBooks: (state, action: PayloadAction<{ bookId: string; bookDetails: NewBook; postedByUser: string }>) => {
       try {
         //DEBUG:

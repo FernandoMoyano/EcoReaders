@@ -21,19 +21,24 @@ const authSlice = createSlice({
 
       localStorage.setItem('userLoggedIn', JSON.stringify(action.payload))
     },
+
     //logout
     logoutSuccess: (state) => {
       state.userLoggedIn.token = null
       state.userLoggedIn.username = null
+      //quitar la cookie
       Cookies.remove('myCookie')
-      localStorage.removeItem('userData')
+      //eliminar el item del localStorage
+      localStorage.removeItem('userLoggedIn')
     },
+
     //register
     registerSuccess: (state, action) => {
       state.registerInfo = action.payload
       localStorage.setItem('registerInfo', JSON.stringify(action.payload))
     },
   },
+
   extraReducers: (builder) => {
     builder.addMatcher(bookApi.endpoints.login.matchFulfilled, (state, { payload }) => {
       state.userLoggedIn.token = payload.token
