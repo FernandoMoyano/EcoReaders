@@ -9,8 +9,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch } from 'react-redux'
 import { deletePublishedBook } from '../features/books/booksSlie'
+import Spinner from '../components/Spinner'
+import { useState } from 'react'
+import Notification from '../components/Notification'
 
 const MyPublished = () => {
+  // Estado para controlar la visibilidad de la notificación
+  const [bookIdToDelete, setBookIdToDelete] = useState('')
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
+  //Estados
   const { userId } = useParams()
   const { data, error, isLoading } = useGetMyPublishedBooksQuery(userId ?? '')
   const [deleteBook, { isLoading: isLoadingBook }] = useDeleteBookMutation()
@@ -19,21 +26,36 @@ const MyPublished = () => {
   //DEBUG: ↴
   console.log(data)
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading)
+    return (
+      <div>
+        <Spinner />
+      </div>
+    )
+
   if (error) {
     return <div>Error al cargar los detalles</div>
   }
 
   const handleDelete = async (bookId: string) => {
-    if (window.confirm('Desea eliminar este libro?')) {
-      try {
-        await deleteBook(bookId).unwrap()
-        dispatch(deletePublishedBook(bookId))
-        alert('Libro eliminado correctamente')
-      } catch (error) {
-        alert('Error al eliminar el libro')
-      }
+    setBookIdToDelete(bookId) // Almacena el ID del libro a eliminar
+    setShowDeleteConfirmation(true) // Muestra la notificación de eliminación
+  }
+
+  const handleConfirmDelete = async () => {
+    try {
+      await deleteBook(bookIdToDelete).unwrap()
+      dispatch(deletePublishedBook(bookIdToDelete))
+      setShowDeleteConfirmation(false)
+      alert('Libro eliminado correctamente')
+    } catch (error) {
+      alert('Error al eliminar el libro')
     }
+  }
+
+  // Manejar el rechazo de eliminación
+  const handleCancelDelete = () => {
+    setShowDeleteConfirmation(false) // Oculta la notificación de eliminación
   }
 
   return (
@@ -61,6 +83,14 @@ const MyPublished = () => {
           </div>
         ))}
       </section>
+
+      {showDeleteConfirmation && (
+        <Notification
+          message="¿Desea eliminar este libro?"
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCancelDelete}
+        />
+      )}
     </>
   )
 }
