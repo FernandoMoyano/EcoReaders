@@ -2,7 +2,6 @@
 
 import NavBar from '../components/NavBar'
 import { useDeleteBookMutation, useGetMyPublishedBooksQuery } from '../app/api/api'
-
 import { useParams } from 'react-router-dom'
 import { formatearNumero } from '../utilities'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,10 +13,11 @@ import { useState } from 'react'
 import Notification from '../components/Notification'
 
 const MyPublished = () => {
-  // Estado para controlar la visibilidad de la notificación
+  // Estados que controlan la visibilidad de la notificación
   const [bookIdToDelete, setBookIdToDelete] = useState('')
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
-  //Estados
+
+  //Uso de los hooks provistos por la api
   const { userId } = useParams()
   const { data, error, isLoading } = useGetMyPublishedBooksQuery(userId ?? '')
   const [deleteBook, { isLoading: isLoadingBook }] = useDeleteBookMutation()
@@ -37,11 +37,13 @@ const MyPublished = () => {
     return <div>Error al cargar los detalles</div>
   }
 
+  //MAnejo del click al icono de "eliminar"
   const handleDelete = async (bookId: string) => {
     setBookIdToDelete(bookId) // Almacena el ID del libro a eliminar
     setShowDeleteConfirmation(true) // Muestra la notificación de eliminación
   }
 
+  //Manejo de la confirmación de eliminación
   const handleConfirmDelete = async () => {
     try {
       await deleteBook(bookIdToDelete).unwrap()
@@ -53,7 +55,7 @@ const MyPublished = () => {
     }
   }
 
-  // Manejar el rechazo de eliminación
+  // Manejo del rechazo de eliminación
   const handleCancelDelete = () => {
     setShowDeleteConfirmation(false) // Oculta la notificación de eliminación
   }

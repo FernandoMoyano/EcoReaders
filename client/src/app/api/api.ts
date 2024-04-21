@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import Cookies from 'js-cookie'
 import { loginSuccess, registerSuccess } from '../../features/auth/authSlice'
 import { messageCreated } from '../../features/notifications/notificationsSlice'
-import { BookI, GetBooks } from '../../interfaces/BookI'
+import { BookI, GetBooks } from '../../interfaces/IBook'
 import { publishedBooks } from '../../features/books/booksSlie'
 
 export const bookApi = createApi({

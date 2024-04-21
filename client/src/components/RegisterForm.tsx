@@ -1,4 +1,4 @@
-import { RegisterFormProps } from '../interfaces/RegisterFormPropsI'
+import { RegisterFormProps } from '../interfaces/IRegisterFormProps'
 import Spinner from '../components/Spinner'
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister, isLoading, handleInputChange, dataRegister }) => {

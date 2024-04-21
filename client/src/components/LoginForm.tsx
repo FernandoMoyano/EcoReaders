@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import Spinner from '../components/Spinner'
-import { LoginFormProps } from '../interfaces/LoginFormPropsI'
+import { LoginFormProps } from '../interfaces/ILoginFormProps'
 
 const LoginComponent: React.FC<LoginFormProps> = ({ handleLogin, handleInputChange, credentials, isLoading }) => {
   return (

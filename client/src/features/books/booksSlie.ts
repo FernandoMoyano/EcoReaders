@@ -1,6 +1,6 @@
 //booksSlice.tsx
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { NewBook } from '../../interfaces/BookI'
+import { NewBook } from '../../interfaces/IBook'
 
 //Interfaz para armar el estado incial extendiendo de NewBook
 interface BookWithUsername extends NewBook {

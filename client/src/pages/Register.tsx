@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import RegisterForm from '../components/RegisterForm'
-import { DataRegisterI } from '../interfaces/DataRegisterI'
+import { DataRegisterI } from '../interfaces/IDataRegister'
 import { registerSuccess } from '../features/auth/authSlice'
 import { useRegisterMutation } from '../app/api/api'
 import { useDispatch } from 'react-redux'

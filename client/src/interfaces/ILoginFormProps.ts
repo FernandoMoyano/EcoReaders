@@ -1,4 +1,4 @@
-import { Credentials } from './CredentialsI'
+import { Credentials } from './ICredentials'
 
 export interface LoginFormProps {
   handleLogin: (credentials: Credentials) => void

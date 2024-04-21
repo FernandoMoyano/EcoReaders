@@ -1,6 +1,6 @@
 //PublicationForm.tsx
 import React, { useRef, useState } from 'react'
-import { BookCategory, BookCondition, BookStatus, NewBook } from '../interfaces/BookI'
+import { BookCategory, BookCondition, BookStatus, NewBook } from '../interfaces/IBook'
 import { usePostNewBookMutation } from '../app/api/api'
 import Spinner from './Spinner'
 

@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { bookApi } from '../../app/api/api'
 import Cookies from 'js-cookie'
-import { AuthState } from '../../interfaces/authStateI'
+import { AuthState } from '../../interfaces/IauthState'
 
 const initialState: AuthState = {
   userLoggedIn: JSON.parse(localStorage?.getItem('userLoggedIn') || '{}'),

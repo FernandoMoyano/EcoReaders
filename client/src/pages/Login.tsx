@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
 import { useLoginMutation } from '../app/api/api'
-import { Credentials } from '../interfaces/CredentialsI'
+import { Credentials } from '../interfaces/ICredentials'
 
 const Login = () => {
   //Estado Inicial
