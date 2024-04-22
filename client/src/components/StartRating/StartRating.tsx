@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { setRating } from '../features/rating/ratingSlice'
-import { RootState } from '../app/store'
+import { setRating } from '../../features/rating/ratingSlice'
+import { RootState } from '../../app/store'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'

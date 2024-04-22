@@ -1,10 +1,10 @@
 //BookDetail.tsx
 import { useParams } from 'react-router-dom'
 import { useGetBookQuery } from '../app/api/api'
-import Spinner from '../components/Spinner'
+import Spinner from '../components/Spinner/Spinner'
 import { BookI } from '../interfaces/IBook'
-import NavBar from '../components/NavBar'
-import StarRating from '../components/StartRating'
+import NavBar from '../components/NavBar/NavBar'
+import StarRating from '../components/StartRating/StartRating'
 import { useSelector } from 'react-redux'
 import { RootState } from '../app/store'
 

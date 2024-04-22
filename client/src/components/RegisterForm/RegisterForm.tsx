@@ -1,5 +1,5 @@
-import { RegisterFormProps } from '../interfaces/IRegisterFormProps'
-import Spinner from '../components/Spinner'
+import { RegisterFormProps } from '../../interfaces/IRegisterFormProps'
+import Spinner from '../Spinner/Spinner'
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister, isLoading, handleInputChange, dataRegister }) => {
   return (
@@ -8,6 +8,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister, isLoading, 
         <div className="max-w-md w-full border py-8 px-6 rounded border-gray-300 bg-white">
           <h2 className="text-center text-3xl font-extrabold">Register</h2>
           <form className="mt-10 space-y-4">
+            {/* Username------------------------- */}
             <div>
               <input
                 name="username"
@@ -19,6 +20,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister, isLoading, 
                 onChange={(e) => handleInputChange(e)}
               />
             </div>
+            {/* Email------------------------- */}
             <div>
               <input
                 name="email"
@@ -30,6 +32,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister, isLoading, 
                 onChange={(e) => handleInputChange(e)}
               />
             </div>
+            {/* Password------------------------- */}
             <div className="flex items-center justify-between gap-4">
               <input
                 name="password"

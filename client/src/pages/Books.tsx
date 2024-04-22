@@ -1,9 +1,9 @@
 //books.tsx
 
 import { useGetBooksQuery } from '../app/api/api'
-import ModalNewBook from '../components/ModalNewBook'
-import NavBar from '../components/NavBar'
-import Spinner from '../components/Spinner'
+import ModalNewBook from '../components/ModalNewBook/ModalNewBook'
+import NavBar from '../components/NavBar/NavBar'
+import Spinner from '../components/Spinner/Spinner'
 import { BookI } from '../interfaces/IBook'
 import { Link } from 'react-router-dom'
 import { formatearNumero } from '../utilities'

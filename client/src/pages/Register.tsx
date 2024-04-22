@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import RegisterForm from '../components/RegisterForm'
+import RegisterForm from '../components/RegisterForm/RegisterForm'
 import { DataRegisterI } from '../interfaces/IDataRegister'
 import { registerSuccess } from '../features/auth/authSlice'
 import { useRegisterMutation } from '../app/api/api'

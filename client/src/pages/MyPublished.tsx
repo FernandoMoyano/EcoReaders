@@ -1,6 +1,6 @@
 //MyPublished
 
-import NavBar from '../components/NavBar'
+import NavBar from '../components/NavBar/NavBar'
 import { useDeleteBookMutation, useGetMyPublishedBooksQuery } from '../app/api/api'
 import { useParams } from 'react-router-dom'
 import { formatearNumero } from '../utilities'
@@ -8,9 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch } from 'react-redux'
 import { deletePublishedBook } from '../features/books/booksSlie'
-import Spinner from '../components/Spinner'
+import Spinner from '../components/Spinner/Spinner'
 import { useState } from 'react'
-import Notification from '../components/Notification'
+import Notification from '../components/Notification/Notification'
 
 const MyPublished = () => {
   // Estados que controlan la visibilidad de la notificación

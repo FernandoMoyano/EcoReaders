@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import PublicationForm from './PublicationForm'
+import PublicationForm from '../PublicationForm/PublicationForm'
 
 const ModalNewBook = () => {
   const [isOpen, setIsOpen] = useState(false)

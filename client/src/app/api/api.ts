@@ -18,7 +18,7 @@ export const bookApi = createApi({
         method: 'POST',
         body: credentials,
       }),
-      //Tratamiento y extraccion de la data
+      //Tratamiento y extracción de la data
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled
@@ -59,7 +59,7 @@ export const bookApi = createApi({
         method: 'POST',
         body: dataRegister,
       }),
-      //Tratamiento y extraccion de la data
+      //Tratamiento y extracción de la data
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled
@@ -94,7 +94,7 @@ export const bookApi = createApi({
         method: 'POST',
         body: dataNewBook,
       }),
-      //Tratamiento y extraccion de la data
+      //Tratamiento y extracción de la data
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled

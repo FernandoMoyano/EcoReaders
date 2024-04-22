@@ -1,9 +1,9 @@
 //navBar
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { logoutSuccess } from '../features/auth/authSlice'
+import { logoutSuccess } from '../../features/auth/authSlice'
 import { Link, useNavigate } from 'react-router-dom'
-import { RootState } from '../app/store'
+import { RootState } from '../../app/store'
 
 const NavBar = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
