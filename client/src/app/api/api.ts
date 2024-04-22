@@ -5,13 +5,14 @@ import { loginSuccess, registerSuccess } from '../../features/auth/authSlice'
 import { messageCreated } from '../../features/notifications/notificationsSlice'
 import { BookI, GetBooks } from '../../interfaces/IBook'
 import { publishedBooks } from '../../features/books/booksSlie'
+import { DataRegisterI } from '../../interfaces/IDataRegister'
 
 export const bookApi = createApi({
   reducerPath: 'bookApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api' }),
 
   endpoints: (builder) => ({
-    //login
+    //login________________________________
     login: builder.mutation({
       query: (credentials) => ({
         url: '/auth/login',
@@ -28,7 +29,6 @@ export const bookApi = createApi({
           //DEBUG:
           console.log(myToken)
           Cookies.set('myCookie', myToken)
-
           if (myToken) {
             dispatch(loginSuccess({ token: myToken, user: data.username, userId: data.id }))
           } else {
@@ -44,7 +44,7 @@ export const bookApi = createApi({
       },
     }),
 
-    //logout
+    //logout__________________________
     logout: builder.mutation({
       query: () => ({
         url: '/auth/logout',
@@ -52,9 +52,9 @@ export const bookApi = createApi({
       }),
     }),
 
-    //registro
+    //registro________________________________________
     register: builder.mutation({
-      query: (dataRegister) => ({
+      query: (dataRegister: DataRegisterI) => ({
         url: '/auth/register',
         method: 'POST',
         body: dataRegister,
@@ -72,12 +72,12 @@ export const bookApi = createApi({
       },
     }),
 
-    //Obtener todos los libros
+    //Obtener todos los libros_________________
     getBooks: builder.query<GetBooks, void>({
       query: () => '/books',
     }),
 
-    //Obtener un libro
+    //Obtener un libro________________________
     getBook: builder.query<BookI[], string>({
       query: (id) => `/books/${id}`,
     }),
@@ -87,7 +87,7 @@ export const bookApi = createApi({
       query: (userId) => `/books/user/${userId}`,
     }),
 
-    //Publicar un libro
+    //Publicar un libro________________________
     postNewBook: builder.mutation({
       query: (dataNewBook) => ({
         url: '/books/new',
@@ -103,10 +103,8 @@ export const bookApi = createApi({
           const bookId = data.result.bookId
           const bookDetails = data.result.bookDetails
           const postedByUser = data.result.publishedBy[0].username
-
           //DEBUG:
           console.log('Detalles del libro recibido:', postedByUser)
-
           dispatch(publishedBooks({ bookId, bookDetails, postedByUser }))
         } catch (error) {
           //DEBUG:
@@ -116,7 +114,7 @@ export const bookApi = createApi({
       },
     }),
 
-    //Eliminar un libro
+    //Eliminar un libro____________________
     deleteBook: builder.mutation({
       query: (id) => ({
         url: `/books/${id}`,

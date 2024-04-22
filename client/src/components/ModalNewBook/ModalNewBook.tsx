@@ -2,6 +2,7 @@ import { useState } from 'react'
 import PublicationForm from '../PublicationForm/PublicationForm'
 
 const ModalNewBook = () => {
+  //estados_________________________
   const [isOpen, setIsOpen] = useState(false)
 
   const openModal = () => {

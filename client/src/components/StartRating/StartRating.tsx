@@ -4,16 +4,16 @@ import { RootState } from '../../app/store'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
-
-interface StarRatingProps {
-  bookId: string | number
-}
+import { StarRatingProps } from './IStartRatingProps'
 
 const StarRating: React.FC<StarRatingProps> = ({ bookId }) => {
+  //Estados
   const [hover, setHover] = useState<number | null>(null)
+  //Dispatch | selector
   const dispatch = useDispatch()
   const rating = useSelector((state: RootState) => state.ratings.ratings[bookId]) || 0
 
+  //Manejo del rating
   const handleSetRating = (ratingValue: number) => {
     dispatch(setRating({ bookId, rating: ratingValue }))
   }

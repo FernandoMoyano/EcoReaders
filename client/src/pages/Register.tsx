@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { createNotication } from '../features/notifications/notificationsSlice'
 
 const Register = () => {
-  //Estados
+  //Estados______________________
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [register, { isLoading }] = useRegisterMutation()
@@ -18,7 +18,7 @@ const Register = () => {
     password: '',
   })
 
-  //Manejo del input
+  //Manejo del input____________________
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setDataRegister((prevDataRegister) => ({
@@ -27,7 +27,7 @@ const Register = () => {
     }))
   }
 
-  //Manejo del registro
+  //Manejo del registro____________________
   const handleRegister = async (dataRegister: DataRegisterI) => {
     try {
       const result = await register(dataRegister).unwrap()

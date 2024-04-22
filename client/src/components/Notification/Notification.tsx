@@ -1,10 +1,6 @@
 import React from 'react'
+import { NotificationProps } from './INotificationProps'
 
-interface NotificationProps {
-  message: string
-  onConfirm: () => void
-  onCancel: () => void
-}
 const Notification: React.FC<NotificationProps> = ({ message, onConfirm, onCancel }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">

@@ -37,10 +37,12 @@ const MyPublished = () => {
     return <div>Error al cargar los detalles</div>
   }
 
-  //MAnejo del click al icono de "eliminar"
+  //Manejo del click al icono de "eliminar"
   const handleDelete = async (bookId: string) => {
-    setBookIdToDelete(bookId) // Almacena el ID del libro a eliminar
-    setShowDeleteConfirmation(true) // Muestra la notificación de eliminación
+    // Almacena el ID del libro a eliminar
+    setBookIdToDelete(bookId)
+    // Muestra la notificación de eliminación
+    setShowDeleteConfirmation(true)
   }
 
   //Manejo de la confirmación de eliminación
@@ -57,7 +59,8 @@ const MyPublished = () => {
 
   // Manejo del rechazo de eliminación
   const handleCancelDelete = () => {
-    setShowDeleteConfirmation(false) // Oculta la notificación de eliminación
+    // Oculta la notificación de eliminación
+    setShowDeleteConfirmation(false)
   }
 
   return (

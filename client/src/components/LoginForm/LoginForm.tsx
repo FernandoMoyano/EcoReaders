@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import Spinner from '../Spinner/Spinner'
-import { LoginFormProps } from '../../interfaces/ILoginFormProps'
+import { LoginFormProps } from './ILoginFormProps'
 
 const LoginComponent: React.FC<LoginFormProps> = ({ handleLogin, handleInputChange, credentials, isLoading }) => {
   return (
@@ -9,7 +9,7 @@ const LoginComponent: React.FC<LoginFormProps> = ({ handleLogin, handleInputChan
         <div className="max-w-md w-full border py-8 px-6 rounded border-gray-300 bg-white">
           <h2 className="text-center text-2xl font-extrabold">Bienvenido a EcoReaders</h2>
           <form className="mt-10 space-y-4">
-            {/* Username------------------------- */}
+            {/* Username_________________________ */}
             <div>
               <input
                 name="username"
@@ -21,7 +21,7 @@ const LoginComponent: React.FC<LoginFormProps> = ({ handleLogin, handleInputChan
                 onChange={(e) => handleInputChange(e)}
               />
             </div>
-            {/* Password------------------------- */}
+            {/* Password__________________________ */}
             <div>
               <input
                 name="password"

@@ -1,4 +1,4 @@
-import { DataRegisterI } from './IDataRegister'
+import { DataRegisterI } from '../../interfaces/IDataRegister'
 
 export interface RegisterFormProps {
   handleRegister: (dataRegister: DataRegisterI) => void

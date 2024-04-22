@@ -1,5 +1,5 @@
-/* //SessionModal.ts
-import { logoutSuccess } from '../features/auth/authSlice'
+//SessionModal.ts
+import { logoutSuccess } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -12,6 +12,7 @@ const SessionModal: React.FC<SessionModalProps> = ({ onClose }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  //Manejo del click a logout
   const handleLogout = async () => {
     dispatch(logoutSuccess())
     navigate('/login')
@@ -35,4 +36,4 @@ const SessionModal: React.FC<SessionModalProps> = ({ onClose }) => {
   )
 }
 
-export default SessionModal */
+export default SessionModal
