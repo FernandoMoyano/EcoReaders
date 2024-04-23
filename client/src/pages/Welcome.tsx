@@ -20,7 +20,7 @@ const Welcome = () => {
       <div className="h-screen container grid grid-cols-1 gap-3 lg:grid-cols-4 m-auto content-center">
         <div className="font-Poppins text-3xl md:text-4xl lg:text-5xl font-bold text-center leading-normal lg:col-span-2  flex align-center justify-center self-center whitespace-pre-line">
           <p>
-            La plataforma para <br /> publicar tus libros <span className="text-violet-500">usados.</span>
+            La plataforma para <br /> intercambiar tus libros <span className="text-violet-500">usados.</span>
           </p>
         </div>
         <div className="col-span-2 flex align-center justify-center  ">

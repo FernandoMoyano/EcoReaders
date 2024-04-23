@@ -32,12 +32,10 @@ export const bookApi = createApi({
           if (myToken) {
             dispatch(loginSuccess({ token: myToken, user: data.username, userId: data.id }))
           } else {
-            //DEBUG:
             console.error('No se encontró la cookie "myCookie" en la respuesta.')
             dispatch(messageCreated('Cookie "myCookie" no encontrada en la respuesta.'))
           }
         } catch (error) {
-          //DEBUG:
           console.error('Error al iniciar sesión:', error)
           dispatch(messageCreated('Error al iniciar sesión.'))
         }
@@ -65,7 +63,6 @@ export const bookApi = createApi({
           const { data } = await queryFulfilled
           dispatch(registerSuccess(data))
         } catch (error) {
-          //DEBUG:
           console.error('Error al registrar:', error)
           dispatch(messageCreated('Error al registrar usuario.'))
         }
@@ -85,6 +82,15 @@ export const bookApi = createApi({
     //Obtener libros por un usuario específico____________
     getMyPublishedBooks: builder.query<IBook[], string>({
       query: (userId) => `/books/user/${userId}`,
+    }),
+
+    //Editar un libro ya publicado________________________
+    updateBook: builder.mutation({
+      query: ({ bookId, updateBook }) => ({
+        url: `books/${bookId}`,
+        method: 'PATCH',
+        body: updateBook,
+      }),
     }),
 
     //Publicar un libro________________________
@@ -107,7 +113,6 @@ export const bookApi = createApi({
           console.log('Detalles del libro recibido:', postedByUser)
           dispatch(publishedBooks({ bookId, bookDetails, postedByUser }))
         } catch (error) {
-          //DEBUG:
           console.error('Error al registrar:', error)
           dispatch(messageCreated('Error al publicar el libro.'))
         }
@@ -132,5 +137,6 @@ export const {
   useGetBooksQuery,
   useGetBookQuery,
   useGetMyPublishedBooksQuery,
+  useUpdateBookMutation,
   useDeleteBookMutation,
 } = bookApi
