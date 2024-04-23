@@ -3,9 +3,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import Cookies from 'js-cookie'
 import { loginSuccess, registerSuccess } from '../../features/auth/authSlice'
 import { messageCreated } from '../../features/notifications/notificationsSlice'
-import { BookI, GetBooks } from '../../interfaces/IBook'
+import { IBook, GetBooks } from '../../interfaces/IBook'
 import { publishedBooks } from '../../features/books/booksSlie'
-import { DataRegisterI } from '../../interfaces/IDataRegister'
+import { IDataRegister } from '../../interfaces/IDataRegister'
 
 export const bookApi = createApi({
   reducerPath: 'bookApi',
@@ -54,7 +54,7 @@ export const bookApi = createApi({
 
     //registro________________________________________
     register: builder.mutation({
-      query: (dataRegister: DataRegisterI) => ({
+      query: (dataRegister: IDataRegister) => ({
         url: '/auth/register',
         method: 'POST',
         body: dataRegister,
@@ -78,12 +78,12 @@ export const bookApi = createApi({
     }),
 
     //Obtener un libro________________________
-    getBook: builder.query<BookI[], string>({
+    getBook: builder.query<IBook[], string>({
       query: (id) => `/books/${id}`,
     }),
 
-    // Obtener libros publicados por un usuario específico
-    getMyPublishedBooks: builder.query<BookI[], string>({
+    //Obtener libros por un usuario específico____________
+    getMyPublishedBooks: builder.query<IBook[], string>({
       query: (userId) => `/books/user/${userId}`,
     }),
 

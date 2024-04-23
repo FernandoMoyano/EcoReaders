@@ -31,7 +31,7 @@ export enum BookStatus {
   RESERVED = 'Reserved',
 }
 
-export interface BookI {
+export interface IBook {
   id: string
   title: string
   author: string
@@ -45,9 +45,9 @@ export interface BookI {
   status: BookStatus
 }
 
-export type NewBook = Omit<BookI, 'id' | 'publisherName'>
+export type NewBook = Omit<IBook, 'id' | 'publisherName'>
 
 export interface GetBooks {
   foundBooks: boolean
-  books: BookI[]
+  books: IBook[]
 }

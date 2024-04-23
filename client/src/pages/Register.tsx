@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import RegisterForm from '../components/RegisterForm/RegisterForm'
-import { DataRegisterI } from '../interfaces/IDataRegister'
+import { IDataRegister } from '../interfaces/IDataRegister'
 import { registerSuccess } from '../features/auth/authSlice'
 import { useRegisterMutation } from '../app/api/api'
 import { useDispatch } from 'react-redux'
@@ -12,7 +12,7 @@ const Register = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [register, { isLoading }] = useRegisterMutation()
-  const [dataRegister, setDataRegister] = useState<DataRegisterI>({
+  const [dataRegister, setDataRegister] = useState<IDataRegister>({
     username: '',
     email: '',
     password: '',
@@ -28,7 +28,7 @@ const Register = () => {
   }
 
   //Manejo del registro____________________
-  const handleRegister = async (dataRegister: DataRegisterI) => {
+  const handleRegister = async (dataRegister: IDataRegister) => {
     try {
       const result = await register(dataRegister).unwrap()
       dispatch(registerSuccess(result.dataRegister))

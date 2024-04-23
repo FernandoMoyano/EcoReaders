@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
 import { useLoginMutation } from '../app/api/api'
-import { Credentials } from '../interfaces/ICredentials'
+import { ICredentials } from '../interfaces/ICredentials'
 
 const Login = () => {
   //Estado Inicial
-  const [credentials, setCredetentials] = useState<Credentials>({
+  const [credentials, setCredetentials] = useState<ICredentials>({
     username: '',
     password: '',
   })
@@ -25,7 +25,7 @@ const Login = () => {
   }
 
   //Manejador de Login
-  const handleLogin = async (credentials: Credentials) => {
+  const handleLogin = async (credentials: ICredentials) => {
     try {
       const result = await login(credentials).unwrap()
       navigate('/books')

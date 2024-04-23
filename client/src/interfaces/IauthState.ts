@@ -1,4 +1,4 @@
-export type AuthState = {
+export type IAuthState = {
   userLoggedIn: {
     username: string | null
     token: string | null

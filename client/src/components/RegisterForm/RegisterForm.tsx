@@ -1,7 +1,7 @@
-import { RegisterFormProps } from './IRegisterFormProps'
+import { IRegisterFormProps } from './IRegisterFormProps'
 import Spinner from '../Spinner/Spinner'
 
-const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister, isLoading, handleInputChange, dataRegister }) => {
+const RegisterForm: React.FC<IRegisterFormProps> = ({ handleRegister, isLoading, handleInputChange, dataRegister }) => {
   return (
     <div className="bg-gray-50 font-[sans-serif] text-[#333]">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">

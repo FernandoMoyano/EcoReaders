@@ -1,3 +1,3 @@
-export interface StarRatingProps {
+export interface IStarRatingProps {
   bookId: string | number
 }

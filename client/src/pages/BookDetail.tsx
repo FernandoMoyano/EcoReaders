@@ -2,7 +2,7 @@
 import { useParams } from 'react-router-dom'
 import { useGetBookQuery } from '../app/api/api'
 import Spinner from '../components/Spinner/Spinner'
-import { BookI } from '../interfaces/IBook'
+import { IBook } from '../interfaces/IBook'
 import NavBar from '../components/NavBar/NavBar'
 import StarRating from '../components/StartRating/StartRating'
 import { useSelector } from 'react-redux'
@@ -27,7 +27,7 @@ const BookDetail = () => {
     return <div>No se encontró el libro con el ID proporcionado</div>
   }
 
-  const book: BookI = data[0]
+  const book: IBook = data[0]
 
   return (
     <div>

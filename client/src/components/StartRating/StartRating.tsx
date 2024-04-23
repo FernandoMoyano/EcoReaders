@@ -4,9 +4,9 @@ import { RootState } from '../../app/store'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
-import { StarRatingProps } from './IStartRatingProps'
+import { IStarRatingProps } from './IStartRatingProps'
 
-const StarRating: React.FC<StarRatingProps> = ({ bookId }) => {
+const StarRating: React.FC<IStarRatingProps> = ({ bookId }) => {
   //Estados
   const [hover, setHover] = useState<number | null>(null)
   //Dispatch | selector

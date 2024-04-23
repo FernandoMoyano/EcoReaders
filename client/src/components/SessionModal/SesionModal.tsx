@@ -4,11 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { ISessionModalProps } from './ISessionModalProps'
 
-interface SessionModalProps {
-  onClose: () => void
-}
-const SessionModal: React.FC<SessionModalProps> = ({ onClose }) => {
+const SessionModal: React.FC<ISessionModalProps> = ({ onClose }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 

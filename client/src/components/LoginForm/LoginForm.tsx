@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import Spinner from '../Spinner/Spinner'
-import { LoginFormProps } from './ILoginFormProps'
+import { ILoginFormProps } from './ILoginFormProps'
 
-const LoginComponent: React.FC<LoginFormProps> = ({ handleLogin, handleInputChange, credentials, isLoading }) => {
+const LoginComponent: React.FC<ILoginFormProps> = ({ handleLogin, handleInputChange, credentials, isLoading }) => {
   return (
     <div className="bg-gray-50 font-[sans-serif] text-[#333]">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">

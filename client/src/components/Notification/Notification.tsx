@@ -1,7 +1,7 @@
 import React from 'react'
-import { NotificationProps } from './INotificationProps'
+import { INotificationProps } from './INotificationProps'
 
-const Notification: React.FC<NotificationProps> = ({ message, onConfirm, onCancel }) => {
+const Notification: React.FC<INotificationProps> = ({ message, onConfirm, onCancel }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
       <div className="w-96 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">

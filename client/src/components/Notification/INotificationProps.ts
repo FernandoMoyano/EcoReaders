@@ -1,4 +1,4 @@
-export interface NotificationProps {
+export interface INotificationProps {
   message: string
   onConfirm: () => void
   onCancel: () => void
