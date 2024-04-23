@@ -57,5 +57,5 @@ const booksSlice = createSlice({
   },
 })
 
-export const { publishedBooks, deletePublishedBook } = booksSlice.actions
+export const { publishedBooks, updatePublishedBook, deletePublishedBook } = booksSlice.actions
 export default booksSlice.reducer

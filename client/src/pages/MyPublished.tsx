@@ -5,19 +5,25 @@ import { useDeleteBookMutation, useGetMyPublishedBooksQuery } from '../app/api/a
 import { useParams } from 'react-router-dom'
 import { formatearNumero } from '../utilities'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch } from 'react-redux'
 import { deletePublishedBook } from '../features/books/booksSlie'
 import Spinner from '../components/Spinner/Spinner'
 import { useState } from 'react'
 import Notification from '../components/Notification/Notification'
+import { IBook } from '../interfaces/IBook'
+import EditForm from '../components/EditForm/EditForm'
 
 const MyPublished = () => {
   // Estados que controlan la visibilidad de la notificación
   const [bookIdToDelete, setBookIdToDelete] = useState('')
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
 
-  //Uso de los hooks provistos por la api
+  //Estados que controlan el formulario de edición
+  const [showEditForm, setShowEditForm] = useState(false)
+  const [bookToEdit, setBookToEdit] = useState<IBook | null>(null)
+
+  //Uso de los hooks provistos por la api_________
   const { userId } = useParams()
   const { data, error, isLoading } = useGetMyPublishedBooksQuery(userId ?? '')
   const [deleteBook, { isLoading: isLoadingBook }] = useDeleteBookMutation()
@@ -37,7 +43,7 @@ const MyPublished = () => {
     return <div>Error al cargar los detalles</div>
   }
 
-  //Manejo del click al icono de "eliminar"
+  //Manejo del click al icono de "eliminar"_________
   const handleDelete = async (bookId: string) => {
     // Almacena el ID del libro a eliminar
     setBookIdToDelete(bookId)
@@ -45,7 +51,7 @@ const MyPublished = () => {
     setShowDeleteConfirmation(true)
   }
 
-  //Manejo de la confirmación de eliminación
+  //Manejo de la confirmación de eliminación_________
   const handleConfirmDelete = async () => {
     try {
       await deleteBook(bookIdToDelete).unwrap()
@@ -57,10 +63,18 @@ const MyPublished = () => {
     }
   }
 
-  // Manejo del rechazo de eliminación
+  // Manejo del rechazo de eliminación__________
   const handleCancelDelete = () => {
     // Oculta la notificación de eliminación
     setShowDeleteConfirmation(false)
+  }
+
+  //Manejo del click a la publicación del libro editado
+  const handleEdit = (book: IBook) => {
+    //DEBUG:
+    setBookToEdit(book)
+    console.log(book)
+    setShowEditForm(true)
   }
 
   return (
@@ -74,15 +88,20 @@ const MyPublished = () => {
               <p className="text-lg font-bold text-black truncate block capitalize">{book.title}</p>
               <div className="flex items-center justify-evenly">
                 <p className="text-lg font-semibold text-black cursor-auto my-3">${formatearNumero(book.price)}</p>
+                {/* Icono de eliminacion */}
                 <FontAwesomeIcon
                   onClick={() => handleDelete(book.id)}
                   icon={faTrashCan}
                   style={{ cursor: isLoadingBook ? 'not-allowed' : 'pointer' }}
                   opacity={isLoadingBook ? 0.5 : 1}
                 />
-                <button className="w-24 py-2 px-6 bg-violet-500 p-2 rounded-md  text-white  hover:bg-violet-600 focus:outline-none">
-                  Edit
-                </button>
+                {/* Icono de edición */}
+                <FontAwesomeIcon
+                  onClick={() => handleEdit(book)}
+                  icon={faEdit}
+                  style={{ cursor: isLoadingBook ? 'not-allowed' : 'pointer' }}
+                  opacity={isLoadingBook ? 0.5 : 1}
+                />
               </div>
             </div>
           </div>
@@ -96,6 +115,9 @@ const MyPublished = () => {
           onCancel={handleCancelDelete}
         />
       )}
+
+      {/* Mostrar el formulario de edición si está abierto */}
+      {showEditForm && bookToEdit && <EditForm initialBookData={bookToEdit} />}
     </>
   )
 }

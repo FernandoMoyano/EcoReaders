@@ -1,49 +1,22 @@
-//PublicationForm.tsx
+//EditForm.tsx
 import React, { useRef, useState } from 'react'
-import { BookCategory, BookCondition, BookStatus, NewBook } from '../../interfaces/IBook'
-import { usePostNewBookMutation } from '../../app/api/api'
+import { BookCategory, BookCondition, BookStatus, IBook, NewBook } from '../../interfaces/IBook'
+import { useUpdateBookMutation } from '../../app/api/api'
 import Spinner from '../Spinner/Spinner'
 
-const PublicationForm: React.FC = () => {
-  const userDataString = localStorage.getItem('userLoggedIn')
-  let userId = null
-
-  if (userDataString) {
-    try {
-      const userData = JSON.parse(userDataString)
-      if (userData && typeof userData === 'object' && 'userId' in userData) {
-        userId = userData.userId
-      }
-    } catch (error) {
-      console.error('Error al parsear userData:', error)
-    }
-  }
-
+const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => {
   const priceValueRef = useRef<HTMLInputElement>(null)
-  //  Uso de los hooks del archivo api
-  const [postNewBook, { isLoading }] = usePostNewBookMutation()
-  //estado que maneja la data para hacer POST de un nuevo libro
-  const [dataNewBook, setDataNewBook] = useState<NewBook>({
-    title: '',
-    description: '',
-    author: '',
-    price: 0,
-    images: {
-      frontCover: '',
-      backCover: '',
-    },
-    bookCondition: BookCondition.NEW,
-    category: BookCategory.OTHER,
-    status: BookStatus.AVAILABLE,
-    publisherId: userId,
-  })
+
+  //Estados
+  const [updateBook, { isLoading }] = useUpdateBookMutation()
+  const [editedBook, setEditedBook] = useState<NewBook>(initialBookData)
 
   //Manejo de los inputs_______________________
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target
 
     if (name === 'frontCover' || name === 'backCover') {
-      setDataNewBook((prevState) => ({
+      setEditedBook((prevState) => ({
         ...prevState,
         images: {
           ...prevState.images,
@@ -51,7 +24,7 @@ const PublicationForm: React.FC = () => {
         },
       }))
     } else {
-      setDataNewBook((prevState) => ({
+      setEditedBook((prevState) => ({
         ...prevState,
         [name]: value,
       }))
@@ -62,7 +35,7 @@ const PublicationForm: React.FC = () => {
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target
 
-    setDataNewBook((prevState) => ({
+    setEditedBook((prevState) => ({
       ...prevState,
       [name]: value,
     }))
@@ -73,7 +46,7 @@ const PublicationForm: React.FC = () => {
     if (priceValueRef.current) {
       const priceValue = parseFloat(priceValueRef.current.value)
 
-      setDataNewBook((prevState) => ({
+      setEditedBook((prevState) => ({
         ...prevState,
         price: priceValue,
       }))
@@ -81,20 +54,15 @@ const PublicationForm: React.FC = () => {
     }
   }
 
-  //Manejo de la publicación del libro______________
-  const handlePostNewBook = async () => {
+  //Manejo de la publicación del libro Editado______________
+  const handlePostEditedBook = async () => {
     try {
-      const result = await postNewBook(dataNewBook)
-      if ('data' in result) {
-        console.log('Libro publicado:', result.data)
-        //mostrar una notificación de éxito
-      } else if ('error' in result) {
-        console.error('Error al publicar el libro:', result.error)
-        //mostrar una notificación de error
-      }
+      await updateBook({ bookId: initialBookData.id, updatedBook: editedBook })
+      // DEBUG:
+      console.log(editedBook)
     } catch (error) {
-      console.error('Error al publicar el libro:', error)
       //mostrar notificación de error
+      console.error('Error al actualizar el libro:', error)
     }
   }
 
@@ -218,7 +186,7 @@ const PublicationForm: React.FC = () => {
         <button
           type="button"
           className="w-full py-2.5 px-4 text-sm rounded text-white bg-gray-900 hover:bg-gray-700 focus:outline-none"
-          onClick={handlePostNewBook}
+          onClick={handlePostEditedBook}
         >
           {isLoading ? <Spinner /> : 'Publicar'}
         </button>
@@ -227,4 +195,4 @@ const PublicationForm: React.FC = () => {
   )
 }
 
-export default PublicationForm
+export default EditForm

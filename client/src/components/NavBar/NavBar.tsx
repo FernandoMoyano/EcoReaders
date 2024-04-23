@@ -37,7 +37,7 @@ const NavBar = () => {
   }
 
   return (
-    <nav className="bg-gray-300">
+    <nav className="bg-gray-900">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -84,27 +84,27 @@ const NavBar = () => {
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
               <Link to={'/books'} className="font-medium">
-                <h1 className="text-blach bold  ">EcoReaders</h1>
+                <h1 className="text-blach bold text-white">EcoReaders</h1>
               </Link>
             </div>
             <div className="hidden sm:ml-6 sm:block items-center">
               <div className="flex space-x-4">
                 <Link
                   to="/books"
-                  className="text-black hover:bg-gray-500 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  className="text-white hover:bg-gray-700  rounded-md px-3 py-2 text-sm font-medium"
                   aria-current="page"
                 >
                   Books
                 </Link>
                 <Link
                   to={`/user/${userId}`}
-                  className="text-black hover:bg-gray-500 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  className="text-white hover:bg-gray-700  rounded-md px-3 py-2 text-sm font-medium"
                 >
                   Mis Publicados
                 </Link>
                 <Link
                   to="/favorites"
-                  className="text-black hover:bg-gray-500 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  className="text-white hover:bg-gray-700  rounded-md px-3 py-2 text-sm font-medium"
                 >
                   Favoritos
                 </Link>
