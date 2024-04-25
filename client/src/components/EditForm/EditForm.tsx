@@ -1,8 +1,10 @@
 //EditForm.tsx
 import React, { useRef, useState } from 'react'
-import { BookCategory, BookCondition, BookStatus, IBook, NewBook } from '../../interfaces/IBook'
+import { BookCategory, BookStatus, IBook, NewBook, BookCondition } from '../../interfaces/IBook'
 import { useUpdateBookMutation } from '../../app/api/api'
 import Spinner from '../Spinner/Spinner'
+import TextInput from '../TextInput/TextInput'
+import SelectInput from '../SelectInput/SelectInput'
 
 const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => {
   const priceValueRef = useRef<HTMLInputElement>(null)
@@ -12,9 +14,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
   const [editedBook, setEditedBook] = useState<NewBook>(initialBookData)
 
   //Manejo de los inputs_______________________
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = event.target
-
+  const handleInputChange = (name: string, value: string) => {
     if (name === 'frontCover' || name === 'backCover') {
       setEditedBook((prevState) => ({
         ...prevState,
@@ -70,45 +70,43 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
     <form className="mt-10 space-y-4">
       {/* Titulo__________________________________________ */}
       <div>
-        <input
+        <label htmlFor="title">Titulo</label>
+        <TextInput
           name="title"
           type="text"
-          autoComplete="title"
-          required
-          className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
           placeholder="Titulo"
-          onChange={handleInputChange}
+          className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
+          onChange={(value) => handleInputChange('title', value)}
         />
       </div>
-
       {/* description__________________________________________ */}
       <div>
-        <textarea
+        <label htmlFor="description">description</label>
+        <TextInput
           name="description"
-          autoComplete="description"
+          type="text"
           required
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
           placeholder="Descripcion"
-          onChange={handleInputChange}
+          onChange={(value) => handleInputChange('description', value)}
         />
       </div>
-
       {/* Autor______________________________________________ */}
       <div className="flex items-center justify-between gap-4">
-        <input
+        <label htmlFor="author">Author</label>
+        <TextInput
           name="author"
           type="text"
-          autoComplete="author"
           required
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
           placeholder="Autor"
-          onChange={handleInputChange}
+          onChange={(value) => handleInputChange('author', value)}
         />
       </div>
-
       {/* Precio_______________________________________________*/}
       <div className="flex items-center justify-between gap-4">
-        <input
+        <label htmlFor="price">Precio</label>
+        <TextInput
           name="price"
           type="number"
           placeholder="Precio"
@@ -118,67 +116,62 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
           onChange={handlePriceChange}
         />
       </div>
-
       {/* -Imagen Frontal____________________________________ */}
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="frontCover">Imagen de Tapa</label>
-        <input
+        <TextInput
           name="frontCover"
           type="text"
           placeholder="url imagen de tapa"
           required
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
-          onChange={handleInputChange}
+          onChange={(value) => handleInputChange('frontcover', value)}
         />
       </div>
-
       {/* -Imagenes Contratapa_____________________________ */}
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="backCover">Imagen de contratapa</label>
-        <input
+        <TextInput
           name="backCover"
           type="text"
           placeholder="url imagen de contratapa"
           required
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
-          onChange={handleInputChange}
+          onChange={(value) => handleInputChange('backcover', value)}
         />
       </div>
 
       {/* condition______________________________________ */}
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="bookCondition">Condición del libro</label>
-        <select name="bookCondition" id="bookCondition" onChange={handleSelectChange}>
-          {Object.values(BookCondition).map((condition) => (
-            <option key={condition} value={condition}>
-              {condition}
-            </option>
-          ))}
-        </select>
+        <SelectInput
+          name="bookCondition"
+          value={editedBook.bookCondition}
+          options={Object.values(BookCondition)}
+          onChange={handleSelectChange}
+        />
       </div>
 
       {/* Categoria_________________________________________ */}
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="category">Categoria:</label>
-        <select name="category" id="category" onChange={handleSelectChange}>
-          {Object.values(BookCategory).map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
+        <SelectInput
+          name="category"
+          value={editedBook.category}
+          options={Object.values(BookCategory)}
+          onChange={handleSelectChange}
+        />
       </div>
 
       {/* Status_______________________________________________ */}
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="">Estado</label>
-        <select name="status" id="status" onChange={handleSelectChange}>
-          {Object.values(BookStatus).map((status) => (
-            <option key={status} value={status}>
-              {status}
-            </option>
-          ))}
-        </select>
+        <SelectInput
+          name="status"
+          value={editedBook.status}
+          options={Object.values(BookStatus)}
+          onChange={handleSelectChange}
+        />
       </div>
 
       {/* botón de envio__________________________________ */}
