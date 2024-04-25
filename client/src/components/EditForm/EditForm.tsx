@@ -32,9 +32,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
   }
 
   //Manejo de los select___________________________
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = event.target
-
+  const handleSelectChange = (name: string, value: string) => {
     setEditedBook((prevState) => ({
       ...prevState,
       [name]: value,
@@ -128,7 +126,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
           onChange={(value) => handleInputChange('frontcover', value)}
         />
       </div>
-      {/* -Imagenes Contratapa_____________________________ */}
+      {/* -Imagen Contratapa_____________________________ */}
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="backCover">Imagen de contratapa</label>
         <TextInput
@@ -145,10 +143,10 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="bookCondition">Condición del libro</label>
         <SelectInput
-          name="bookCondition"
+          name="consition"
           value={editedBook.bookCondition}
           options={Object.values(BookCondition)}
-          onChange={handleSelectChange}
+          onChange={(value) => handleSelectChange('condition', value)}
         />
       </div>
 
@@ -159,7 +157,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
           name="category"
           value={editedBook.category}
           options={Object.values(BookCategory)}
-          onChange={handleSelectChange}
+          onChange={(value) => handleSelectChange('category', value)}
         />
       </div>
 
@@ -170,7 +168,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
           name="status"
           value={editedBook.status}
           options={Object.values(BookStatus)}
-          onChange={handleSelectChange}
+          onChange={(value) => handleSelectChange('status', value)}
         />
       </div>
 
