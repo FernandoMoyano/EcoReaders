@@ -12,18 +12,21 @@ import Spinner from '../components/Spinner/Spinner'
 import { useState } from 'react'
 import Notification from '../components/Notification/Notification'
 import { IBook } from '../interfaces/IBook'
-import EditForm from '../components/EditForm/EditForm'
+import ModalEditedBook from '../components/ModalEditBook/ModalEditBook'
 
 const MyPublished = () => {
-  // Estados que controlan la visibilidad de la notificación
+  // Estados que controlan la visibilidad de la notificación________
+
   const [bookIdToDelete, setBookIdToDelete] = useState('')
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
 
-  //Estados que controlan el formulario de edición
-  const [showEditForm, setShowEditForm] = useState(false)
+  //Estados que controlan el formulario de edición________
+
   const [bookToEdit, setBookToEdit] = useState<IBook | null>(null)
+  const [isOpenModal, setIsOpenModal] = useState(false)
 
   //Uso de los hooks provistos por la api_________
+
   const { userId } = useParams()
   const { data, error, isLoading } = useGetMyPublishedBooksQuery(userId ?? '')
   const [deleteBook, { isLoading: isLoadingBook }] = useDeleteBookMutation()
@@ -44,6 +47,7 @@ const MyPublished = () => {
   }
 
   //Manejo del click al icono de "eliminar"_________
+
   const handleDelete = async (bookId: string) => {
     // Almacena el ID del libro a eliminar
     setBookIdToDelete(bookId)
@@ -52,6 +56,7 @@ const MyPublished = () => {
   }
 
   //Manejo de la confirmación de eliminación_________
+
   const handleConfirmDelete = async () => {
     try {
       await deleteBook(bookIdToDelete).unwrap()
@@ -64,17 +69,24 @@ const MyPublished = () => {
   }
 
   // Manejo del rechazo de eliminación__________
+
   const handleCancelDelete = () => {
     // Oculta la notificación de eliminación
     setShowDeleteConfirmation(false)
   }
 
-  //Manejo del click a la publicación del libro editado
+  const closeModal = () => {
+    setIsOpenModal(false)
+  }
+
+  //Manejo del click a la publicación del libro editado_____
+
   const handleEdit = (book: IBook) => {
     //DEBUG:
-    setBookToEdit(book)
     console.log(book)
-    setShowEditForm(true)
+    setBookToEdit(book)
+    console.log('datos del libro a editar', bookToEdit)
+    setIsOpenModal(true)
   }
 
   return (
@@ -82,7 +94,10 @@ const MyPublished = () => {
       <NavBar />
       <section className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
         {data?.map((book) => (
-          <div className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+          <div
+            key={book.id}
+            className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl"
+          >
             <div className="px-4 py-3 w-72">
               <span className="text-gray-400 mr-3 uppercase text-xs">{book.author}</span>
               <p className="text-lg font-bold text-black truncate block capitalize">{book.title}</p>
@@ -116,8 +131,9 @@ const MyPublished = () => {
         />
       )}
 
-      {/* Mostrar el formulario de edición si está abierto */}
-      {showEditForm && bookToEdit && <EditForm initialBookData={bookToEdit} />}
+      {isOpenModal && bookToEdit && (
+        <ModalEditedBook initialBookData={bookToEdit} closeModal={closeModal} isOpen={isOpenModal} />
+      )}
     </>
   )
 }

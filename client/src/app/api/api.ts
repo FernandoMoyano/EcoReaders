@@ -13,6 +13,7 @@ export const bookApi = createApi({
 
   endpoints: (builder) => ({
     //login________________________________
+
     login: builder.mutation({
       query: (credentials) => ({
         url: '/auth/login',
@@ -43,6 +44,7 @@ export const bookApi = createApi({
     }),
 
     //logout__________________________
+
     logout: builder.mutation({
       query: () => ({
         url: '/auth/logout',
@@ -51,6 +53,7 @@ export const bookApi = createApi({
     }),
 
     //registro________________________________________
+
     register: builder.mutation({
       query: (dataRegister: IDataRegister) => ({
         url: '/auth/register',
@@ -70,21 +73,25 @@ export const bookApi = createApi({
     }),
 
     //Obtener todos los libros_________________
+
     getBooks: builder.query<GetBooks, void>({
       query: () => '/books',
     }),
 
     //Obtener un libro________________________
+
     getBook: builder.query<IBook[], string>({
       query: (id) => `/books/${id}`,
     }),
 
     //Obtener libros por un usuario específico____________
+
     getMyPublishedBooks: builder.query<IBook[], string>({
       query: (userId) => `/books/user/${userId}`,
     }),
 
     //Editar un libro ya publicado________________________
+
     updateBook: builder.mutation({
       query: ({ bookId, updateBook }) => ({
         url: `books/${bookId}`,
@@ -94,6 +101,7 @@ export const bookApi = createApi({
     }),
 
     //Publicar un libro________________________
+
     postNewBook: builder.mutation({
       query: (dataNewBook) => ({
         url: '/books/new',
@@ -120,6 +128,7 @@ export const bookApi = createApi({
     }),
 
     //Eliminar un libro____________________
+
     deleteBook: builder.mutation({
       query: (id) => ({
         url: `/books/${id}`,

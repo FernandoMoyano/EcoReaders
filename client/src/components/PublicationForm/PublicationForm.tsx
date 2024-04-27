@@ -39,6 +39,7 @@ const PublicationForm: React.FC = () => {
   })
 
   //Manejo de los inputs_______________________
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target
 
@@ -59,6 +60,7 @@ const PublicationForm: React.FC = () => {
   }
 
   //Manejo de los select___________________________
+
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target
 
@@ -69,6 +71,7 @@ const PublicationForm: React.FC = () => {
   }
 
   //Manejo del input de precio__________________________
+
   const handlePriceChange = () => {
     if (priceValueRef.current) {
       const priceValue = parseFloat(priceValueRef.current.value)
@@ -82,6 +85,7 @@ const PublicationForm: React.FC = () => {
   }
 
   //Manejo de la publicación del libro______________
+
   const handlePostNewBook = async () => {
     try {
       const result = await postNewBook(dataNewBook)

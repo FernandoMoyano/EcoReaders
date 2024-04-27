@@ -9,11 +9,16 @@ import SelectInput from '../SelectInput/SelectInput'
 const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => {
   const priceValueRef = useRef<HTMLInputElement>(null)
 
-  //Estados
+  //Estados____________________________
+
   const [updateBook, { isLoading }] = useUpdateBookMutation()
   const [editedBook, setEditedBook] = useState<NewBook>(initialBookData)
 
+  //DEBUG:
+  console.log('Data del libro a editar', editedBook)
+
   //Manejo de los inputs_______________________
+
   const handleInputChange = (name: string, value: string) => {
     if (name === 'frontCover' || name === 'backCover') {
       setEditedBook((prevState) => ({
@@ -32,6 +37,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
   }
 
   //Manejo de los select___________________________
+
   const handleSelectChange = (name: string, value: string) => {
     setEditedBook((prevState) => ({
       ...prevState,
@@ -40,6 +46,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
   }
 
   //Manejo del input de precio__________________________
+
   const handlePriceChange = () => {
     if (priceValueRef.current) {
       const priceValue = parseFloat(priceValueRef.current.value)
@@ -53,11 +60,12 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
   }
 
   //Manejo de la publicación del libro Editado______________
+
   const handlePostEditedBook = async () => {
     try {
+      console.log(editedBook)
       await updateBook({ bookId: initialBookData.id, updatedBook: editedBook })
       // DEBUG:
-      console.log(editedBook)
     } catch (error) {
       //mostrar notificación de error
       console.error('Error al actualizar el libro:', error)
@@ -73,6 +81,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
           name="title"
           type="text"
           placeholder="Titulo"
+          value={editedBook.title}
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
           onChange={(value) => handleInputChange('title', value)}
         />
@@ -84,6 +93,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
           name="description"
           type="text"
           required
+          value={editedBook.description}
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
           placeholder="Descripcion"
           onChange={(value) => handleInputChange('description', value)}
@@ -96,6 +106,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
           name="author"
           type="text"
           required
+          value={editedBook.author}
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
           placeholder="Autor"
           onChange={(value) => handleInputChange('author', value)}
@@ -108,6 +119,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
           name="price"
           type="number"
           placeholder="Precio"
+          value={editedBook.price}
           ref={priceValueRef}
           required
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
@@ -120,10 +132,11 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
         <TextInput
           name="frontCover"
           type="text"
+          value={editedBook.images.frontCover}
           placeholder="url imagen de tapa"
           required
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
-          onChange={(value) => handleInputChange('frontcover', value)}
+          onChange={(value) => handleInputChange('frontCover', value)}
         />
       </div>
       {/* -Imagen Contratapa_____________________________ */}
@@ -134,8 +147,9 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
           type="text"
           placeholder="url imagen de contratapa"
           required
+          value={editedBook.images.backCover}
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
-          onChange={(value) => handleInputChange('backcover', value)}
+          onChange={(value) => handleInputChange('backCover', value)}
         />
       </div>
 
