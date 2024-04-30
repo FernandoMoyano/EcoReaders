@@ -7,12 +7,12 @@ interface IInputFormProps {
   className: string
   required?: boolean
   value: string | number
-  onChange: (value: string) => void
+  onChange: (name: string, value: string) => void
 }
 
 const TextInput = forwardRef<HTMLTextAreaElement | HTMLInputElement, IInputFormProps>((props, ref) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    props.onChange(event.target.value)
+    props.onChange(props.name, event.target.value)
   }
 
   return (
@@ -22,6 +22,7 @@ const TextInput = forwardRef<HTMLTextAreaElement | HTMLInputElement, IInputFormP
           ref={ref as React.RefObject<HTMLTextAreaElement>} // Se ajusta el tipo de ref para textarea
           name={props.name}
           required={props.required}
+          value={props.value}
           className={props.className}
           placeholder={props.placeholder}
           onChange={handleInputChange}
@@ -32,6 +33,7 @@ const TextInput = forwardRef<HTMLTextAreaElement | HTMLInputElement, IInputFormP
           name={props.name}
           type={props.type}
           required={props.required}
+          value={props.value}
           className={props.className}
           placeholder={props.placeholder}
           onChange={handleInputChange}

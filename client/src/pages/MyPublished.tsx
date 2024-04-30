@@ -75,6 +75,8 @@ const MyPublished = () => {
     setShowDeleteConfirmation(false)
   }
 
+  //Manejo del cierre del modal
+
   const closeModal = () => {
     setIsOpenModal(false)
   }
@@ -85,6 +87,7 @@ const MyPublished = () => {
     //DEBUG:
     console.log(book)
     setBookToEdit(book)
+    //DEBUG:
     console.log('datos del libro a editar', bookToEdit)
     setIsOpenModal(true)
   }

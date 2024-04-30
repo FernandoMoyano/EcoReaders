@@ -13,6 +13,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
 
   const [updateBook, { isLoading }] = useUpdateBookMutation()
   const [editedBook, setEditedBook] = useState<NewBook>(initialBookData)
+  console.log(initialBookData)
 
   //DEBUG:
   console.log('Data del libro a editar', editedBook)
@@ -21,6 +22,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
 
   const handleInputChange = (name: string, value: string) => {
     if (name === 'frontCover' || name === 'backCover') {
+      console.log('Input changed:', name, value)
       setEditedBook((prevState) => ({
         ...prevState,
         images: {
