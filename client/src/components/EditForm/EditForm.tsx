@@ -1,27 +1,31 @@
 //EditForm.tsx
 import React, { useRef, useState } from 'react'
-import { BookCategory, BookStatus, IBook, NewBook, BookCondition } from '../../interfaces/IBook'
+import { BookCategory, BookStatus, IBook, BookCondition } from '../../interfaces/IBook'
 import { useUpdateBookMutation } from '../../app/api/api'
 import Spinner from '../Spinner/Spinner'
 import TextInput from '../TextInput/TextInput'
 import SelectInput from '../SelectInput/SelectInput'
+import { useParams } from 'react-router-dom'
 
 const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => {
+  const { bookId, userId } = useParams<{ bookId: string; userId: string }>()
   const priceValueRef = useRef<HTMLInputElement>(null)
 
   //Estados____________________________
 
-  const [updateBook, { isLoading }] = useUpdateBookMutation()
-  const [editedBook, setEditedBook] = useState<NewBook>(initialBookData)
-  console.log(initialBookData)
+  const [editedBook, setEditedBook] = useState<IBook>(initialBookData)
+  const [updateBook, { isLoading }] = useUpdateBookMutation({ userId, bookId, editedBook })
+  //DEBUG:
+  console.log('data inicial del libro', initialBookData)
 
   //DEBUG:
-  console.log('Data del libro a editar', editedBook)
+  //console.log('Data del libro a editar', editedBook)
 
   //Manejo de los inputs_______________________
 
   const handleInputChange = (name: string, value: string) => {
     if (name === 'frontCover' || name === 'backCover') {
+      //DEBUG:
       console.log('Input changed:', name, value)
       setEditedBook((prevState) => ({
         ...prevState,
@@ -65,9 +69,9 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
 
   const handlePostEditedBook = async () => {
     try {
-      console.log(editedBook)
-      await updateBook({ bookId: initialBookData.id, updatedBook: editedBook })
-      // DEBUG:
+      console.log(initialBookData)
+
+      await updateBook({ editedBook, bookId: bookId, userId: userId })
     } catch (error) {
       //mostrar notificación de error
       console.error('Error al actualizar el libro:', error)

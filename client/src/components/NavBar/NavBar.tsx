@@ -97,7 +97,7 @@ const NavBar = () => {
                   Books
                 </Link>
                 <Link
-                  to={`/user/${userId}`}
+                  to={`/books/user/${userId}/my-books`}
                   className="text-white hover:bg-gray-700  rounded-md px-3 py-2 text-sm font-medium"
                 >
                   Mis Publicados

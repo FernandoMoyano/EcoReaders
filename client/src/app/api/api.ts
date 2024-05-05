@@ -1,4 +1,4 @@
-// api.ts
+// API.TS
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import Cookies from 'js-cookie'
 import { loginSuccess, registerSuccess } from '../../features/auth/authSlice'
@@ -6,6 +6,7 @@ import { messageCreated } from '../../features/notifications/notificationsSlice'
 import { IBook, GetBooks } from '../../interfaces/IBook'
 import { publishedBooks } from '../../features/books/booksSlie'
 import { IDataRegister } from '../../interfaces/IDataRegister'
+import { UserId } from '../../../../src/interfaces/User.interface'
 
 export const bookApi = createApi({
   reducerPath: 'bookApi',
@@ -87,16 +88,16 @@ export const bookApi = createApi({
     //Obtener libros por un usuario específico____________
 
     getMyPublishedBooks: builder.query<IBook[], string>({
-      query: (userId) => `/books/user/${userId}`,
+      query: (userId) => `/books/user/${userId}/my-books`,
     }),
 
     //Editar un libro ya publicado________________________
 
-    updateBook: builder.mutation({
-      query: ({ bookId, updateBook }) => ({
-        url: `books/${bookId}`,
+    updateBook: builder.mutation<IBook, { userId: string; bookId: string; editedBook: Partial<IBook> }>({
+      query: ({ editedBook, userId, bookId }) => ({
+        url: `/books/user/${userId}/edit/${bookId}`,
         method: 'PATCH',
-        body: updateBook,
+        body: editedBook,
       }),
     }),
 

@@ -54,7 +54,7 @@ const LoginComponent: React.FC<ILoginFormProps> = ({ handleLogin, handleInputCha
             <div className="flex flex-col items-center">
               <button
                 type="button"
-                className="w-full py-2.5 px-4 text-sm rounded text-white bg-violet-500 hover:bg-violet-600 focus:outline-none"
+                className="w-full py-2.5 px-4 text-sm rounded text-white bg-gray-900 hover:bg-gray-700 focus:outline-none"
                 onClick={() => handleLogin(credentials)}
                 disabled={isLoading}
               >

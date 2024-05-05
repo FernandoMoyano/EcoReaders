@@ -47,6 +47,8 @@ export interface IBook {
 
 export type NewBook = Omit<IBook, 'id' | 'publisherName'>
 
+export type EditBook = Omit<IBook, 'id' | 'publisherName' | 'publisherId'>
+
 export interface GetBooks {
   foundBooks: boolean
   books: IBook[]

@@ -12,14 +12,14 @@ const bookController = new BookController()
 //GET /api/books
 bookRoutes.get('/', bookController.getBooks)
 
-//UPDATE /api/books/:id
-bookRoutes.patch('/:id', validatorSchema(BookSchema, 'body'), bookController.updateBook)
-
-//GET/api/books/:id
+//GET /api/books/:id
 bookRoutes.get('/:id', bookController.getBook)
 
-// GET /api/books/books-by-user/:id - Obtener todos los libros de un usuario
-bookRoutes.get('/user/:userId', bookController.getBooksByUser)
+//UPDATE /api/books/user/:userId/edit/:bookId
+bookRoutes.patch('/user/:userId/edit/:bookId', validatorSchema(BookSchema, 'body'), bookController.updateBook)
+
+// GET /api/books/:userId/books - Obtener todos los libros de un usuario
+bookRoutes.get('/user/:userId/my-books', bookController.getBooksByUser)
 
 //POST /api/books/new
 bookRoutes.post('/new', validatorSchema(BookSchema, 'body'), bookController.creteBook)

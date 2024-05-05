@@ -36,7 +36,7 @@ const TextInput = forwardRef<HTMLTextAreaElement | HTMLInputElement, IInputFormP
           value={props.value}
           className={props.className}
           placeholder={props.placeholder}
-          onChange={handleInputChange}
+          onChange={(e) => handleInputChange(e)}
         />
       )}
     </div>

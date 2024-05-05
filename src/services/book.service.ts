@@ -119,9 +119,13 @@ export class BookService {
   }
 
   //➡️Actualizar un libro
-  async update(id: BookId, changes: Partial<IBookRow>) {
+  async update(userId: string, bookId: string, changes: Partial<IBookRow>) {
     try {
-      const bookId = id
+      //DEBUG:
+      console.log('ID recibido en el servicio:', bookId)
+      //DEBUG:
+      console.log('Cambios recibidos en el servicio:', changes)
+
       const columnsToUpdate = Object.keys(changes)
         .map((column) => `${column} = ?`)
         .join(', ')

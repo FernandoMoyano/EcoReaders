@@ -8,7 +8,7 @@ const Welcome = () => {
           <h1 className="text-xl font-bold text-black">EcoReaders</h1>
         </div>
         <nav className="flex gap-3 text-white">
-          <Link className="w-20 text-center bg-violet-500 p-2 rounded-md" to={'/login'}>
+          <Link className="w-20 text-center bg-gray-900 p-2 rounded-md" to={'/login'}>
             Login
           </Link>
           <Link className=" p-2 rounded-md text-black" to={'/register'}>

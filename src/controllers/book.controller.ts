@@ -56,9 +56,13 @@ export class BookController {
   //➡️PATCH-Actualizar lo datos de un libro
   async updateBook(req: Request, res: Response) {
     try {
-      const id = req.params.id
+      const { userId, bookId } = req.params
       const body = req.body
-      const editedBook = await bookService.update(id, body)
+      //DEBUG:
+      console.log('ID recibido en el controlador:', bookId)
+      //DEBUG:
+      console.log('Body recibido en el controlador:', body)
+      const editedBook = await bookService.update(userId, bookId, body)
       return res.json(editedBook)
     } catch (error) {
       console.log(error)
