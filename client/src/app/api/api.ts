@@ -6,7 +6,6 @@ import { messageCreated } from '../../features/notifications/notificationsSlice'
 import { IBook, GetBooks } from '../../interfaces/IBook'
 import { publishedBooks } from '../../features/books/booksSlie'
 import { IDataRegister } from '../../interfaces/IDataRegister'
-import { UserId } from '../../../../src/interfaces/User.interface'
 
 export const bookApi = createApi({
   reducerPath: 'bookApi',
