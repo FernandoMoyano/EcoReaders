@@ -1,4 +1,4 @@
-//booksSlice.tsx
+//BOOKS - BOOKSLICE
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { NewBook } from '../../interfaces/IBook'
 

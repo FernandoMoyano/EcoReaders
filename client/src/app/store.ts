@@ -1,4 +1,4 @@
-// store.ts
+// STORE. TS
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { bookApi } from './api/api'

@@ -1,4 +1,4 @@
-// notificationsSlice.ts
+// NOTIFICATIONS - NOTIFICATIONSSLICE
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface NotificationsState {

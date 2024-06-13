@@ -1,4 +1,4 @@
-//EditForm.tsx
+//EDITFORM
 import React, { useRef, useState } from 'react'
 import { BookCategory, BookStatus, IBook, BookCondition } from '../../interfaces/IBook'
 import { useUpdateBookMutation } from '../../app/api/api'
@@ -72,14 +72,16 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
       console.log(initialBookData)
 
       const editBookToSend = {
-        title: editedBook.title,
+        ...editedBook,
+        publisherId: initialBookData.publisherId,
+        /*   title: editedBook.title,
         author: editedBook.author,
         description: editedBook.description,
         price: editedBook.price,
         images: editedBook.images,
         bookCondition: editedBook.bookCondition,
         category: editedBook.category,
-        status: editedBook.status,
+        status: editedBook.status, */
       }
 
       await updateBook({ editedBook: editBookToSend, bookId: initialBookData.id, userId: initialBookData.publisherId })

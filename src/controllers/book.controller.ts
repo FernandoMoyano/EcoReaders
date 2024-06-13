@@ -54,18 +54,43 @@ export class BookController {
   }
 
   //➡️PATCH-Actualizar lo datos de un libro
-  async updateBook(req: Request, res: Response) {
+  /*  async updateBook(req: Request, res: Response) {
     try {
-      const { userId, bookId } = req.params
-      const body = req.body
+      const { id: bookId } = req.body
+      const { userId } = req.body
+      const changes = req.body
       //DEBUG:
       console.log('ID recibido en el controlador:', bookId)
       //DEBUG:
-      console.log('Body recibido en el controlador:', body)
-      const editedBook = await bookService.update(userId, bookId, body)
+      console.log('Body recibido en el controlador:', changes)
+      const editedBook = await bookService.update(userId, bookId, changes)
       return res.json(editedBook)
     } catch (error) {
       console.log(error)
+    }
+  } */
+
+  //➡️ UPDATE - Crear un nuevo libro
+  async updateBook(req: Request, res: Response) {
+    try {
+      const { bookId } = req.params
+      const { userId } = req.body.userId // Asegúrate de obtener el userId de la solicitud
+      const changes = req.body
+
+      // DEBUG: Mostrar el userId y los cambios recibidos
+      /*  console.log('userId recibido en el controlador:', userId)
+      console.log('changes recibidos en el controlador:', changes) */
+
+      const result = await bookService.update(userId, bookId, changes)
+
+      res.status(200).json({
+        message: 'Book updated successfully',
+        data: result,
+      })
+    } catch (error) {
+      res.status(500).json({
+        message: 'Error updating book',
+      })
     }
   }
 

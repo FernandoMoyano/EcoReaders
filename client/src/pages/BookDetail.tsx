@@ -1,4 +1,4 @@
-//BookDetail.tsx
+//PAGES - BOOKDETAIL.tsx
 import { useParams } from 'react-router-dom'
 import { useGetBookQuery } from '../app/api/api'
 import Spinner from '../components/Spinner/Spinner'
@@ -22,6 +22,7 @@ const BookDetail = () => {
   if (error) {
     return <div>Error al cargar los detalles</div>
   }
+
   // Verifica si data está definido y no está vacío
   if (!data || data.length === 0) {
     return <div>No se encontró el libro con el ID proporcionado</div>

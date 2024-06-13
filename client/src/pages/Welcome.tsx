@@ -1,3 +1,4 @@
+//WELCOME
 import { Link } from 'react-router-dom'
 
 const Welcome = () => {

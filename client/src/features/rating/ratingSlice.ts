@@ -1,3 +1,4 @@
+//RATING - RATINGSLICE
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 interface RatingState {

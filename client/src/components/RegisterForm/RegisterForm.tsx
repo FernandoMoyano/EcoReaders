@@ -1,3 +1,4 @@
+//REGISTERFORM
 import { IRegisterFormProps } from './IRegisterFormProps'
 import Spinner from '../Spinner/Spinner'
 

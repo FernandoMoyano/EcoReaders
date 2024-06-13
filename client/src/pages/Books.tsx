@@ -1,4 +1,4 @@
-//books.tsx
+//PAGES - BOOKS
 
 import { useGetBooksQuery } from '../app/api/api'
 import ModalNewBook from '../components/ModalNewBook/ModalNewBook'

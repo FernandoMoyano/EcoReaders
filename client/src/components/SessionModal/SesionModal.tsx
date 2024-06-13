@@ -1,4 +1,4 @@
-//SessionModal.ts
+//SESSIONMODAL.ts
 import { logoutSuccess } from '../../features/auth/authSlice'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'

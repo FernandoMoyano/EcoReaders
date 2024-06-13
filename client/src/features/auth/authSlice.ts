@@ -1,8 +1,8 @@
-// authSlice.ts
+// AUTHSLICE.TS
 import { createSlice } from '@reduxjs/toolkit'
 import { bookApi } from '../../app/api/api'
 import Cookies from 'js-cookie'
-import { IAuthState } from '../../interfaces/IauthState'
+import { IAuthState } from '../../interfaces/IAuthState'
 
 const initialState: IAuthState = {
   userLoggedIn: JSON.parse(localStorage?.getItem('userLoggedIn') || '{}'),

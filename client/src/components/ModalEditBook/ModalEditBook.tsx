@@ -11,7 +11,7 @@ interface IModalEditedBook {
 
 const ModalEditedBook = ({ initialBookData, closeModal, isOpen }: IModalEditedBook) => {
   const handleCloseModal = () => {
-    closeModal() // Llamamos a la función closeModal cuando se cierra el modal
+    closeModal()
   }
 
   return (

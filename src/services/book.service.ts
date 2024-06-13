@@ -119,11 +119,10 @@ export class BookService {
   }
 
   //➡️Actualizar un libro
-  async update(userId: string, bookId: string, changes: Partial<IBookRow>) {
+  /*  async update(userId: string, bookId: string, changes: Partial<IBookRow>) {
     try {
-      //DEBUG:
       console.log('ID recibido en el servicio:', bookId)
-      //DEBUG:
+
       console.log('Cambios recibidos en el servicio:', changes)
 
       const columnsToUpdate = Object.keys(changes)
@@ -135,6 +134,52 @@ export class BookService {
       return booksWithChanges
     } catch (error) {
       console.error(error)
+      throw error
+    }
+  } */
+
+  //➡️Actualizar un libro
+  async update(userId: string, bookId: string, changes: Partial<IBookRow>) {
+    try {
+      // DEBUG: Mostrar la ID del libro y los cambios recibidos
+      console.log('ID de usuario recibido en el servicio:', userId)
+      console.log('ID del libro recibido en el servicio:', bookId)
+      console.log('Cambios recibidos en el servicio:', changes)
+
+      // Validar las columnas para asegurarse de que existen en la tabla 'books'
+      const validColumns = [
+        'title',
+        'author',
+        'description',
+        'price',
+        'images',
+        'bookCondition',
+        'category',
+        'publisherId',
+        'status',
+        'created_at',
+      ]
+
+      const columnsToUpdate = Object.keys(changes)
+        .filter((column) => validColumns.includes(column))
+        .map((column) => `${column} = ?`)
+        .join(', ')
+
+      if (columnsToUpdate.length === 0) {
+        throw new Error('No valid columns to update')
+      }
+
+      const query = `UPDATE books SET ${columnsToUpdate} WHERE id = ? AND publisherId = ?;`
+      const values = [...Object.values(changes), bookId, userId]
+
+      const [result] = await pool.execute(query, values)
+
+      // DEBUG: Mostrar el resultado de la actualización
+      console.log('Resultado de la actualización:', result)
+
+      return result
+    } catch (error) {
+      console.error('Error al actualizar el libro:', error)
       throw error
     }
   }
