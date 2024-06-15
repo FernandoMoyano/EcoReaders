@@ -5,10 +5,8 @@ import { useUpdateBookMutation } from '../../app/api/api'
 import Spinner from '../Spinner/Spinner'
 import TextInput from '../TextInput/TextInput'
 import SelectInput from '../SelectInput/SelectInput'
-//import { useParams } from 'react-router-dom'
 
 const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => {
-  //const { bookId, userId } = useParams<{ bookId: string; userId: string }>()
   const priceValueRef = useRef<HTMLInputElement>(null)
 
   //Estados____________________________
@@ -74,14 +72,6 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
       const editBookToSend = {
         ...editedBook,
         publisherId: initialBookData.publisherId,
-        /*   title: editedBook.title,
-        author: editedBook.author,
-        description: editedBook.description,
-        price: editedBook.price,
-        images: editedBook.images,
-        bookCondition: editedBook.bookCondition,
-        category: editedBook.category,
-        status: editedBook.status, */
       }
 
       await updateBook({ editedBook: editBookToSend, bookId: initialBookData.id, userId: initialBookData.publisherId })

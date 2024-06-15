@@ -70,16 +70,15 @@ export class BookController {
     }
   } */
 
-  //➡️ UPDATE - Crear un nuevo libro
+  //➡️ PATCH - Crear un nuevo libro
   async updateBook(req: Request, res: Response) {
     try {
-      const { bookId } = req.params
-      const { userId } = req.body.userId // Asegúrate de obtener el userId de la solicitud
+      const { userId, bookId } = req.params
       const changes = req.body
 
-      // DEBUG: Mostrar el userId y los cambios recibidos
-      /*  console.log('userId recibido en el controlador:', userId)
-      console.log('changes recibidos en el controlador:', changes) */
+      //DEBUG: Verificar los parámetros recibidos
+      console.log('Parámetros recibidos en req.params:', req.params)
+      console.log('Datos recibidos en req.body:', req.body)
 
       const result = await bookService.update(userId, bookId, changes)
 

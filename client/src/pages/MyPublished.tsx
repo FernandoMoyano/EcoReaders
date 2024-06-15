@@ -20,7 +20,7 @@ const MyPublished = () => {
   const [bookIdToDelete, setBookIdToDelete] = useState('')
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
 
-  //Estados que controlan el formulario de edición________
+  //Estados que controlan el formulario de Edición________
 
   const [bookToEdit, setBookToEdit] = useState<IBook | null>(null)
   const [isOpenModal, setIsOpenModal] = useState(false)

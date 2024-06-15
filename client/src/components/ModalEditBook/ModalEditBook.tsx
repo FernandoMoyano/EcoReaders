@@ -1,4 +1,4 @@
-//ModalEditedBook
+//MODALEDITEDBOOK
 
 import EditForm from '../EditForm/EditForm'
 import { IBook } from '../../interfaces/IBook'

@@ -119,33 +119,12 @@ export class BookService {
   }
 
   //➡️Actualizar un libro
-  /*  async update(userId: string, bookId: string, changes: Partial<IBookRow>) {
-    try {
-      console.log('ID recibido en el servicio:', bookId)
-
-      console.log('Cambios recibidos en el servicio:', changes)
-
-      const columnsToUpdate = Object.keys(changes)
-        .map((column) => `${column} = ?`)
-        .join(', ')
-      const query = `UPDATE books SET ${columnsToUpdate} WHERE id = ?;`
-      const values = [...Object.values(changes), bookId]
-      const booksWithChanges = await pool.execute(query, values)
-      return booksWithChanges
-    } catch (error) {
-      console.error(error)
-      throw error
-    }
-  } */
-
-  //➡️Actualizar un libro
   async update(userId: string, bookId: string, changes: Partial<IBookRow>) {
     try {
-      // DEBUG: Mostrar la ID del libro y los cambios recibidos
-      console.log('ID de usuario recibido en el servicio:', userId)
-      console.log('ID del libro recibido en el servicio:', bookId)
-      console.log('Cambios recibidos en el servicio:', changes)
-
+      //DEBUG:
+      console.log('datos del usuario ', userId)
+      console.log('ID del libro:', bookId)
+      console.log('Cambios:', changes)
       // Validar las columnas para asegurarse de que existen en la tabla 'books'
       const validColumns = [
         'title',
@@ -169,8 +148,34 @@ export class BookService {
         throw new Error('No valid columns to update')
       }
 
+      // Serializar el objeto images
+      if (changes.images) {
+        changes.image = JSON.stringify(changes.images)
+      }
+
+      // Convertir created_at a un formato adecuado para MySQL
+      if (changes.created_at) {
+        changes.created_at = new Date(changes.created_at).toISOString().slice(0, 19).replace('T', ' ')
+      }
+
+      // Filtrar cambios
+      const filteredChanges = validColumns.reduce((acc, key) => {
+        if (changes[key] !== undefined) {
+          acc[key] = changes[key]
+        }
+        return acc
+      }, {} as Partial<IBookRow>)
+
       const query = `UPDATE books SET ${columnsToUpdate} WHERE id = ? AND publisherId = ?;`
-      const values = [...Object.values(changes), bookId, userId]
+      const values = [
+        ...Object.values(filteredChanges).map((value) => (value !== undefined ? value : null)),
+        bookId,
+        userId,
+      ]
+
+      //DEBUG:
+      console.log('Query:', query)
+      console.log('Values:', values)
 
       const [result] = await pool.execute(query, values)
 
