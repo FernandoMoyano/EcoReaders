@@ -53,23 +53,6 @@ export class BookController {
     }
   }
 
-  //➡️PATCH-Actualizar lo datos de un libro
-  /*  async updateBook(req: Request, res: Response) {
-    try {
-      const { id: bookId } = req.body
-      const { userId } = req.body
-      const changes = req.body
-      //DEBUG:
-      console.log('ID recibido en el controlador:', bookId)
-      //DEBUG:
-      console.log('Body recibido en el controlador:', changes)
-      const editedBook = await bookService.update(userId, bookId, changes)
-      return res.json(editedBook)
-    } catch (error) {
-      console.log(error)
-    }
-  } */
-
   //➡️ PATCH - Crear un nuevo libro
   async updateBook(req: Request, res: Response) {
     try {
