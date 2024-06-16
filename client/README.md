@@ -202,30 +202,93 @@ graph TD
 
 ### MyPublished:
 
-**Props:** data, error, isLoading, handleDelete, handleEdit, bookIdToDelete.
-Función principal: Muestra la lista de libros publicados y maneja la edición/eliminación de libros.
-Interacción: Llama a handleDelete(bookId) que abre Notification.
+- **Props:** data, error, isLoading, handleDelete, handleEdit, bookIdToDelete.
+- **Función principal:** Muestra la lista de libros publicados y maneja la edición/eliminación de libros.
+- **Interacción:** Llama a handleDelete(bookId) que abre Notification.
 
 ### Notification:
 
-**Props:\*\*** message, onConfirm, onCancel.
-**Función principal:** Muestra una notificación de confirmación para eliminar un libro.
-**Interacción:** onConfirm llama a la acción de Redux API (deleteBook).
+- **Props:** message, onConfirm, onCancel.
+- **Función principal:** Muestra una notificación de confirmación para eliminar un libro.
+- **Interacción:** onConfirm llama a la acción de Redux API (deleteBook).
 
 ### Redux API (deleteBook):
 
-**Props:** bookId.
-**Función principal:** Acción de Redux para eliminar un libro en el servidor.
-**Interacción:** Envia bookId al Controller (deleteBook).
+- **Props:** bookId.
+- **Función principal:** Acción de Redux para eliminar un libro en el servidor.
+- **Interacción:** Envia bookId al Controller (deleteBook).
 
 ### Controller (deleteBook):
 
-**Props:** id.
-**Función principal:** Controlador del backend que maneja la solicitud de eliminación.
-**Interacción:** Llama al Service (delete).
+- **Props:** id.
+- **Función principal:** Controlador del backend que maneja la solicitud de eliminación.
+- **Interacción:** Llama al Service (delete).
 
 ### Service (delete):
 
-**Props:** id.
-**Función principal:** Servicio que realiza la eliminación en la base de datos.
-**Interacción:** Ejecuta la consulta SQL para eliminar el libro de la base de datos.
+- **Props:** id.
+- **Función principal:** Servicio que realiza la eliminación en la base de datos.
+- **Interacción:** Ejecuta la consulta SQL para eliminar el libro de la base de datos.
+
+# Diagrama de Flujo Para la Obtención de todos los Libros
+
+---
+
+```mermaid
+
+graph TD
+    %% Definición de los componentes
+    A[Books Page]
+    B[Redux API]
+    C[Controller]
+    D[Service]
+
+    %% Conexiones
+    A -->|useGetBooksQuery| B
+    B -->|query: /books| C
+    C -->|Responde con los libros| D
+
+    %% Detalles de los Props
+    subgraph Props
+        A1[Props: data, isLoading, isError] --> A
+        B1[Props: void] --> B
+        C1[Props: req, res] --> C
+        D1[Props: none] --> D
+    end
+
+    %% Estilos
+    style A fill:#f9f,stroke:#333,stroke-width:4px
+    style B fill:#b9e,stroke:#333,stroke-width:4px
+    style C fill:#cfc,stroke:#333,stroke-width:4px
+    style D fill:#fc9,stroke:#333,stroke-width:4px
+
+
+```
+
+## Descripción de la Conexión entre Componentes
+
+---
+
+Books Page:
+
+Props: data, isLoading, isError.
+Función principal: Muestra la lista de libros disponibles.
+Interacción: Llama a useGetBooksQuery() que conecta con la API de Redux.
+
+Redux API (getBooks):
+
+Props: void.
+Función principal: Acción de Redux para obtener todos los libros del servidor.
+Interacción: Envía una solicitud GET a /books al Controller (getBooks).
+
+Controller (getBooks):
+
+Props: req, res.
+Función principal: Controlador del backend que maneja la solicitud para obtener todos los libros.
+Interacción: Llama al Service (getAll) para obtener los datos.
+
+Service (getAll):
+
+Props: none.
+Función principal: Servicio que realiza la consulta en la base de datos para obtener todos los libros.
+Interacción: Ejecuta la consulta SQL y devuelve los libros encontrados.
