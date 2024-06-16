@@ -1,4 +1,4 @@
-//bookService.ts
+//BOOKSERVICE.ts
 import { ResultSetHeader, RowDataPacket } from 'mysql2'
 import { pool } from '../db/connection'
 import { selectQuery } from '../db/queryUtils'

@@ -1,4 +1,4 @@
-//ModalNewBook
+//MODALNEWBOOK
 import { useState } from 'react'
 import PublicationForm from '../PublicationForm/PublicationForm'
 

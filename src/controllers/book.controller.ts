@@ -1,4 +1,4 @@
-//bookController.ts
+//BOOKCONTROLLER.ts
 import { Request, Response } from 'express'
 import { BookId, CreateBook } from '../interfaces/Book.interface'
 import { BookService } from '../services/book.service'
