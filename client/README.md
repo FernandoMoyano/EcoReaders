@@ -24,9 +24,9 @@ graph TD
         A1[Props: data, error, isLoading, handleEdit, handleDelete, bookIdToDelete] --> A
         B1[Props: initialBookData, closeModal, isOpen] --> B
         C1[Props: initialBookData, handlePostEditedBook, handleInputChange, handleSelectChange, editedBook] --> C
-        D1[Props: userId, bookId, editedBook] --> D
-        E1[Props: userId, bookId, changes] --> E
-        F1[Props: userId, bookId, changes] --> F
+        D1[Params: userId, bookId, editedBook] --> D
+        E1[Params: userId, bookId, changes] --> E
+        F1[Params: userId, bookId, changes] --> F
     end
 
     %% Estilos
@@ -62,19 +62,19 @@ graph TD
 
 ### Redux API (updateBook):
 
-- **Props:** userId, bookId, editedBook.
+- **Params:** userId, bookId, editedBook.
 - **Función principal:** Acción de Redux para actualizar un libro en el servidor.
 - **Interacción:** Envia datos al Controller (updateBook).
 
 ### Controller (updateBook):
 
-- **Props:** userId, bookId, changes.
+- **Params:** userId, bookId, changes.
 - **Función principal:** Controlador del backend que maneja la solicitud de actualización.
 - **Interacción:** Llama al Service (update).
 
 ### Service (update):
 
-- **Props:** userId, bookId, changes.
+- **Params:** userId, bookId, changes.
 - **Función principal:** Servicio que realiza la actualización en la base de datos.
 - **Interacción:** Ejecuta la consulta SQL para actualizar el libro en la base de datos.
 
@@ -104,9 +104,9 @@ graph TD
         A1[Props: data, isLoading, isError] --> A
         B1[Props: isOpen, setIsOpen] --> B
         C1[Props: initialBookData, handlePostNewBook, handleInputChange, handleSelectChange, dataNewBook] --> C
-        D1[Props: dataNewBook] --> D
-        E1[Props: bookDetails] --> E
-        F1[Props: bookDetails] --> F
+        D1[Param: dataNewBook] --> D
+        E1[Param: bookDetails] --> E
+        F1[Param: bookDetails] --> F
     end
 
     %% Estilos
@@ -143,19 +143,19 @@ graph TD
 
 ### Redux API (postNewBook):
 
-- **Props:** dataNewBook.
+- **Param:** dataNewBook.
 - **Función principal:** Acción de Redux para crear un nuevo libro en el servidor.
 - **Interacción:** Envia dataNewBook al Controller (creteBook).
 
 ### Controller (creteBook):
 
-- **Props:** bookDetails.
+- **Param:** bookDetails.
 - **Función principal:** Controlador del backend que maneja la solicitud de creación.
 - **Interacción:** Llama al Service (create).
 
 ### Service (create):
 
-- **Props:** bookDetails.
+- **Param:** bookDetails.
 - **Función principal:** Servicio que realiza la inserción en la base de datos.
 - **Interacción:** Ejecuta la consulta SQL para crear el nuevo libro en la base de datos.
 
@@ -182,9 +182,9 @@ graph TD
     subgraph Props
         A1[Props: data, error, isLoading, handleDelete, handleEdit, bookIdToDelete] --> A
         B1[Props: message, onConfirm, onCancel] --> B
-        C1[Props: bookId] --> C
-        D1[Props: id] --> D
-        E1[Props: id] --> E
+        C1[Param: bookId] --> C
+        D1[Param: id] --> D
+        E1[Param: id] --> E
     end
 
     %% Estilos
@@ -214,19 +214,19 @@ graph TD
 
 ### Redux API (deleteBook):
 
-- **Props:** bookId.
+- **Param:** bookId.
 - **Función principal:** Acción de Redux para eliminar un libro en el servidor.
 - **Interacción:** Envia bookId al Controller (deleteBook).
 
 ### Controller (deleteBook):
 
-- **Props:** id.
+- **Param:** id.
 - **Función principal:** Controlador del backend que maneja la solicitud de eliminación.
 - **Interacción:** Llama al Service (delete).
 
 ### Service (delete):
 
-- **Props:** id.
+- **Param:** id.
 - **Función principal:** Servicio que realiza la eliminación en la base de datos.
 - **Interacción:** Ejecuta la consulta SQL para eliminar el libro de la base de datos.
 
@@ -251,9 +251,9 @@ graph TD
     %% Detalles de los Props
     subgraph Props
         A1[Props: data, isLoading, isError] --> A
-        B1[Props: void] --> B
-        C1[Props: req, res] --> C
-        D1[Props: none] --> D
+        B1[Param: void] --> B
+        C1[Param: req, res] --> C
+        D1[Param: none] --> D
     end
 
     %% Estilos
@@ -269,26 +269,97 @@ graph TD
 
 ---
 
-Books Page:
+### Books Page:
 
-Props: data, isLoading, isError.
-Función principal: Muestra la lista de libros disponibles.
-Interacción: Llama a useGetBooksQuery() que conecta con la API de Redux.
+- **Props:** data, isLoading, isError.
+- **Función principal:** Muestra la lista de libros disponibles.
+- **Interacción:** Llama a useGetBooksQuery() que conecta con la API de Redux.
 
-Redux API (getBooks):
+### Redux API (getBooks):
 
-Props: void.
-Función principal: Acción de Redux para obtener todos los libros del servidor.
-Interacción: Envía una solicitud GET a /books al Controller (getBooks).
+- **Param:** void.
+- **Función principal:** Acción de Redux para obtener todos los libros del servidor.
+- **Interacción:** Envía una solicitud GET a /books al Controller (getBooks).
 
-Controller (getBooks):
+### Controller (getBooks):
 
-Props: req, res.
-Función principal: Controlador del backend que maneja la solicitud para obtener todos los libros.
-Interacción: Llama al Service (getAll) para obtener los datos.
+- **Param:** req, res.
+- **Función principal:** Controlador del backend que maneja la solicitud para obtener todos los libros.
+- **Interacción:** Llama al Service (getAll) para obtener los datos.
 
-Service (getAll):
+### Service (getAll):
 
-Props: none.
-Función principal: Servicio que realiza la consulta en la base de datos para obtener todos los libros.
-Interacción: Ejecuta la consulta SQL y devuelve los libros encontrados.
+- **Param:** none.
+- **Función principal:** Servicio que realiza la consulta en la base de datos para obtener todos los libros.
+- **Interacción:** Ejecuta la consulta SQL y devuelve los libros encontrados.
+
+# Diagrama de Flujo Para la Obtención de Libros por usuario
+
+---
+
+```mermaid
+graph TD
+    %% Definición de los componentes
+    A[MyPublished Page]
+    B[Redux API]
+    C[Controller]
+    D[Service]
+    E[Database]
+
+    %% Conexiones
+    A -->|useGetMyPublishedBooksQuery| B
+    B -->|query: /books/user/:userId/my-books| C
+    C -->|Calls getAllByUserId| D
+    D -->|Executes query| E
+
+    %% Detalles de los Props
+    subgraph Props
+        A1[Props: data, isLoading, isError] --> A
+        B1[Param: userId] --> B
+        C1[Param: req, res] --> C
+        D1[Param: userId] --> D
+        E1[Param: userId] --> E
+    end
+
+    %% Estilos
+    style A fill:#f9f,stroke:#333,stroke-width:4px
+    style B fill:#b9e,stroke:#333,stroke-width:4px
+    style C fill:#cfc,stroke:#333,stroke-width:4px
+    style D fill:#fc9,stroke:#333,stroke-width:4px
+    style E fill:#9cf,stroke:#333,stroke-width:4px
+
+
+```
+
+## Descripción de la Conexión entre Componentes
+
+### MyPublished Page:
+
+- **Props:** data, isLoading, isError.
+- **Función principal:** Muestra la lista de libros publicados por el usuario.
+- **Interacción:** Llama a useGetMyPublishedBooksQuery(userId) que conecta con la API de Redux.
+
+### Redux API (getMyPublishedBooks):
+
+- **Param:** userId.
+- **Función principal:** Acción de Redux para obtener todos los libros publicados por un usuario específico.
+- **Interacción:** Envía una solicitud GET a /books/user/
+  /my-books al Controller (getBooksByUser).
+
+### Controller (getBooksByUser):
+
+- **Param:** req, res.
+- **Función principal:** Controlador del backend que maneja la solicitud para obtener todos los libros publicados por un usuario.
+- **Interacción:** Llama al Service (getAllByUserId) para obtener los datos.
+
+### Service (getAllByUserId):
+
+- **Param:** userId.
+- **Función principal:** Servicio que realiza la consulta en la base de datos para obtener todos los libros publicados por un usuario.
+- **Interacción:** Ejecuta la consulta SQL y devuelve los libros encontrados.
+
+### Database:
+
+- **Param:** userId.
+- **Función principal:** Almacena los datos de los libros y usuarios.
+- **Interacción:** Ejecuta la consulta SQL y devuelve los libros encontrados para el usuario especificado.
