@@ -30,12 +30,12 @@ graph TD
     end
 
     %% Estilos
-    style A fill:#f9f,stroke:#333,stroke-width:4px
-    style B fill:#b9e,stroke:#333,stroke-width:4px
-    style C fill:#9cf,stroke:#333,stroke-width:4px
-    style D fill:#cfc,stroke:#333,stroke-width:4px
-    style E fill:#fc9,stroke:#333,stroke-width:4px
-    style F fill:#ff9,stroke:#333,stroke-width:4px
+    style A fill:#f9f,stroke:#333,stroke-width:4px,color:#000
+    style B fill:#b9e,stroke:#333,stroke-width:4px,color:#000
+    style C fill:#9cf,stroke:#333,stroke-width:4px,color:#000
+    style D fill:#cfc,stroke:#333,stroke-width:4px,color:#000
+    style E fill:#fc9,stroke:#333,stroke-width:4px,color:#000
+    style F fill:#ff9,stroke:#333,stroke-width:4px,color:#000
 ```
 
 ## Descripción de la Conexión entre Componentes
@@ -110,12 +110,12 @@ graph TD
     end
 
     %% Estilos
-    style A fill:#f9f,stroke:#333,stroke-width:4px
-    style B fill:#b9e,stroke:#333,stroke-width:4px
-    style C fill:#9cf,stroke:#333,stroke-width:4px
-    style D fill:#cfc,stroke:#333,stroke-width:4px
-    style E fill:#fc9,stroke:#333,stroke-width:4px
-    style F fill:#ff9,stroke:#333,stroke-width:4px
+    style A fill:#f9f,stroke:#333,stroke-width:4px,color:#000
+    style B fill:#b9e,stroke:#333,stroke-width:4px,color:#000
+    style C fill:#9cf,stroke:#333,stroke-width:4px,color:#000
+    style D fill:#cfc,stroke:#333,stroke-width:4px,color:#000
+    style E fill:#fc9,stroke:#333,stroke-width:4px,color:#000
+    style F fill:#ff9,stroke:#333,stroke-width:4px,color:#000
 
 ```
 
@@ -188,11 +188,11 @@ graph TD
     end
 
     %% Estilos
-    style A fill:#f9f,stroke:#333,stroke-width:4px
-    style B fill:#b9e,stroke:#333,stroke-width:4px
-    style C fill:#cfc,stroke:#333,stroke-width:4px
-    style D fill:#fc9,stroke:#333,stroke-width:4px
-    style E fill:#ff9,stroke:#333,stroke-width:4px
+    style A fill:#f9f,stroke:#333,stroke-width:4px,color:#000
+    style B fill:#b9e,stroke:#333,stroke-width:4px,color:#000
+    style C fill:#cfc,stroke:#333,stroke-width:4px,color:#000
+    style D fill:#fc9,stroke:#333,stroke-width:4px,color:#000
+    style E fill:#ff9,stroke:#333,stroke-width:4px,color:#000
 
 ```
 
@@ -257,10 +257,10 @@ graph TD
     end
 
     %% Estilos
-    style A fill:#f9f,stroke:#333,stroke-width:4px
-    style B fill:#b9e,stroke:#333,stroke-width:4px
-    style C fill:#cfc,stroke:#333,stroke-width:4px
-    style D fill:#fc9,stroke:#333,stroke-width:4px
+    style A fill:#f9f,stroke:#333,stroke-width:4px,color:#000
+    style B fill:#b9e,stroke:#333,stroke-width:4px,color:#000
+    style C fill:#cfc,stroke:#333,stroke-width:4px,color:#000
+    style D fill:#fc9,stroke:#333,stroke-width:4px,color:#000
 
 
 ```
@@ -322,11 +322,11 @@ graph TD
     end
 
     %% Estilos
-    style A fill:#f9f,stroke:#333,stroke-width:4px
-    style B fill:#b9e,stroke:#333,stroke-width:4px
-    style C fill:#cfc,stroke:#333,stroke-width:4px
-    style D fill:#fc9,stroke:#333,stroke-width:4px
-    style E fill:#9cf,stroke:#333,stroke-width:4px
+    style A fill:#f9f,stroke:#333,stroke-width:4px,color:#000
+    style B fill:#b9e,stroke:#333,stroke-width:4px,color:#000
+    style C fill:#cfc,stroke:#333,stroke-width:4px,color:#000
+    style D fill:#fc9,stroke:#333,stroke-width:4px,color:#000
+    style E fill:#9cf,stroke:#333,stroke-width:4px,color:#000
 
 
 ```
