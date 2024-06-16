@@ -1,4 +1,4 @@
-//PAGES - MYPUBLISHED
+//PAGES - MYPUBLISHED.TS
 
 import NavBar from '../components/NavBar/NavBar'
 import { useDeleteBookMutation, useGetMyPublishedBooksQuery } from '../app/api/api'
