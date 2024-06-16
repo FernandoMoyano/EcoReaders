@@ -12,7 +12,8 @@ const BookDetail = () => {
   const publishedBook = useSelector((state: RootState) => state.books.publishedBooks)
   const { id } = useParams<{ id: string }>()
   const { data, error, isLoading } = useGetBookQuery(id!)
-  //DEBUG:↴
+
+  //DEBUG:
   console.log(data)
 
   if (isLoading) {

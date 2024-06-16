@@ -179,7 +179,7 @@ export class BookService {
 
       const [result] = await pool.execute(query, values)
 
-      // DEBUG: Mostrar el resultado de la actualización
+      // DEBUG:
       console.log('Resultado de la actualización:', result)
 
       return result

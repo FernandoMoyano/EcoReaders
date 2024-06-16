@@ -363,3 +363,73 @@ graph TD
 - **Param:** userId.
 - **Función principal:** Almacena los datos de los libros y usuarios.
 - **Interacción:** Ejecuta la consulta SQL y devuelve los libros encontrados para el usuario especificado.
+
+# Diagrama de Flujo Para la Obtención de un libro por id
+
+---
+
+```mermaid
+graph TD
+%% Definición de los componentes
+A[BookDetail Page]
+B[Redux API]
+C[Controller]
+D[Service]
+E[Database]
+
+    %% Conexiones
+    A -->|useGetBookQuery| B
+    B -->|query: /books/:id| C
+    C -->|Calls getOne| D
+    D -->|Executes query| E
+
+    %% Detalles de los Props
+    subgraph Props
+        A1[Props: data, error, isLoading] --> A
+        B1[Param: id] --> B
+        C1[Param: req, res] --> C
+        D1[Param: id] --> D
+        E1[Param: id] --> E
+    end
+
+    %% Estilos
+    style A fill:#f9f,stroke:#333,stroke-width:4px,color:#000
+    style B fill:#b9e,stroke:#333,stroke-width:4px,color:#000
+    style C fill:#cfc,stroke:#333,stroke-width:4px,color:#000
+    style D fill:#fc9,stroke:#333,stroke-width:4px,color:#000
+    style E fill:#9cf,stroke:#333,stroke-width:4px,color:#000
+```
+
+## Descripción de la Conexión entre Componentes
+
+---
+
+### BookDetail Page:
+
+- **Props:** data, error, isLoading.
+- **Función principal:** Muestra los detalles de un libro específico.
+- **Interacción:** Llama a useGetBookQuery(id) que conecta con la API de Redux.
+
+### Redux API (getBook):
+
+- **Props:** id.
+- **Función principal:** Acción de Redux para obtener los detalles de un libro específico.
+- **Interacción:** Envía una solicitud GET a /books/ al Controller (getBook).
+
+### Controller (getBook):
+
+- **Props:** req, res.
+- **Función principal:** Controlador del backend que maneja la solicitud para obtener los detalles de un libro específico.
+- **Interacción:** Llama al Service (getOne) para obtener los datos.
+
+### Service (getOne):
+
+- **Props:** id.
+- **Función principal:** Servicio que realiza la consulta en la base de datos para obtener los detalles de un libro específico.
+- **Interacción:** Ejecuta la consulta SQL y devuelve los detalles del libro.
+
+### Database:
+
+- **Props:** id.
+- **Función principal:** Almacena los datos de los libros y usuarios.
+- **Interacción:** Ejecuta la consulta SQL y devuelve los detalles del libro específico.

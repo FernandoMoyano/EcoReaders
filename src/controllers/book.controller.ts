@@ -7,7 +7,7 @@ import { BookService } from '../services/book.service'
 const bookService = new BookService()
 
 export class BookController {
-  //➡️GET-Obtener un libro
+  //➡️GET - Obtener un libro
   async getBook(req: Request, res: Response) {
     try {
       const id: BookId = req.params.id
@@ -22,7 +22,7 @@ export class BookController {
     }
   }
 
-  //➡️GET-Obtener todos los libros publicados por un usuario
+  //➡️GET - Obtener todos los libros publicados por un usuario
   async getBooksByUser(req: Request, res: Response) {
     try {
       const userId = req.params.userId // Asumiendo que el ID del usuario se pasa como parámetro en la URL
@@ -38,7 +38,7 @@ export class BookController {
     }
   }
 
-  //➡️GET-Obtener todos los libros
+  //➡️GET - Obtener todos los libros
   async getBooks(req: Request, res: Response) {
     try {
       const books = await bookService.getAll()
@@ -59,7 +59,7 @@ export class BookController {
       const { userId, bookId } = req.params
       const changes = req.body
 
-      //DEBUG: Verificar los parámetros recibidos
+      //DEBUG:
       console.log('Parámetros recibidos en req.params:', req.params)
       console.log('Datos recibidos en req.body:', req.body)
 
@@ -76,7 +76,7 @@ export class BookController {
     }
   }
 
-  //➡️POST-Crear un nuevo libro
+  //➡️POST - Crear un nuevo libro
   async creteBook(req: Request, res: Response) {
     try {
       const bookData: CreateBook = req.body
@@ -89,7 +89,7 @@ export class BookController {
     }
   }
 
-  //➡️DELETE-Eliminar un linbro
+  //➡️DELETE - Eliminar un linbro
   async deleteBook(req: Request, res: Response) {
     try {
       const id: BookId = req.params.id
