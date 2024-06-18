@@ -490,30 +490,30 @@ graph TD
 
 
     %% Estilos
-    style A fill:#f9f,stroke:#333,stroke-width:4px
-    style B fill:#b9e,stroke:#333,stroke-width:4px
-    style C fill:#9cf,stroke:#333,stroke-width:4px
-    style D fill:#cfc,stroke:#333,stroke-width:4px
-    style E fill:#fc9,stroke:#333,stroke-width:4px
-    style F fill:#ff9,stroke:#333,stroke-width:4px
-    style G fill:#ff9,stroke:#333,stroke-width:4px
-    style H fill:#f9f,stroke:#333,stroke-width:4px
-    style I fill:#b9e,stroke:#333,stroke-width:4px
-    style J fill:#9cf,stroke:#333,stroke-width:4px
-    style K fill:#cfc,stroke:#333,stroke-width:4px
-    style L fill:#fc9,stroke:#333,stroke-width:4px
-    style M fill:#ff9,stroke:#333,stroke-width:4px
-    style N fill:#ff9,stroke:#333,stroke-width:4px
-    style O fill:#f9f,stroke:#333,stroke-width:4px
-    style P fill:#b9e,stroke:#333,stroke-width:4px
-    style Q fill:#9cf,stroke:#333,stroke-width:4px
-    style R fill:#cfc,stroke:#333,stroke-width:4px
-    style S fill:#fc9,stroke:#333,stroke-width:4px
-    style T fill:#ff9,stroke:#333,stroke-width:4px
-    style U fill:#ff9,stroke:#333,stroke-width:4px
-    style V fill:#f9f,stroke:#333,stroke-width:4px
-    style W fill:#b9e,stroke:#333,stroke-width:4px
-    style X fill:#9cf,stroke:#333,stroke-width:4
+    style A fill:#f9f,stroke:#333,stroke-width:4px,color:#000
+    style B fill:#b9e,stroke:#333,stroke-width:4px,color:#000
+    style C fill:#9cf,stroke:#333,stroke-width:4px,color:#000
+    style D fill:#cfc,stroke:#333,stroke-width:4px,color:#000
+    style E fill:#fc9,stroke:#333,stroke-width:4px,color:#000
+    style F fill:#ff9,stroke:#333,stroke-width:4px,color:#000
+    style G fill:#ff9,stroke:#333,stroke-width:4px,color:#000
+    style H fill:#f9f,stroke:#333,stroke-width:4px,color:#000
+    style I fill:#b9e,stroke:#333,stroke-width:4px,color:#000
+    style J fill:#9cf,stroke:#333,stroke-width:4px,color:#000
+    style K fill:#cfc,stroke:#333,stroke-width:4px,color:#000
+    style L fill:#fc9,stroke:#333,stroke-width:4px,color:#000
+    style M fill:#ff9,stroke:#333,stroke-width:4px,color:#000
+    style N fill:#ff9,stroke:#333,stroke-width:4px,color:#000
+    style O fill:#f9f,stroke:#333,stroke-width:4px,color:#000
+    style P fill:#b9e,stroke:#333,stroke-width:4px,color:#000
+    style Q fill:#9cf,stroke:#333,stroke-width:4px,color:#000
+    style R fill:#cfc,stroke:#333,stroke-width:4px,color:#000
+    style S fill:#fc9,stroke:#333,stroke-width:4px,color:#000
+    style T fill:#ff9,stroke:#333,stroke-width:4px,color:#000
+    style U fill:#ff9,stroke:#333,stroke-width:4px,color:#000
+    style V fill:#f9f,stroke:#333,stroke-width:4px,color:#000
+    style W fill:#b9e,stroke:#333,stroke-width:4px,color:#000
+    style X fill:#9cf,stroke:#333,stroke-width:4,color:#000
 
 
 ```
