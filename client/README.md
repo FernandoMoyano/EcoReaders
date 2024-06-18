@@ -92,7 +92,7 @@ graph TD
 graph
 
     %% Definición de los componentes
-    A["Books Page"] -->|useGetBooksQuery| B["Redux API - getBooks"]
+    A["Books Page"]<-->|useGetBooksQuery| B["Redux API - getBooks"]
     B -->|query: /books| C["BookController - getBooks"]
     C -->|Calls getAll| D["BookService - getAll"]
     D <-->|Executes query| E["Database - Books"]
@@ -104,19 +104,19 @@ graph
     I <-->|Executes query| E
 
     %% Conexiones para obtener un libro en particular
-    J["BookDetail Page"] -->|useGetBookQuery| K["Redux API - getBook"]
+    J["BookDetail Page"]<-->|useGetBookQuery| K["Redux API - getBook"]
     K -->|query: /books/:id| L["BookController - getBook"]
     L -->|Calls getOne| M["BookService - getOne"]
     M <-->|Executes query| E
 
     %% Conexiones para eliminar un libro
-    N["MyPublished Page"] -->|useDeleteBookMutation| O["Redux API - deleteBook"]
+    N["MyPublished Page"] <-->|useDeleteBookMutation| O["Redux API - deleteBook"]
     O -->|mutation: /books/:id| P["BookController - deleteBook"]
     P -->|Calls deleteOne| Q["BookService - deleteOne"]
     Q -->|Executes delete query| E
 
     %% Conexiones para editar un libro
-    R["MyPublished Page"] -->|useUpdateBookMutation| S["Redux API - updateBook"]
+    R["MyPublished Page"] <-->|useUpdateBookMutation| S["Redux API - updateBook"]
     S -->|mutation: /books/user/:userId/edit/:bookId| T["BookController - updateBook"]
     T -->|Calls updateOne| U["BookService - updateOne"]
     U -->|Executes update query| E
