@@ -94,32 +94,32 @@ graph
     %% Definición de los componentes
     A["Books Page"]<-->|useGetBooksQuery| B["Redux API - getBooks"]
     B -->|query: /books| C["BookController - getBooks"]
-    C -->|Calls getAll| D["BookService - getAll"]
+    C <-->|Calls getAll| D["BookService - getAll"]
     D <-->|Executes query| E["Database - Books"]
 
     %% Conexiones para obtener libros por usuario
     F["MyPublished Page"]<-->|useGetMyPublishedBooksQuery|G["Redux API - getMyPublishedBooks"]
     G -->|query: /books/user/:userId/my-books| H["BookController - getBooksByUser"]
-    H -->|Calls getAllByUserId| I["BookService - getAllByUserId"]
+    H <-->|Calls getAllByUserId| I["BookService - getAllByUserId"]
     I <-->|Executes query| E
 
     %% Conexiones para obtener un libro en particular
     J["BookDetail Page"]<-->|useGetBookQuery| K["Redux API - getBook"]
     K -->|query: /books/:id| L["BookController - getBook"]
-    L -->|Calls getOne| M["BookService - getOne"]
+    L <-->|Calls getOne| M["BookService - getOne"]
     M <-->|Executes query| E
 
     %% Conexiones para eliminar un libro
     N["MyPublished Page"] <-->|useDeleteBookMutation| O["Redux API - deleteBook"]
     O -->|mutation: /books/:id| P["BookController - deleteBook"]
-    P -->|Calls deleteOne| Q["BookService - deleteOne"]
+    P <-->|Calls deleteOne| Q["BookService - deleteOne"]
     Q -->|Executes delete query| E
 
     %% Conexiones para editar un libro
     R["MyPublished Page"] <-->|useUpdateBookMutation| S["Redux API - updateBook"]
     S -->|mutation: /books/user/:userId/edit/:bookId| T["BookController - updateBook"]
-    T -->|Calls updateOne| U["BookService - updateOne"]
-    U -->|Executes update query| E
+    T <-->|Calls updateOne| U["BookService - updateOne"]
+    U <-->|Executes update query| E
 
     %% Detalles de los Props
     subgraph Params
@@ -177,6 +177,12 @@ graph
     style S fill:#b9e,stroke:#333,stroke-width:4px,color:#000
     style T fill:#cfc,stroke:#333,stroke-width:4px,color:#000
     style U fill:#fc9,stroke:#333,stroke-width:4px,color:#000
+
+    %% Definición de estilos personalizados
+    classDef largeText font-size:20px;
+
+    %% Aplicación de estilos a nodos
+    class A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z largeText;
 
 
 ```
