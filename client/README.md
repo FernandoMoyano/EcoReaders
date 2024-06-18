@@ -123,17 +123,17 @@ graph
 
     %% Detalles de los Props
     subgraph Params
-        A1[Desestructuración usando hook Redux: data, isLoading, isError] --> A
+        A1[Desestructuración hook provisto por RTK : data, isLoading, isError] --> A
         B1[Param: void] --> B
         C1[Param: req, res] --> C
         D1[Param: none] --> D
 
-        F1[Desestructuración usando hook Redux: data, isLoading, isError] --> F
+        F1[Desestructuración hook provisto por RTK: data, isLoading, isError] --> F
         G1[Param: userId] --> G
         H1[Param: req, res] --> H
         I1[Param: userId] --> I
 
-        J1[Desestructuración usando hook Redux: data, error, isLoading] --> J
+        J1[Desestructuración hook provisto por RTK: data, error, isLoading] --> J
         K1[Param: id] --> K
         L1[Param: req, res] --> L
         M1[Param: id] --> M
