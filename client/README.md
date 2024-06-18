@@ -29,26 +29,32 @@ graph TD
     J --> K[PublicationForm]
     K --> L[Spinner]
 
+
+
     %% BookDetail component hierarchy
     D --> M[Spinner]
     D --> N[NavBar]
-    D --> O[StarRating]
+    D --> |Props:bookId| O[StarRating]
+
+
 
     %% MyPublished component hierarchy
     E --> P[Spinner]
     E --> Q[NavBar]
-    E --> R[Notification]
-    E --> S[ModalEditBook]
-    S --> T[EditForm]
-    T --> U[TextInput]
-    T --> V[SelectInput]
+    E -->|"message\n onCancel\n onConfirm"| R[Notification]
+    E -->|"initialBookData\n closeModal\n isOpon"| S[ModalEditBook]
+    S -->| initialBookData | T[EditForm]
+    T -->|"name\ntype\n placeholder\n className\n required\nvalue\n onChange"| U[TextInput]
+    T -->|"name\nvalue\noptions\nonChange"| V[SelectInput]
+
+
 
     %% Login component hierarchy
-    F --> W[LoginForm]
+    F -->|"handleLogin\n handleInputchange\n credentials\n isLoading"| W[LoginForm]
     W --> X[Spinner]
 
     %% Register component hierarchy
-    G --> Y[RegisterForm]
+    G -->|"handleregister\n isLoading\n handleInputChange\n dataRegister"| Y[RegisterForm]
     Y --> Z[Spinner]
 
 
@@ -80,8 +86,6 @@ graph TD
     style V fill:#f9f,stroke:#333,stroke-width:4px,color:#000
     style W fill:#b9e,stroke:#333,stroke-width:4px,color:#000
     style X fill:#9cf,stroke:#333,stroke-width:4,color:#000
-
-
 ```
 
 ## Descripción de la Conexión entre Componentes para las operaciones CRUD

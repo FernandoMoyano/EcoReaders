@@ -2,6 +2,7 @@
 
 import EditForm from '../EditForm/EditForm'
 import { IBook } from '../../interfaces/IBook'
+import React from 'react'
 
 interface IModalEditedBook {
   initialBookData: IBook
@@ -9,7 +10,7 @@ interface IModalEditedBook {
   isOpen: boolean
 }
 
-const ModalEditedBook = ({ initialBookData, closeModal, isOpen }: IModalEditedBook) => {
+const ModalEditedBook: React.FC<IModalEditedBook> = ({ initialBookData, closeModal, isOpen }) => {
   const handleCloseModal = () => {
     closeModal()
   }

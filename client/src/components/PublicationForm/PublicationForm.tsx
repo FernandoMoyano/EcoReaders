@@ -1,4 +1,4 @@
-//PublicationForm.tsx
+//PUBLICATIONFORM.tsx
 import React, { useRef, useState } from 'react'
 import { BookCategory, BookCondition, BookStatus, NewBook } from '../../interfaces/IBook'
 import { usePostNewBookMutation } from '../../app/api/api'
@@ -20,8 +20,9 @@ const PublicationForm: React.FC = () => {
   }
 
   const priceValueRef = useRef<HTMLInputElement>(null)
-  //  Uso de los hooks del archivo api
+  //  Uso de los hooks del archivo api RTK
   const [postNewBook, { isLoading }] = usePostNewBookMutation()
+
   //estado que maneja la data para hacer POST de un nuevo libro
   const [dataNewBook, setDataNewBook] = useState<NewBook>({
     title: '',
