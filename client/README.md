@@ -524,6 +524,7 @@ graph TD
 
 ```mermaid
 graph
+box pink
     %% Definición de los componentes
     A["Books Page"] -->|useGetBooksQuery| B["Redux API - getBooks"]
     B -->|query: /books| C["BookController - getBooks"]
@@ -549,25 +550,25 @@ graph
     Q -->|Executes delete query| E
 
     %% Conexiones para editar un libro
-    R["**MyPublished Page**"] -->|useUpdateBookMutation| S["Redux API - updateBook"]
+    R["MyPublished Page"] -->|useUpdateBookMutation| S["Redux API - updateBook"]
     S -->|mutation: /books/user/:userId/edit/:bookId| T["BookController - updateBook"]
     T -->|Calls updateOne| U["BookService - updateOne"]
     U -->|Executes update query| E
 
     %% Detalles de los Props
-    subgraph Props
-        A1[Props: data, isLoading, isError] --> A
-        B1[Props: void] --> B
+    subgraph Params
+        A1[Desestructuración: data, isLoading, isError] --> A
+        B1[Param: void] --> B
         C1[Param: req, res] --> C
         D1[Param: none] --> D
 
         F1[Props: data, isLoading, isError] --> F
-        G1[Props: userId] --> G
+        G1[Param: userId] --> G
         H1[Param: req, res] --> H
         I1[Param: userId] --> I
 
         J1[Props: data, error, isLoading] --> J
-        K1[Props: id] --> K
+        K1[Param: id] --> K
         L1[Param: req, res] --> L
         M1[Param: id] --> M
 
@@ -577,11 +578,11 @@ graph
         Q1[Param: id] --> Q
 
         R1[Props: mutation] --> R
-        S1[Props: userId, bookId] --> S
+        S1[Param: userId, bookId] --> S
         T1[Param: req, res] --> T
         U1[Param: userId, bookId] --> U
 
-        E1[Props: query] --> E
+        E1[Param: query] --> E
     end
 
     %% Estilos
