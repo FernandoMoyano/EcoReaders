@@ -98,7 +98,7 @@ graph
     D <-->|Executes query| E["Database - Books"]
 
     %% Conexiones para obtener libros por usuario
-    F["MyPublished Page"] -->|useGetMyPublishedBooksQuery| G["Redux API - getMyPublishedBooks"]
+    F["MyPublished Page"]<-->|useGetMyPublishedBooksQuery|<-->G["Redux API - getMyPublishedBooks"]
     G -->|query: /books/user/:userId/my-books| H["BookController - getBooksByUser"]
     H -->|Calls getAllByUserId| I["BookService - getAllByUserId"]
     I <-->|Executes query| E
