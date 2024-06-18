@@ -1,8 +1,8 @@
-import { DataRegisterI } from '../../interfaces/IDataRegister'
+import { IDataRegister } from '../../interfaces/IDataRegister'
 
 export interface IRegisterFormProps {
-  handleRegister: (dataRegister: DataRegisterI) => void
+  handleRegister: (dataRegister: IDataRegister) => void
   isLoading: boolean
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  dataRegister: DataRegisterI
+  dataRegister: IDataRegister
 }

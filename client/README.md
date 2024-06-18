@@ -92,8 +92,9 @@ graph TD
 
 ---
 
+<div style="zoom: 1.5;">
 ```mermaid
-graph
+graph TD
 
     %% Definición de los componentes
     A["Books Page"]<-->|useGetBooksQuery| B["Redux API - getBooks"]
@@ -188,5 +189,5 @@ graph
     %% Aplicación de estilos a nodos
     class A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z largeText;
 
-
+</div>
 ```
