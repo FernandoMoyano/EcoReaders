@@ -434,6 +434,53 @@ E[Database]
 - **Función principal:** Almacena los datos de los libros y usuarios.
 - **Interacción:** Ejecuta la consulta SQL y devuelve los detalles del libro específico.
 
+## Arbol de componentes
+
+---
+
+```mermaid
+
+graph TD
+    A[App.tsx]
+
+    A --> B[Welcome]
+    A --> C[Books]
+    A --> D[BookDetail]
+    A --> E[MyPublished]
+    A --> F[Login]
+    A --> G[Register]
+
+    %% Books component hierarchy
+    C --> H[Spinner]
+    C --> I[NavBar]
+    C --> J[ModalNewBook]
+    J --> K[PublicationForm]
+    K --> L[Spinner]
+
+    %% BookDetail component hierarchy
+    D --> M[Spinner]
+    D --> N[NavBar]
+    D --> O[StarRating]
+
+    %% MyPublished component hierarchy
+    E --> P[Spinner]
+    E --> Q[NavBar]
+    E --> R[Notification]
+    E --> S[ModalEditBook]
+    S --> T[EditForm]
+    T --> U[TextInput]
+    T --> V[SelectInput]
+
+    %% Login component hierarchy
+    F --> W[LoginForm]
+    W --> X[Spinner]
+
+    %% Register component hierarchy
+    G --> Y[RegisterForm]
+    Y --> Z[Spinner]
+
+```
+
 ## Descripción de la Conexión entre Componentes para las operaciones CRUD
 
 ---
