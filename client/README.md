@@ -93,6 +93,7 @@ graph TD
 ---
 
 ```mermaid
+
 graph TD
 
     %% Definición de los componentes
