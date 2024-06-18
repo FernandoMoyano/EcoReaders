@@ -61,6 +61,8 @@ graph TD
     style E fill:#fc9,stroke:#333,stroke-width:4px,color:#000
     style F fill:#ff9,stroke:#333,stroke-width:4px,color:#000
     style G fill:#ff9,stroke:#333,stroke-width:4px,color:#000
+
+
     style H fill:#f9f,stroke:#333,stroke-width:4px,color:#000
     style I fill:#b9e,stroke:#333,stroke-width:4px,color:#000
     style J fill:#9cf,stroke:#333,stroke-width:4px,color:#000
@@ -121,27 +123,27 @@ graph
 
     %% Detalles de los Props
     subgraph Params
-        A1[Desestructuración: data, isLoading, isError] --> A
+        A1[Desestructuración usando hook Redux: data, isLoading, isError] --> A
         B1[Param: void] --> B
         C1[Param: req, res] --> C
         D1[Param: none] --> D
 
-        F1[Props: data, isLoading, isError] --> F
+        F1[Desestructuración usando hook Redux: data, isLoading, isError] --> F
         G1[Param: userId] --> G
         H1[Param: req, res] --> H
         I1[Param: userId] --> I
 
-        J1[Props: data, error, isLoading] --> J
+        J1[Desestructuración usando hook Redux: data, error, isLoading] --> J
         K1[Param: id] --> K
         L1[Param: req, res] --> L
         M1[Param: id] --> M
 
-        N1[Props: mutation] --> N
-        O1[Props: id] --> O
+        N1[Tipo de builder: mutation] --> N
+        O1[Param: id] --> O
         P1[Param: req, res] --> P
         Q1[Param: id] --> Q
 
-        R1[Props: mutation] --> R
+        R1[Tipo de builder: mutation] --> R
         S1[Param: userId, bookId] --> S
         T1[Param: req, res] --> T
         U1[Param: userId, bookId] --> U
