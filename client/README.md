@@ -441,14 +441,22 @@ E[Database]
 ```mermaid
 
 graph TD
+    %% Definición de los componentes
     A[App.tsx]
+    B[Welcome]
+    C[Books]
+    D[BookDetail]
+    E[MyPublished]
+    F[Login]
+    G[Register]
 
-    A --> B[Welcome]
-    A --> C[Books]
-    A --> D[BookDetail]
-    A --> E[MyPublished]
-    A --> F[Login]
-    A --> G[Register]
+    %% Conexiones
+    A --> B
+    A --> C
+    A --> D
+    A --> E
+    A --> F
+    A --> G
 
     %% Books component hierarchy
     C --> H[Spinner]
@@ -478,6 +486,35 @@ graph TD
     %% Register component hierarchy
     G --> Y[RegisterForm]
     Y --> Z[Spinner]
+
+
+
+    %% Estilos
+    style A fill:#f9f,stroke:#333,stroke-width:4px
+    style B fill:#b9e,stroke:#333,stroke-width:4px
+    style C fill:#9cf,stroke:#333,stroke-width:4px
+    style D fill:#cfc,stroke:#333,stroke-width:4px
+    style E fill:#fc9,stroke:#333,stroke-width:4px
+    style F fill:#ff9,stroke:#333,stroke-width:4px
+    style G fill:#ff9,stroke:#333,stroke-width:4px
+    style H fill:#f9f,stroke:#333,stroke-width:4px
+    style I fill:#b9e,stroke:#333,stroke-width:4px
+    style J fill:#9cf,stroke:#333,stroke-width:4px
+    style K fill:#cfc,stroke:#333,stroke-width:4px
+    style L fill:#fc9,stroke:#333,stroke-width:4px
+    style M fill:#ff9,stroke:#333,stroke-width:4px
+    style N fill:#ff9,stroke:#333,stroke-width:4px
+    style O fill:#f9f,stroke:#333,stroke-width:4px
+    style P fill:#b9e,stroke:#333,stroke-width:4px
+    style Q fill:#9cf,stroke:#333,stroke-width:4px
+    style R fill:#cfc,stroke:#333,stroke-width:4px
+    style S fill:#fc9,stroke:#333,stroke-width:4px
+    style T fill:#ff9,stroke:#333,stroke-width:4px
+    style U fill:#ff9,stroke:#333,stroke-width:4px
+    style V fill:#f9f,stroke:#333,stroke-width:4px
+    style W fill:#b9e,stroke:#333,stroke-width:4px
+    style X fill:#9cf,stroke:#333,stroke-width:4
+
 
 ```
 
