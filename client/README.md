@@ -524,7 +524,7 @@ graph TD
 
 ```mermaid
 graph
-box pink
+
     %% Definición de los componentes
     A["Books Page"] -->|useGetBooksQuery| B["Redux API - getBooks"]
     B -->|query: /books| C["BookController - getBooks"]
