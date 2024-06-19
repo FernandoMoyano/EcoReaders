@@ -1,4 +1,4 @@
-//Book.interface.ts
+//BOOK.INTERFACE.TS
 import { RowDataPacket } from 'mysql2'
 import { BookCategory } from '../enums/BookCategory.enum'
 import { BookCondition } from '../enums/BookCondition.enum'

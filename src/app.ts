@@ -1,17 +1,14 @@
+//APP.TS
+
 //Import de dotenv
 import dotenv from 'dotenv'
 dotenv.config()
-//Express
+
 import express, { Application } from 'express'
-//import cors
 import cors from 'cors'
-//Import routes
 import apiRouter from './routes/index'
-//Import Swagger
 import swaggerUi from 'swagger-ui-express'
-//Importación de archivo swagger
 import swaggerDocumentation from '../openapi.json'
-//Importacion Middlewares
 import { handleError } from './middlewares/handleError'
 import { loggError } from './middlewares/loggError'
 
@@ -25,7 +22,7 @@ export class App {
     this.middlewares()
   }
 
-  setting() {
+  private setting() {
     this.app.set('port', this.port || process.env.PORT || 3000)
   }
 
@@ -38,7 +35,7 @@ export class App {
     })
   }
 
-  middlewares() {
+  private middlewares() {
     this.app.use(express.urlencoded({ extended: false }))
     this.app.use(express.json())
     this.app.use(loggError)

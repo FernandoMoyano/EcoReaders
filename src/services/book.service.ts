@@ -7,12 +7,19 @@ import { v4 as uuidv4 } from 'uuid'
 import { CreateResult } from '../interfaces/CreateResult.interface'
 
 export class BookService {
-  //➡️Obtener un libro
+  //Obtener un libro______________________________
+
   async getOne(id: BookId) {
     try {
       const bookId = id
-      const query =
-        'SELECT books.*, users.username AS publisherName FROM books JOIN users ON books.publisherId = users.id WHERE books.id = ?'
+
+      const query = `
+        SELECT books.*, 
+        users.username AS publisherName 
+        FROM books 
+        JOIN users ON books.publisherId = users.id WHERE books.id = ?
+        `
+
       const [results] = await pool.execute(query, [bookId])
       if (!results) {
         throw new Error('Error al intentar obtener el libro')
@@ -24,7 +31,8 @@ export class BookService {
     }
   }
 
-  //➡️Obtener todos los libros por usuario
+  //Obtener todos los libros por usuario______________
+
   async getAllByUserId(userId: string) {
     try {
       const query = `
@@ -44,7 +52,30 @@ export class BookService {
     }
   }
 
-  //➡️Eliminar un libro
+  //Obtener todos los libros_______________________
+
+  async getAll() {
+    try {
+      const query = `
+        SELECT books.*, 
+        users.username AS publisherName 
+        FROM books 
+        JOIN users ON books.publisherId = users.id;
+        `
+
+      const books = await selectQuery<IBookRow>(query)
+      if (books.length === 0) {
+        throw new Error('No se encontraron libros')
+      }
+      return { foundBooks: books.length > 0, books }
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
+  }
+
+  //Eliminar un libro________________________
+
   async delete(id: BookId): Promise<ResultSetHeader> {
     try {
       const query = 'DELETE FROM books WHERE id = ?;'
@@ -56,31 +87,20 @@ export class BookService {
     }
   }
 
-  //➡️Obtener todos los libros
-  async getAll() {
-    try {
-      const books = await selectQuery<IBookRow>(
-        'SELECT books.*, users.username AS publisherName FROM books JOIN users ON books.publisherId = users.id',
-      )
-      if (books.length === 0) {
-        throw new Error('No se encontraron libros')
-      }
-      return { foundBooks: books.length > 0, books }
-    } catch (error) {
-      console.error(error)
-      throw error
-    }
-  }
+  //Crear un nuevo libro_________________________
 
-  //➡️Crear un nuevo libro
   async create(bookDetails: CreateBook): Promise<CreateResult> {
     try {
       console.log('Datos recibidos en create:', bookDetails)
 
       const bookId = uuidv4()
-      const queryBook =
-        'INSERT INTO books (id, title, author, description, price, images, bookCondition, category, publisherId, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'
-      //const values: CreateBook = Object.values(data)
+
+      const queryBook = `
+      INSERT INTO books
+        ( id, title, author, description, price,
+          images, bookCondition, category, publisherId, status )
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+         `
       const bookValues = [
         bookId,
         bookDetails.title,
@@ -93,13 +113,15 @@ export class BookService {
         bookDetails.publisherId,
         bookDetails.status,
       ]
+
       if (bookValues.length === 0) {
         throw new Error('Faltan datos necesarios para la solicitud')
       }
 
       const [insertedBookResult] = await pool.execute(queryBook, bookValues)
       const queryResult: ResultSetHeader = insertedBookResult as ResultSetHeader
-      const queryUser = 'SELECT * FROM users WHERE id = ?;'
+
+      const queryUser = `SELECT * FROM users WHERE id = ?;`
       const [dataUserResult] = await pool.execute(queryUser, [bookDetails.publisherId])
       const publishedBy: RowDataPacket[] = dataUserResult as RowDataPacket[]
 
@@ -109,6 +131,7 @@ export class BookService {
         bookDetails,
         publishedBy,
       }
+      //DEBUG:
       console.log(result)
 
       return result as CreateResult
@@ -118,7 +141,8 @@ export class BookService {
     }
   }
 
-  //➡️Actualizar un libro
+  //Actualizar un libro___________________________
+
   async update(userId: string, bookId: string, changes: Partial<IBookRow>) {
     try {
       //DEBUG:
@@ -148,7 +172,7 @@ export class BookService {
         throw new Error('No valid columns to update')
       }
 
-      // Serializar el objeto images
+      // Serialización del objeto images
       if (changes.images) {
         changes.image = JSON.stringify(changes.images)
       }
@@ -166,7 +190,10 @@ export class BookService {
         return acc
       }, {} as Partial<IBookRow>)
 
-      const query = `UPDATE books SET ${columnsToUpdate} WHERE id = ? AND publisherId = ?;`
+      const query = `
+      UPDATE books SET ${columnsToUpdate} 
+      WHERE id = ? AND publisherId = ?;
+      `
       const values = [
         ...Object.values(filteredChanges).map((value) => (value !== undefined ? value : null)),
         bookId,
