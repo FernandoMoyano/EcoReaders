@@ -1,16 +1,16 @@
+# 📚 Bienvenidos a EcoReaders 📚
+
+¡Conectamos lectores y reducimos residuos 🌱📖
+
+### 🚀Objetivo de EcoReaders
+
+Facilitamos el intercambio de libros usados para promover la reutilización. 🔄🌍
+
 # Estructura de api
 
 ---
 
 ![Estructura general API](./src/assets/estructura-api.jpg)
-
-# 📚 Bienvenidos a EcoReaders 📚
-
-¡Conectamos lectores y reducimos residuos para un futuro más verde! 🌱📖
-
-### 🚀Objetivo de EcoReaders
-
-Facilitamos el intercambio de libros usados para promover la reutilización. 🔄🌍
 
 # 🚀Para probar la API sigue los siguientes pasos
 
