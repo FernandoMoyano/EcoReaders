@@ -88,6 +88,7 @@ export const bookApi = createApi({
 
     getMyPublishedBooks: builder.query<IBook[], string>({
       query: (userId) => `/books/user/${userId}/my-books`,
+      transformResponse: (response: { message: string; data: IBook[] }) => response.data,
     }),
 
     //Editar un libro ya publicado________________________

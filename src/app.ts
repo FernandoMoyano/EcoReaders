@@ -14,7 +14,7 @@ import { loggError } from './middlewares/loggError'
 
 //Clase App -----------------------------------------
 export class App {
-  private app: Application
+  app: Application
 
   constructor(private port?: number | string) {
     this.app = express()
@@ -22,7 +22,7 @@ export class App {
     this.middlewares()
   }
 
-  private setting() {
+  setting() {
     this.app.set('port', this.port || process.env.PORT || 3000)
   }
 
@@ -35,7 +35,7 @@ export class App {
     })
   }
 
-  private middlewares() {
+  middlewares() {
     this.app.use(express.urlencoded({ extended: false }))
     this.app.use(express.json())
     this.app.use(loggError)

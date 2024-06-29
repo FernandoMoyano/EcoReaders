@@ -57,7 +57,7 @@ export class BookController {
     }
   }
 
-  // PATCH - Crear un nuevo libro_______________________
+  // PATCH - Actualizar los datos de un libro_______________________
 
   async updateBook(req: Request, res: Response) {
     try {

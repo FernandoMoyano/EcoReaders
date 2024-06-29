@@ -35,12 +35,7 @@ export class BookService {
 
   async getAllByUserId(userId: string) {
     try {
-      const query = `
-      SELECT books.*, users.username AS publisherName 
-      FROM books 
-      JOIN users ON books.publisherId = users.id 
-      WHERE books.publisherId = ?
-    `
+      const query = `SELECT books.*, users.username AS publisherName FROM books JOIN users ON books.publisherId = users.id WHERE books.publisherId = ?`
       const [books] = await pool.execute(query, [userId])
       if (Array.isArray(books) && books.length === 0) {
         throw new Error('No se encontraron libros para este usuario')
@@ -87,7 +82,7 @@ export class BookService {
     }
   }
 
-  //Crear un nuevo libro_________________________
+  //Publicar un nuevo libro_________________________
 
   async create(bookDetails: CreateBook): Promise<CreateResult> {
     try {
