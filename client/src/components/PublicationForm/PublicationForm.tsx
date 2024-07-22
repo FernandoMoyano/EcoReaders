@@ -1,4 +1,5 @@
 //PUBLICATIONFORM.tsx
+
 import React, { useRef, useState } from 'react'
 import { BookCategory, BookCondition, BookStatus, NewBook } from '../../interfaces/IBook'
 import { usePostNewBookMutation } from '../../app/api/api'
@@ -20,10 +21,13 @@ const PublicationForm: React.FC = () => {
   }
 
   const priceValueRef = useRef<HTMLInputElement>(null)
-  //  Uso de los hooks del archivo api RTK
+
+  // ➡️Uso de los hooks del archivo api RTK
+
   const [postNewBook, { isLoading }] = usePostNewBookMutation()
 
-  //estado que maneja la data para hacer POST de un nuevo libro
+  //➡️estado que maneja la data para hacer POST de un nuevo libro
+
   const [dataNewBook, setDataNewBook] = useState<NewBook>({
     title: '',
     description: '',
@@ -39,7 +43,7 @@ const PublicationForm: React.FC = () => {
     publisherId: userId,
   })
 
-  //Manejo de los inputs_______________________
+  //➡️Manejo de los inputs_______________________
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target
@@ -60,7 +64,7 @@ const PublicationForm: React.FC = () => {
     }
   }
 
-  //Manejo de los select___________________________
+  //➡️Manejo de los select___________________________
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target
@@ -71,7 +75,7 @@ const PublicationForm: React.FC = () => {
     }))
   }
 
-  //Manejo del input de precio__________________________
+  //➡️Manejo del input de precio__________________________
 
   const handlePriceChange = () => {
     if (priceValueRef.current) {
@@ -85,12 +89,13 @@ const PublicationForm: React.FC = () => {
     }
   }
 
-  //Manejo de la publicación del libro______________
+  //➡️Manejo de la publicación del libro______________
 
   const handlePostNewBook = async () => {
     try {
       const result = await postNewBook(dataNewBook)
       if ('data' in result) {
+        //DEBUG:
         console.log('Libro publicado:', result.data)
         //mostrar una notificación de éxito
       } else if ('error' in result) {
@@ -106,6 +111,7 @@ const PublicationForm: React.FC = () => {
   return (
     <form className="mt-10 space-y-4">
       {/* Titulo__________________________________________ */}
+
       <div>
         <input
           name="title"
@@ -119,6 +125,7 @@ const PublicationForm: React.FC = () => {
       </div>
 
       {/* description__________________________________________ */}
+
       <div>
         <textarea
           name="description"
@@ -131,6 +138,7 @@ const PublicationForm: React.FC = () => {
       </div>
 
       {/* Autor______________________________________________ */}
+
       <div className="flex items-center justify-between gap-4">
         <input
           name="author"
@@ -144,6 +152,7 @@ const PublicationForm: React.FC = () => {
       </div>
 
       {/* Precio_______________________________________________*/}
+
       <div className="flex items-center justify-between gap-4">
         <input
           name="price"
@@ -157,6 +166,7 @@ const PublicationForm: React.FC = () => {
       </div>
 
       {/* -Imagen Frontal____________________________________ */}
+
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="frontCover">Imagen de Tapa</label>
         <input
@@ -170,6 +180,7 @@ const PublicationForm: React.FC = () => {
       </div>
 
       {/* -Imagenes Contratapa_____________________________ */}
+
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="backCover">Imagen de contratapa</label>
         <input
@@ -183,6 +194,7 @@ const PublicationForm: React.FC = () => {
       </div>
 
       {/* condition______________________________________ */}
+
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="bookCondition">Condición del libro</label>
         <select name="bookCondition" id="bookCondition" onChange={handleSelectChange}>
@@ -195,6 +207,7 @@ const PublicationForm: React.FC = () => {
       </div>
 
       {/* Categoria_________________________________________ */}
+
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="category">Categoria:</label>
         <select name="category" id="category" onChange={handleSelectChange}>
@@ -207,6 +220,7 @@ const PublicationForm: React.FC = () => {
       </div>
 
       {/* Status_______________________________________________ */}
+
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="">Estado</label>
         <select name="status" id="status" onChange={handleSelectChange}>
@@ -219,6 +233,7 @@ const PublicationForm: React.FC = () => {
       </div>
 
       {/* botón de envio__________________________________ */}
+
       <div className="!mt-10">
         <button
           type="button"

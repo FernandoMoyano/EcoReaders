@@ -28,6 +28,7 @@ export class AuthController {
       return refreshToken
     }
   }
+
   //➡️Login
   async login(req: Request, res: Response) {
     try {
@@ -35,6 +36,7 @@ export class AuthController {
       if (!username || !password) {
         return res.status(400).json('Todos los campos son requeridos')
       }
+      //DEBUG:
       console.log(username, password)
       const user = await authService.foundUser(username, password)
 

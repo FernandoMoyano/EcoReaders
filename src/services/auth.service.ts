@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 import bcrypt from 'bcrypt'
 
 export class AuthService {
-  //Encontrar usuario
+  //➡️Encontrar usuario
   async foundUser(username: string, password: string): Promise<IUser | null> {
     try {
       const query = 'SELECT * FROM users WHERE username = ?'
@@ -14,7 +14,8 @@ export class AuthService {
       if (user.length > 0) {
         const passwordMatch = await bcrypt.compare(password, user[0].password)
         if (passwordMatch) {
-          //console.log(passwordMatch)
+          //DEBUG:
+          console.log(passwordMatch)
           return user[0] as IUser
         } else {
           throw new Error('No se Encontraron coincidencias')
@@ -26,7 +27,7 @@ export class AuthService {
     }
   }
 
-  //Crear usuario
+  //➡️Crear usuario
   async create(data: IUser): Promise<ResultSetHeader> {
     try {
       const userId = uuidv4()
