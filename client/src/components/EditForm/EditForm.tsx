@@ -1,4 +1,5 @@
-//EDITFORM
+//EDITFORM.TSX
+
 import React, { useRef, useState } from 'react'
 import { BookCategory, BookStatus, IBook, BookCondition } from '../../interfaces/IBook'
 import { useUpdateBookMutation } from '../../app/api/api'
@@ -9,7 +10,7 @@ import SelectInput from '../SelectInput/SelectInput'
 const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => {
   const priceValueRef = useRef<HTMLInputElement>(null)
 
-  //Estados____________________________
+  // ➡️Estados____________________________
 
   const [editedBook, setEditedBook] = useState<IBook>(initialBookData)
   const [updateBook, { isLoading }] = useUpdateBookMutation()
@@ -19,28 +20,16 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
   //DEBUG:
   //console.log('Data del libro a editar', editedBook)
 
-  //Manejo de los inputs_______________________
+  // ➡️Manejo de los inputs_______________________
 
   const handleInputChange = (name: string, value: string) => {
-    if (name === 'frontCover' || name === 'backCover') {
-      //DEBUG:
-      console.log('Input changed:', name, value)
-      setEditedBook((prevState) => ({
-        ...prevState,
-        images: {
-          ...prevState.images,
-          [name]: value,
-        },
-      }))
-    } else {
-      setEditedBook((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }))
-    }
+    setEditedBook((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }))
   }
 
-  //Manejo de los select___________________________
+  // ➡️Manejo de los select___________________________
 
   const handleSelectChange = (name: string, value: string) => {
     setEditedBook((prevState) => ({
@@ -49,7 +38,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
     }))
   }
 
-  //Manejo del input de precio__________________________
+  // ➡️Manejo del input de precio__________________________
 
   const handlePriceChange = () => {
     if (priceValueRef.current) {
@@ -63,7 +52,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
     }
   }
 
-  //Manejo de la publicación del libro Editado______________
+  // ➡️Manejo de la publicación del libro Editado______________
 
   const handlePostEditedBook = async () => {
     try {
@@ -95,7 +84,9 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
           onChange={(value) => handleInputChange('title', value)}
         />
       </div>
+
       {/* description__________________________________________ */}
+
       <div>
         <label htmlFor="description">description</label>
         <TextInput
@@ -108,7 +99,9 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
           onChange={(value) => handleInputChange('description', value)}
         />
       </div>
+
       {/* Autor______________________________________________ */}
+
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="author">Author</label>
         <TextInput
@@ -121,7 +114,9 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
           onChange={(value) => handleInputChange('author', value)}
         />
       </div>
+
       {/* Precio_______________________________________________*/}
+
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="price">Precio</label>
         <TextInput
@@ -135,34 +130,24 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
           onChange={handlePriceChange}
         />
       </div>
+
       {/* -Imagen Frontal____________________________________ */}
+
       <div className="flex items-center justify-between gap-4">
-        <label htmlFor="frontCover">Imagen de Tapa</label>
+        <label htmlFor="frontCover">Url Imagen</label>
         <TextInput
           name="frontCover"
           type="text"
-          value={editedBook.images.frontCover}
+          value={editedBook.image}
           placeholder="url imagen de tapa"
           required
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
           onChange={(value) => handleInputChange('frontCover', value)}
         />
       </div>
-      {/* -Imagen Contratapa_____________________________ */}
-      <div className="flex items-center justify-between gap-4">
-        <label htmlFor="backCover">Imagen de contratapa</label>
-        <TextInput
-          name="backCover"
-          type="text"
-          placeholder="url imagen de contratapa"
-          required
-          value={editedBook.images.backCover}
-          className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
-          onChange={(value) => handleInputChange('backCover', value)}
-        />
-      </div>
 
       {/* condition______________________________________ */}
+
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="bookCondition">Condición del libro</label>
         <SelectInput
@@ -174,6 +159,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
       </div>
 
       {/* Categoria_________________________________________ */}
+
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="category">Categoria:</label>
         <SelectInput
@@ -185,6 +171,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
       </div>
 
       {/* Status_______________________________________________ */}
+
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="">Estado</label>
         <SelectInput
@@ -196,6 +183,7 @@ const EditForm: React.FC<{ initialBookData: IBook }> = ({ initialBookData }) => 
       </div>
 
       {/* botón de envio__________________________________ */}
+
       <div className="!mt-10">
         <button
           type="button"

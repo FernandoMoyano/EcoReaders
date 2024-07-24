@@ -40,7 +40,7 @@ const BookDetail = () => {
             <img
               alt="ecommerce"
               className="lg:w-1/3  w-full object-contain object-center rounded border border-gray-200"
-              src={book.images.frontCover}
+              src={book.image}
             />
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
               <h2 className="text-sm title-font text-gray-500 tracking-widest">{book.author}</h2>

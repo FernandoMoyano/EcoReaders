@@ -8,7 +8,7 @@ import { useLoginMutation } from '../app/api/api'
 import { ICredentials } from '../interfaces/ICredentials'
 
 const Login = () => {
-  //Estado Inicial
+  //➡️Estado Inicial
   const [credentials, setCredetentials] = useState<ICredentials>({
     username: '',
     password: '',
@@ -17,7 +17,7 @@ const Login = () => {
   const navigate = useNavigate()
   const [login, { isLoading }] = useLoginMutation()
 
-  //Manejador de los valores de los inputs
+  //➡️Manejador de los valores de los inputs
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setCredetentials((prevCredentials) => ({
@@ -26,7 +26,7 @@ const Login = () => {
     }))
   }
 
-  //Manejador de Login
+  //➡️Manejador de Login
   const handleLogin = async (credentials: ICredentials) => {
     try {
       const result = await login(credentials).unwrap()

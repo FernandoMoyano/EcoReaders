@@ -16,7 +16,7 @@ export interface IBookRow extends RowDataPacket {
   author: string
   description: string
   price: number
-  images: Images
+  image: string
   bookCondition: BookCondition
   category: BookCategory
   sellerId: number

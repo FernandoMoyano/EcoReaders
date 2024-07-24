@@ -15,17 +15,17 @@ import { IBook } from '../interfaces/IBook'
 import ModalEditedBook from '../components/ModalEditBook/ModalEditBook'
 
 const MyPublished = () => {
-  // Estados que controlan la visibilidad de la notificación________
+  // ➡️Estados que controlan la visibilidad de la notificación________
 
   const [bookIdToDelete, setBookIdToDelete] = useState('')
-  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState<boolean>(false)
 
-  //Estados que controlan el formulario de Edición________
+  // ➡️Estados que controlan el formulario de Edición________
 
   const [bookToEdit, setBookToEdit] = useState<IBook | null>(null)
   const [isOpenModal, setIsOpenModal] = useState(false)
 
-  //Uso de los hooks provistos por la api_________
+  // ➡️Uso de los hooks provistos por la api_________
 
   const { userId } = useParams()
   const { data, error, isLoading } = useGetMyPublishedBooksQuery(userId ?? '')
@@ -46,7 +46,7 @@ const MyPublished = () => {
     return <div>Error al cargar los detalles</div>
   }
 
-  //Manejo del click al icono de "eliminar"_________
+  // ➡️Manejo del click al icono de "eliminar"_________
 
   const handleDelete = async (bookId: string) => {
     // Almacena el ID del libro a eliminar
@@ -55,7 +55,7 @@ const MyPublished = () => {
     setShowDeleteConfirmation(true)
   }
 
-  //Manejo de la confirmación de eliminación_________
+  // ➡️Manejo de la confirmación de eliminación_________
 
   const handleConfirmDelete = async () => {
     try {
@@ -68,20 +68,20 @@ const MyPublished = () => {
     }
   }
 
-  // Manejo del rechazo de eliminación__________
+  // ➡️Manejo del rechazo de eliminación__________
 
   const handleCancelDelete = () => {
     // Oculta la notificación de eliminación
     setShowDeleteConfirmation(false)
   }
 
-  //Manejo del cierre del modal
+  // ➡️Manejo del cierre del modal
 
   const closeModal = () => {
     setIsOpenModal(false)
   }
 
-  //Manejo del click a la publicación del libro editado_____
+  // ➡️Manejo del click a la publicación del libro editado_____
 
   const handleEdit = (book: IBook) => {
     //DEBUG:
@@ -106,14 +106,16 @@ const MyPublished = () => {
               <p className="text-lg font-bold text-black truncate block capitalize">{book.title}</p>
               <div className="flex items-center justify-evenly">
                 <p className="text-lg font-semibold text-black cursor-auto my-3">${formatearNumero(book.price)}</p>
-                {/* Icono de eliminacion */}
+
+                {/* Icono de eliminacion___________ */}
                 <FontAwesomeIcon
                   onClick={() => handleDelete(book.id)}
                   icon={faTrashCan}
                   style={{ cursor: isLoadingBook ? 'not-allowed' : 'pointer' }}
                   opacity={isLoadingBook ? 0.5 : 1}
                 />
-                {/* Icono de edición */}
+
+                {/* Icono de edición________________ */}
                 <FontAwesomeIcon
                   onClick={() => handleEdit(book)}
                   icon={faEdit}

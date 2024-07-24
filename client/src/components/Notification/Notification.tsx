@@ -1,4 +1,5 @@
-//NOTIFICATION.TS
+//NOTIFICATION.TSx
+
 import React from 'react'
 import { INotificationProps } from './INotificationProps'
 

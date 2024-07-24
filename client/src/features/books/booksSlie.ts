@@ -2,22 +2,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { NewBook } from '../../interfaces/IBook'
 
-//Interface para armar el estado incial extendiendo de NewBook
+//➡️Interface para armar el estado incial extendiendo de NewBook
 interface BookWithUsername extends NewBook {
   postedByUser: string
 }
 
-//Interface de estado inicial____________
+//➡️Interface de estado inicial____________
 interface bookState {
   publishedBooks: { [bookId: string]: BookWithUsername }
 }
 
-//Estado inicial__________________
+//➡️Estado inicial__________________
 const initialState: bookState = {
   publishedBooks: JSON.parse(localStorage.getItem('publishedBooks') || '{}'),
 }
 
-//Slice________________________
+//➡️Slice________________________
 const booksSlice = createSlice({
   name: 'books',
 
@@ -41,14 +41,14 @@ const booksSlice = createSlice({
       }
     },
 
-    //Eliminar libro por id___________________________
+    //➡️Eliminar libro por id___________________________
     deletePublishedBook: (state, action: PayloadAction<string>) => {
       const bookId = action.payload
       delete state.publishedBooks[bookId]
       localStorage.setItem('publishedBooks', JSON.stringify(state.publishedBooks))
     },
 
-    //Acatualizar un libro_________________________
+    //➡️Acatualizar un libro_________________________
     updatePublishedBook: (state, action: PayloadAction<{ bookId: string; changes: Partial<NewBook> }>) => {
       const { bookId, changes } = action.payload
       state.publishedBooks[bookId] = { ...state.publishedBooks[bookId], ...changes }

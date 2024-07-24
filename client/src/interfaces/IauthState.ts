@@ -5,8 +5,8 @@ export type IAuthState = {
     userId: string
   }
   registerInfo: {
-    username: null
-    email: null
-    password: null
+    username: string | null
+    email: string | null
+    password: string | null
   }
 }

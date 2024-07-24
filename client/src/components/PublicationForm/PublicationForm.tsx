@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react'
 import { BookCategory, BookCondition, BookStatus, NewBook } from '../../interfaces/IBook'
 import { usePostNewBookMutation } from '../../app/api/api'
 import Spinner from '../Spinner/Spinner'
+import Notification from '../Notification/Notification'
 
 const PublicationForm: React.FC = () => {
   const userDataString = localStorage.getItem('userLoggedIn')
@@ -39,6 +40,10 @@ const PublicationForm: React.FC = () => {
     status: BookStatus.AVAILABLE,
     publisherId: userId,
   })
+
+  // ➡️Estado para la notificación
+  const [showNotification, setShowNotification] = useState(false)
+  const [isConfirming, setIsConfirming] = useState(false)
 
   //➡️Manejo de los inputs_______________________
 
@@ -76,10 +81,18 @@ const PublicationForm: React.FC = () => {
     }
   }
 
+  // ➡️Mostrar la notificación de confirmación
+  const handlePostNewBookClick = () => {
+    setShowNotification(true)
+  }
+
   //➡️Manejo de la publicación del libro______________
 
-  const handlePostNewBook = async () => {
+  const handleConfirmPublish = async () => {
+    setIsConfirming(true)
     try {
+      //DEBUG:
+      console.log('Data before sending:', dataNewBook)
       const result = await postNewBook(dataNewBook)
       if ('data' in result) {
         //DEBUG:
@@ -92,131 +105,148 @@ const PublicationForm: React.FC = () => {
     } catch (error) {
       console.error('Error al publicar el libro:', error)
       //mostrar notificación de error
+    } finally {
+      setIsConfirming(false)
+      setShowNotification(false)
     }
   }
 
+  // ➡️Cancelar la publicación del libro
+  const handleCancelPublish = () => {
+    setShowNotification(false)
+  }
+
   return (
-    <form className="mt-10 space-y-4">
-      {/* Titulo__________________________________________ */}
-
-      <div>
-        <input
-          name="title"
-          type="text"
-          autoComplete="title"
-          required
-          className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
-          placeholder="Titulo"
-          onChange={handleInputChange}
+    <>
+      {showNotification && (
+        <Notification
+          message="¿Estás seguro que quieres publicar este libro?"
+          onConfirm={handleConfirmPublish}
+          onCancel={handleCancelPublish}
         />
-      </div>
+      )}
+      <form className="mt-10 space-y-4">
+        {/* Titulo__________________________________________ */}
 
-      {/* description__________________________________________ */}
+        <div>
+          <input
+            name="title"
+            type="text"
+            autoComplete="title"
+            required
+            className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
+            placeholder="Titulo"
+            onChange={handleInputChange}
+          />
+        </div>
 
-      <div>
-        <textarea
-          name="description"
-          autoComplete="description"
-          required
-          className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
-          placeholder="Descripcion"
-          onChange={handleInputChange}
-        />
-      </div>
+        {/* description__________________________________________ */}
 
-      {/* Autor______________________________________________ */}
+        <div>
+          <textarea
+            name="description"
+            autoComplete="description"
+            required
+            className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
+            placeholder="Descripcion"
+            onChange={handleInputChange}
+          />
+        </div>
 
-      <div className="flex items-center justify-between gap-4">
-        <input
-          name="author"
-          type="text"
-          autoComplete="author"
-          required
-          className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
-          placeholder="Autor"
-          onChange={handleInputChange}
-        />
-      </div>
+        {/* Autor______________________________________________ */}
 
-      {/* Precio_______________________________________________*/}
+        <div className="flex items-center justify-between gap-4">
+          <input
+            name="author"
+            type="text"
+            autoComplete="author"
+            required
+            className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
+            placeholder="Autor"
+            onChange={handleInputChange}
+          />
+        </div>
 
-      <div className="flex items-center justify-between gap-4">
-        <input
-          name="price"
-          type="number"
-          placeholder="Precio"
-          ref={priceValueRef}
-          required
-          className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
-          onChange={handlePriceChange}
-        />
-      </div>
+        {/* Precio_______________________________________________*/}
 
-      {/* -Imagen__________________________________________ */}
+        <div className="flex items-center justify-between gap-4">
+          <input
+            name="price"
+            type="number"
+            placeholder="Precio"
+            ref={priceValueRef}
+            required
+            className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
+            onChange={handlePriceChange}
+          />
+        </div>
 
-      <div className="flex items-center justify-between gap-4">
-        <label htmlFor="frontCover">Imagen de Tapa</label>
-        <input
-          name="frontCover"
-          type="text"
-          placeholder="url imagen de tapa"
-          required
-          className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
-          onChange={handleInputChange}
-        />
-      </div>
+        {/* -Imagen__________________________________________ */}
 
-      {/* condition______________________________________ */}
+        <div className="flex items-center justify-between gap-4">
+          <label htmlFor="image">Imagen de Tapa</label>
+          <input
+            name="image"
+            type="text"
+            placeholder="url imagen de tapa"
+            required
+            className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
+            onChange={handleInputChange}
+          />
+        </div>
 
-      <div className="flex items-center justify-between gap-4">
-        <label htmlFor="bookCondition">Condición del libro</label>
-        <select name="bookCondition" id="bookCondition" onChange={handleSelectChange}>
-          {Object.values(BookCondition).map((condition) => (
-            <option key={condition} value={condition}>
-              {condition}
-            </option>
-          ))}
-        </select>
-      </div>
+        {/* condition______________________________________ */}
 
-      {/* Categoria_________________________________________ */}
+        <div className="flex items-center justify-between gap-4">
+          <label htmlFor="bookCondition">Condición del libro</label>
+          <select name="bookCondition" id="bookCondition" onChange={handleSelectChange}>
+            {Object.values(BookCondition).map((condition) => (
+              <option key={condition} value={condition}>
+                {condition}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="flex items-center justify-between gap-4">
-        <label htmlFor="category">Categoria:</label>
-        <select name="category" id="category" onChange={handleSelectChange}>
-          {Object.values(BookCategory).map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
-      </div>
+        {/* Categoria_________________________________________ */}
 
-      {/* Status_______________________________________________ */}
+        <div className="flex items-center justify-between gap-4">
+          <label htmlFor="category">Categoria:</label>
+          <select name="category" id="category" onChange={handleSelectChange}>
+            {Object.values(BookCategory).map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="flex items-center justify-between gap-4">
-        <label htmlFor="">Estado</label>
-        <select name="status" id="status" onChange={handleSelectChange}>
-          {Object.values(BookStatus).map((status) => (
-            <option key={status} value={status}>
-              {status}
-            </option>
-          ))}
-        </select>
-      </div>
+        {/* Status_______________________________________________ */}
 
-      {/* botón de Publicacion de nuevo libro_________________________ */}
+        <div className="flex items-center justify-between gap-4">
+          <label htmlFor="">Estado</label>
+          <select name="status" id="status" onChange={handleSelectChange}>
+            {Object.values(BookStatus).map((status) => (
+              <option key={status} value={status}>
+                {status}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="!mt-10">
-        <button
-          type="button"
-          className="w-full py-2.5 px-4 text-sm rounded text-white bg-gray-900 hover:bg-gray-700 focus:outline-none"
-          onClick={handlePostNewBook}
-        >
-          {isLoading ? <Spinner /> : 'Publicar'}
-        </button>
-      </div>
-    </form>
+        {/* botón de Publicacion de nuevo libro_________________________ */}
+
+        <div className="!mt-10">
+          <button
+            type="button"
+            className="w-full py-2.5 px-4 text-sm rounded text-white bg-gray-900 hover:bg-gray-700 focus:outline-none"
+            onClick={handlePostNewBookClick}
+          >
+            {isLoading || isConfirming ? <Spinner /> : 'Publicar'}
+          </button>
+        </div>
+      </form>
+    </>
   )
 }
 

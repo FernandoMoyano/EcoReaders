@@ -6,7 +6,7 @@ Usuario1
 usuario1
 usuario1@example.com
 
-----------------------------------------------------------------------
+---------------------------------1-------------------------------------
 
 {
   "title": "El extranjero",
@@ -20,7 +20,7 @@ usuario1@example.com
   "status": "Available"
 }
 
------------------------------------------------------------------------
+-----------------------------------2------------------------------------
 
 {
   "title": "El principito",
@@ -34,7 +34,7 @@ usuario1@example.com
   "status": "Available"
 }
 
------------------------------------------------------------------------------
+-------------------------------------3-----------------------------------
 
 {
   "title": "Crónica de una muerte anunciada",
@@ -48,21 +48,39 @@ usuario1@example.com
   "status": "Available"
 }
 
---------------------------------------------------------------------
 
- {
-    "title": "Cien años de soledad",
-    "author": "Gabriel García Márquez",
-    "description": "Una de las obras más importantes del realismo mágico, narra la historia de la familia Buendía a lo largo de varias generaciones en el pueblo ficticio de Macondo.",
-    "price": 22.50,
-    "image": "https://images.cdn3.buscalibre.com/fit-in/360x360/61/8d/618d227e8967274cd9589a549adff52d.jpg",
+  -------------------------------------4------------------------------------
+
+  {
+    "title": "La tregua",
+    "author": "Mario Benedetti",
+    "description": "Una novela sobre la vida de un oficinista en Montevideo que encuentra el amor en su compañera de trabajo, pero las circunstancias le deparan un destino inesperado.",
+    "price": 15.75,
+    "image":"https://images.cdn1.buscalibre.com/fit-in/360x360/0b/3b/0b3b5778165bc3dad053eac37ee0ebb7.jpg",
     "bookCondition": "New",
     "category": "Fiction",
-    "publisherId": "550e8400-e29b-41d4-a716-446655440001",
+    "publisherId": "550e8400-e29b-41d4-a716-446655440003",
     "status": "Available"
   },
 
-  ----------------------------------------------------------------------------
+  ------------------------------------5-----------------------------------
+
+  {
+    "title": "Como agua para chocolate",
+    "author": "Laura Esquivel",
+    "description": "Una novela de realismo mágico que narra la vida de Tita, cuya fuerte conexión emocional con la comida provoca efectos sobrenaturales.",
+    "price": 16.50,
+    "image": "https://images.cdn2.buscalibre.com/fit-in/360x360/36/d0/36d09cc5a34cd172a8ab97261f0e142b.jpg",
+    "bookCondition": "New",
+    "category": "Fiction",
+    "publisherId": "550e8400-e29b-41d4-a716-446655440004",
+    "status": "Available"
+  },
+
+  
+---------------------------------------------------------------------
+
+
 
 -----------------------------------------------------------------------------
 LIBROS USUARIO 2
@@ -71,6 +89,8 @@ LIBROS USUARIO 2
 Usuario2
 usuario2
 usuario2@example.com
+
+-----------------------------1------------------------------------
 
 
 {
@@ -85,7 +105,7 @@ usuario2@example.com
   "status": "Available"
 }
 
------------------------------------------------------------------------------------
+-------------------------------2------------------------------------
 
 {
   "title": "Pedro Páramo",
@@ -99,7 +119,7 @@ usuario2@example.com
   "status": "Available"
 }
 
------------------------------------------------------------------------------------
+---------------------------------3-------------------------------
 
 {
   "title": "La ciudad y los perros",
@@ -112,6 +132,34 @@ usuario2@example.com
   "publisherId": "550e8400-e29b-41d4-a716-446655440002",
   "status": "Available"
 }
+--------------------------------4----------------------------------
+ {
+    "title": "Ficciones",
+    "author": "Jorge Luis Borges",
+    "description": "Una colección de cuentos cortos que exploran conceptos filosóficos y metafísicos a través de narrativas complejas y a menudo sorprendentes.",
+    "price": 19.00,
+    "image": "https://images.cdn3.buscalibre.com/fit-in/360x360/46/85/4685286dbc1ec2013245afe1d537acfb.jpg",
+    "bookCondition": "New",
+    "category": "Fiction",
+    "publisherId": "550e8400-e29b-41d4-a716-446655440005",
+    "status": "Available"
+  },
+
+  ----------------------------5------------------------------------
+
+{
+    "title": "La fiesta del chivo",
+    "author": "Mario Vargas Llosa",
+    "description": "Una novela histórica que explora la dictadura de Rafael Leónidas Trujillo en la República Dominicana, desde múltiples perspectivas.",
+    "price": 21.25,
+    "image": "https://images.cdn2.buscalibre.com/fit-in/360x360/eb/f3/ebf312ad01be9e04367852a8203a83f3.jpg",
+    "bookCondition": "New",
+    "category": "Fiction",
+    "publisherId": "550e8400-e29b-41d4-a716-446655440006",
+    "status": "Available"
+  }
+
+
 
 -----------------------------------------------------------------------------
 LIBROS USUARIO 3
@@ -121,6 +169,7 @@ Usuario3
 usuario3
 usuario3@example.com
 
+----------------------------------1-----------------------------------
 {
   "title": "Los pasos perdidos",
   "author": "Alejo Carpentier",
@@ -133,7 +182,7 @@ usuario3@example.com
   "status": "Available"
 }
 
--------------------------------------------------------------------------------
+------------------------------------2------------------------------------
 
 {
   "title": "Doña Bárbara",
@@ -147,7 +196,7 @@ usuario3@example.com
   "status": "Available"
 }
 
----------------------------------------------------------------------------------
+--------------------------------------3-----------------------------------------
 
 {
   "title": "La casa de los espíritus",
