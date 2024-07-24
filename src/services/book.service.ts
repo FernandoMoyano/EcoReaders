@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { CreateResult } from '../interfaces/CreateResult.interface'
 
 export class BookService {
-  //Obtener un libro______________________________
+  // ➡️Obtener un libro______________________________
 
   async getOne(id: BookId) {
     try {
@@ -31,7 +31,7 @@ export class BookService {
     }
   }
 
-  //Obtener todos los libros por usuario______________
+  //➡️Obtener todos los libros por usuario______________
 
   async getAllByUserId(userId: string) {
     try {
@@ -47,7 +47,7 @@ export class BookService {
     }
   }
 
-  //Obtener todos los libros_______________________
+  //➡️Obtener todos los libros_______________________
 
   async getAll() {
     try {
@@ -69,7 +69,7 @@ export class BookService {
     }
   }
 
-  //Eliminar un libro________________________
+  //➡️Eliminar un libro________________________
 
   async delete(id: BookId): Promise<ResultSetHeader> {
     try {
@@ -93,7 +93,7 @@ export class BookService {
       const queryBook = `
       INSERT INTO books
         ( id, title, author, description, price,
-          images, bookCondition, category, publisherId, status )
+          image, bookCondition, category, publisherId, status )
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
          `
       const bookValues = [
@@ -102,7 +102,7 @@ export class BookService {
         bookDetails.author,
         bookDetails.description,
         bookDetails.price,
-        JSON.stringify(bookDetails.images),
+        bookDetails.image,
         bookDetails.bookCondition,
         bookDetails.category,
         bookDetails.publisherId,
@@ -150,7 +150,7 @@ export class BookService {
         'author',
         'description',
         'price',
-        'images',
+        'image',
         'bookCondition',
         'category',
         'publisherId',
@@ -168,9 +168,9 @@ export class BookService {
       }
 
       // Serialización del objeto images
-      if (changes.images) {
+      /*   if (changes.images) {
         changes.image = JSON.stringify(changes.images)
-      }
+      } */
 
       // Convertir created_at a un formato adecuado para MySQL
       if (changes.created_at) {

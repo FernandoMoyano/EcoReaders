@@ -1,4 +1,4 @@
-//PUBLICATIONFORM.tsx
+// PUBLICATIONFORM.tsx
 
 import React, { useRef, useState } from 'react'
 import { BookCategory, BookCondition, BookStatus, NewBook } from '../../interfaces/IBook'
@@ -22,7 +22,7 @@ const PublicationForm: React.FC = () => {
 
   const priceValueRef = useRef<HTMLInputElement>(null)
 
-  // ➡️Uso de los hooks del archivo api RTK
+  // ➡️Uso del hook provisto por el archivo api RTK
 
   const [postNewBook, { isLoading }] = usePostNewBookMutation()
 
@@ -33,10 +33,7 @@ const PublicationForm: React.FC = () => {
     description: '',
     author: '',
     price: 0,
-    images: {
-      frontCover: '',
-      backCover: '',
-    },
+    image: '',
     bookCondition: BookCondition.NEW,
     category: BookCategory.OTHER,
     status: BookStatus.AVAILABLE,
@@ -48,20 +45,10 @@ const PublicationForm: React.FC = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target
 
-    if (name === 'frontCover' || name === 'backCover') {
-      setDataNewBook((prevState) => ({
-        ...prevState,
-        images: {
-          ...prevState.images,
-          [name]: value,
-        },
-      }))
-    } else {
-      setDataNewBook((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }))
-    }
+    setDataNewBook((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }))
   }
 
   //➡️Manejo de los select___________________________
@@ -165,7 +152,7 @@ const PublicationForm: React.FC = () => {
         />
       </div>
 
-      {/* -Imagen Frontal____________________________________ */}
+      {/* -Imagen__________________________________________ */}
 
       <div className="flex items-center justify-between gap-4">
         <label htmlFor="frontCover">Imagen de Tapa</label>
@@ -173,20 +160,6 @@ const PublicationForm: React.FC = () => {
           name="frontCover"
           type="text"
           placeholder="url imagen de tapa"
-          required
-          className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
-          onChange={handleInputChange}
-        />
-      </div>
-
-      {/* -Imagenes Contratapa_____________________________ */}
-
-      <div className="flex items-center justify-between gap-4">
-        <label htmlFor="backCover">Imagen de contratapa</label>
-        <input
-          name="backCover"
-          type="text"
-          placeholder="url imagen de contratapa"
           required
           className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-gray-500"
           onChange={handleInputChange}
@@ -232,7 +205,7 @@ const PublicationForm: React.FC = () => {
         </select>
       </div>
 
-      {/* botón de envio__________________________________ */}
+      {/* botón de Publicacion de nuevo libro_________________________ */}
 
       <div className="!mt-10">
         <button

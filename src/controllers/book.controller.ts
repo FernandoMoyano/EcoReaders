@@ -7,7 +7,7 @@ import { BookService } from '../services/book.service'
 const bookService = new BookService()
 
 export class BookController {
-  //GET - Obtener un libro______________________
+  //➡️GET - Obtener un libro______________________
 
   async getBook(req: Request, res: Response) {
     try {
@@ -23,7 +23,7 @@ export class BookController {
     }
   }
 
-  //GET - Obtener todos los libros publicados por un usuario__________
+  //➡️GET - Obtener todos los libros publicados por un usuario__________
 
   async getBooksByUser(req: Request, res: Response) {
     try {
@@ -40,7 +40,7 @@ export class BookController {
     }
   }
 
-  //GET - Obtener todos los libros_________________________
+  //➡️GET - Obtener todos los libros_________________________
 
   async getBooks(req: Request, res: Response) {
     try {
@@ -57,7 +57,7 @@ export class BookController {
     }
   }
 
-  // PATCH - Actualizar los datos de un libro_______________________
+  // ➡️PATCH - Actualizar los datos de un libro_______________________
 
   async updateBook(req: Request, res: Response) {
     try {
@@ -81,7 +81,7 @@ export class BookController {
     }
   }
 
-  //POST - Crear un nuevo libro______________________
+  //➡️POST - Crear un nuevo libro______________________
 
   async creteBook(req: Request, res: Response) {
     try {
@@ -96,7 +96,7 @@ export class BookController {
     }
   }
 
-  //DELETE - Eliminar un linbro__________________
+  //➡️DELETE - Eliminar un linbro__________________
 
   async deleteBook(req: Request, res: Response) {
     try {

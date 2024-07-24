@@ -12,7 +12,9 @@ export const bookApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000/api' }),
 
   endpoints: (builder) => ({
-    //login________________________________
+    //USUARIOS
+
+    //➡️Login________________________________
 
     login: builder.mutation({
       query: (credentials) => ({
@@ -20,6 +22,7 @@ export const bookApi = createApi({
         method: 'POST',
         body: credentials,
       }),
+
       //Tratamiento y extracción de la data
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
@@ -43,7 +46,7 @@ export const bookApi = createApi({
       },
     }),
 
-    //logout__________________________
+    //➡️Logout__________________________
 
     logout: builder.mutation({
       query: () => ({
@@ -52,7 +55,7 @@ export const bookApi = createApi({
       }),
     }),
 
-    //registro________________________________________
+    //➡️Registro________________________________________
 
     register: builder.mutation({
       query: (dataRegister: IDataRegister) => ({
@@ -60,6 +63,7 @@ export const bookApi = createApi({
         method: 'POST',
         body: dataRegister,
       }),
+
       //Tratamiento y extracción de la data
       onQueryStarted: async (_, { dispatch, queryFulfilled }) => {
         try {
@@ -72,26 +76,28 @@ export const bookApi = createApi({
       },
     }),
 
-    //Obtener todos los libros_________________
+    //BOOKS
+
+    //➡️Obtener todos los libros_________________
 
     getBooks: builder.query<GetBooks, void>({
       query: () => '/books',
     }),
 
-    //Obtener un libro________________________
+    //➡️Obtener un libro por id________________________
 
     getBook: builder.query<IBook[], string>({
       query: (id) => `/books/${id}`,
     }),
 
-    //Obtener libros por un usuario específico____________
+    //➡️Obtener libros por un usuario específico____________
 
     getMyPublishedBooks: builder.query<IBook[], string>({
       query: (userId) => `/books/user/${userId}/my-books`,
       transformResponse: (response: { message: string; data: IBook[] }) => response.data,
     }),
 
-    //Editar un libro ya publicado________________________
+    //➡️Editar un libro ya publicado________________________
 
     updateBook: builder.mutation<IBook, { userId: string; bookId: string; editedBook: Partial<IBook> }>({
       query: ({ editedBook, userId, bookId }) => ({
@@ -101,7 +107,7 @@ export const bookApi = createApi({
       }),
     }),
 
-    //Publicar un libro________________________
+    //➡️Publicar un libro________________________
 
     postNewBook: builder.mutation({
       query: (dataNewBook) => ({
@@ -128,7 +134,7 @@ export const bookApi = createApi({
       },
     }),
 
-    //Eliminar un libro____________________
+    //➡️Eliminar un libro____________________
 
     deleteBook: builder.mutation({
       query: (id) => ({

@@ -1,8 +1,4 @@
 //Book interface
-export interface Images {
-  frontCover: string
-  backCover: string
-}
 
 export enum BookCondition {
   NEW = 'New',
@@ -37,7 +33,7 @@ export interface IBook {
   author: string
   description: string
   price: number
-  images: Images
+  image: string
   bookCondition: BookCondition
   category: BookCategory
   publisherId: string
