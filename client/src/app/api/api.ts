@@ -80,8 +80,12 @@ export const bookApi = createApi({
 
     //➡️Obtener todos los libros_________________
 
-    getBooks: builder.query<GetBooks, void>({
+    /*   getBooks: builder.query<GetBooks, void>({
       query: () => '/books',
+    }), */
+
+    getBooks: builder.query<GetBooks, { page: number; limit: number }>({
+      query: ({ page, limit }) => `/books?page=${page}&limit=${limit}`,
     }),
 
     //➡️Obtener un libro por id________________________
