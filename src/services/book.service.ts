@@ -49,7 +49,7 @@ export class BookService {
 
   //➡️Obtener todos los libros_______________________
 
-  async getAll() {
+  /*   async getAll() {
     try {
       const query = `
         SELECT books.*, 
@@ -63,6 +63,44 @@ export class BookService {
         throw new Error('No se encontraron libros')
       }
       return { foundBooks: books.length > 0, books }
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
+  } */
+
+  async getAll(page: number = 1, limit: number = 9) {
+    try {
+      const offset = (page - 1) * limit
+
+      // Consulta para obtener los libros paginados
+      const query = `
+          SELECT books.*, 
+                 users.username AS publisherName 
+          FROM books 
+          JOIN users ON books.publisherId = users.id
+          LIMIT ${limit} OFFSET ${offset};
+        `
+
+      // Consulta para contar el número total de libros
+      const countQuery = `
+          SELECT COUNT(*) as totalBooks 
+          FROM books;
+        `
+
+      const books = await selectQuery<IBookRow>(query)
+      const totalBooksResult = await selectQuery<{ totalBooks: number }>(countQuery)
+      const totalBooks = totalBooksResult[0].totalBooks
+
+      if (books.length === 0) {
+        throw new Error('No se encontraron libros')
+      }
+
+      return {
+        foundBooks: books.length > 0,
+        books,
+        totalBooks,
+      }
     } catch (error) {
       console.error(error)
       throw error
@@ -82,7 +120,7 @@ export class BookService {
     }
   }
 
-  //Publicar un nuevo libro_________________________
+  //➡️Publicar un nuevo libro_________________________
 
   async create(bookDetails: CreateBook): Promise<CreateResult> {
     try {

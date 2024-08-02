@@ -1,24 +1,33 @@
 //Book.ts
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useGetBooksQuery } from '../app/api/api'
 import ModalNewBook from '../components/ModalNewBook/ModalNewBook'
 import NavBar from '../components/NavBar/NavBar'
 import Spinner from '../components/Spinner/Spinner'
 import { IBook } from '../interfaces/IBook'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { formatearNumero } from '../utilities'
 import { useSelector } from 'react-redux'
-import { faLessThan, faGreaterThan } from '@fortawesome/free-solid-svg-icons'
 import { RootState } from '../app/store'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Pagination from '../components/Pagination/Pagination'
 
 const Books: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState(1)
-  const limit = 9
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const queryParams = new URLSearchParams(location.search)
+  const initialPage = parseInt(queryParams.get('page') || '1', 10)
+
+  const [currentPage, setCurrentPage] = useState(initialPage)
+  const limit = 8
 
   const { data, isLoading, isError } = useGetBooksQuery({ page: currentPage, limit })
   const publishedBooks = useSelector((state: RootState) => state.books.publishedBooks)
+
+  useEffect(() => {
+    navigate(`?page=${currentPage}`)
+  }, [currentPage, navigate])
 
   if (isLoading) {
     return <Spinner />
@@ -63,47 +72,7 @@ const Books: React.FC = () => {
           </div>
         ))}
       </section>
-
-      {/* Controles de Paginación */}
-      <div className="flex justify-center items-center mt-8">
-        {/*  <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-          className="px-4 py-2 mx-2 text-white bg-gray-900 rounded disabled:bg-gray-400"
-        >
-          Anterior
-        </button> */}
-
-        <FontAwesomeIcon
-          icon={faLessThan}
-          className={`px-4 py-2 mx-2 rounded ${currentPage === 1 ? 'bg-gray-200 text-white cursor-not-allowed' : 'bg-gray-900 text-white cursor-pointer'}`}
-          onClick={() => handlePageChange(currentPage - 1)}
-        />
-
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => handlePageChange(index + 1)}
-            className={`px-4 py-2 mx-1 rounded ${currentPage === index + 1 ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-900'}`}
-          >
-            {index + 1}
-          </button>
-        ))}
-
-        {/*  <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className="px-4 py-2 mx-2 text-white bg-gray-900 rounded disabled:bg-gray-400"
-        >
-          Siguiente
-        </button> */}
-
-        <FontAwesomeIcon
-          icon={faGreaterThan}
-          onClick={() => handlePageChange(currentPage + 1)}
-          className={`px-4 py-2 mx-2 rounded ${currentPage === totalPages ? 'bg-gray-200 text-white cursor-not-allowed' : 'bg-gray-900 text-white cursor-pointer'}`}
-        />
-      </div>
+      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       <ModalNewBook />
     </div>
   )
