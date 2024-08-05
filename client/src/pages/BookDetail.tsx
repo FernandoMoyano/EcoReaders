@@ -25,11 +25,20 @@ const BookDetail = () => {
   }
 
   // Verifica si data está definido y no está vacío
-  if (!data || data.length === 0) {
+  if (!data) {
     return <div>No se encontró el libro con el ID proporcionado</div>
   }
 
-  const book: IBook = data[0]
+  //DEBUG:
+  console.log(`data es ${data}`)
+  const book: IBook = data
+
+  if (!book || !book.image || !book.title) {
+    return <div>Información del libro incompleta</div>
+  }
+
+  //DEBUG:
+  console.log(book)
 
   return (
     <div>

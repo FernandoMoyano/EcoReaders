@@ -1,10 +1,10 @@
 //BOOKSERVICE.ts
-import { ResultSetHeader, RowDataPacket } from 'mysql2'
-import { pool } from '../db/connection'
+
 import { BookId, CreateBook, IBookRow } from '../interfaces/Book.interface'
 import { v4 as uuidv4 } from 'uuid'
 import { CreateResult } from '../interfaces/CreateResult.interface'
 import { BookRepository } from '../repositories/BookRepository'
+import { prepareUpdateQuery } from '../db/queryUtils'
 
 export class BookService {
   // ➡️Obtener un libro______________________________
@@ -39,7 +39,7 @@ export class BookService {
 
   //➡️Obtener todos los libros_______________________
 
-  async getAll(page: number = 1, limit: number = 9) {
+  async getAll(page: number, limit: number) {
     try {
       const offset = (page - 1) * limit
 
@@ -79,13 +79,6 @@ export class BookService {
       console.log('Datos recibidos en create:', bookDetails)
 
       const bookId = uuidv4()
-
-      const queryBook = `
-      INSERT INTO books
-        ( id, title, author, description, price,
-          image, bookCondition, category, publisherId, status )
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-         `
       const bookValues = [
         bookId,
         bookDetails.title,
@@ -103,12 +96,8 @@ export class BookService {
         throw new Error('Faltan datos necesarios para la solicitud')
       }
 
-      const [insertedBookResult] = await pool.execute(queryBook, bookValues)
-      const queryResult: ResultSetHeader = insertedBookResult as ResultSetHeader
-
-      const queryUser = `SELECT * FROM users WHERE id = ?;`
-      const [dataUserResult] = await pool.execute(queryUser, [bookDetails.publisherId])
-      const publishedBy: RowDataPacket[] = dataUserResult as RowDataPacket[]
+      const queryResult = await BookRepository.insertBook(bookValues)
+      const publishedBy = await BookRepository.findUserById(bookDetails.publisherId)
 
       const result: CreateResult = {
         bookId,
@@ -116,10 +105,10 @@ export class BookService {
         bookDetails,
         publishedBy,
       }
-      //DEBUG:
+
       console.log(result)
 
-      return result as CreateResult
+      return result
     } catch (error) {
       console.error(error)
       throw error
@@ -134,7 +123,7 @@ export class BookService {
       console.log('datos del usuario ', userId)
       console.log('ID del libro:', bookId)
       console.log('Cambios:', changes)
-      // Validar las columnas para asegurarse de que existen en la tabla 'books'
+
       const validColumns = [
         'title',
         'author',
@@ -148,45 +137,17 @@ export class BookService {
         'created_at',
       ]
 
-      const columnsToUpdate = Object.keys(changes)
-        .filter((column) => validColumns.includes(column))
-        .map((column) => `${column} = ?`)
-        .join(', ')
+      // Utilizar la función de utilidad para preparar la consulta y filtrar cambios
+      const { columnsToUpdate, filteredChanges } = prepareUpdateQuery(changes, validColumns)
 
-      if (columnsToUpdate.length === 0) {
-        throw new Error('No valid columns to update')
-      }
-
-      // Convertir created_at a un formato adecuado para MySQL
-      if (changes.created_at) {
-        changes.created_at = new Date(changes.created_at).toISOString().slice(0, 19).replace('T', ' ')
-      }
-
-      // Filtrar cambios
-      const filteredChanges = validColumns.reduce((acc, key) => {
-        if (changes[key] !== undefined) {
-          acc[key] = changes[key]
-        }
-        return acc
-      }, {} as Partial<IBookRow>)
-
-      const query = `
-      UPDATE books SET ${columnsToUpdate} 
-      WHERE id = ? AND publisherId = ?;
-      `
-      const values = [
-        ...Object.values(filteredChanges).map((value) => (value !== undefined ? value : null)),
+      // Llamar a la función del repositorio para ejecutar la actualización
+      const result = await BookRepository.updateBookById(
+        columnsToUpdate,
+        Object.values(filteredChanges),
         bookId,
         userId,
-      ]
+      )
 
-      //DEBUG:
-      console.log('Query:', query)
-      console.log('Values:', values)
-
-      const [result] = await pool.execute(query, values)
-
-      // DEBUG:
       console.log('Resultado de la actualización:', result)
 
       return result

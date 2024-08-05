@@ -33,7 +33,7 @@ export interface IBook {
   author: string
   description: string
   price: number
-  image: string
+  image?: string
   bookCondition: BookCondition
   category: BookCategory
   publisherId: string

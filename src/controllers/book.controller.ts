@@ -42,22 +42,6 @@ export class BookController {
 
   //➡️GET - Obtener todos los libros_________________________
 
-  /*  async getBooks(req: Request, res: Response) {
-    try {
-      const books = await bookService.getAll()
-      //DEBUG:
-      console.log(books)
-      if (!books) {
-        res.status(404).json('No se encontraron libros')
-      } else {
-        res.status(200).json(books)
-      }
-    } catch (error) {
-      res.status(500).json({ error: 'Error interno del servidor' })
-    }
-  }
- */
-
   async getBooks(req: Request, res: Response) {
     try {
       // Obtener los parámetros de paginación de la solicitud (con valores por defecto)
