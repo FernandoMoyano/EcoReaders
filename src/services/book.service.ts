@@ -5,26 +5,18 @@ import { selectQuery } from '../db/queryUtils'
 import { BookId, CreateBook, IBookRow } from '../interfaces/Book.interface'
 import { v4 as uuidv4 } from 'uuid'
 import { CreateResult } from '../interfaces/CreateResult.interface'
+import { BookRepository } from '../repositories/BookRepository'
 
 export class BookService {
   // ➡️Obtener un libro______________________________
 
   async getOne(id: BookId) {
     try {
-      const bookId = id
-
-      const query = `
-        SELECT books.*, 
-        users.username AS publisherName 
-        FROM books 
-        JOIN users ON books.publisherId = users.id WHERE books.id = ?
-        `
-
-      const [results] = await pool.execute(query, [bookId])
-      if (!results) {
+      const book = await BookRepository.getBookById(id)
+      if (book.length === 0) {
         throw new Error('Error al intentar obtener el libro')
       }
-      return results
+      return book[0]
     } catch (error) {
       console.error(error)
       throw error
@@ -35,9 +27,8 @@ export class BookService {
 
   async getAllByUserId(userId: string) {
     try {
-      const query = `SELECT books.*, users.username AS publisherName FROM books JOIN users ON books.publisherId = users.id WHERE books.publisherId = ?`
-      const [books] = await pool.execute(query, [userId])
-      if (Array.isArray(books) && books.length === 0) {
+      const books = await BookRepository.getBooksByUserId(userId)
+      if (books.length === 0) {
         throw new Error('No se encontraron libros para este usuario')
       }
       return books

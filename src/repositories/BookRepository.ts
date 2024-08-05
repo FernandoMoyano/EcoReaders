@@ -1,12 +1,12 @@
 // BookRepository.ts
 import { pool } from '../db/connection'
-import { IBookRow } from '../interfaces/Book.interface'
+import { BookId, IBookRow } from '../interfaces/Book.interface'
 import { RowDataPacket } from 'mysql2'
 
 export class BookRepository {
   //➡️Query para obtener un libro por Id
 
-  static async getBookById(bookId: string): Promise<IBookRow[]> {
+  static async getBookById(bookId: BookId): Promise<IBookRow[]> {
     const query = `
       SELECT books.*, 
              users.username AS publisherName 
