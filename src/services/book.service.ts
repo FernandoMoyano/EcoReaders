@@ -49,26 +49,6 @@ export class BookService {
 
   //➡️Obtener todos los libros_______________________
 
-  /*   async getAll() {
-    try {
-      const query = `
-        SELECT books.*, 
-        users.username AS publisherName 
-        FROM books 
-        JOIN users ON books.publisherId = users.id;
-        `
-
-      const books = await selectQuery<IBookRow>(query)
-      if (books.length === 0) {
-        throw new Error('No se encontraron libros')
-      }
-      return { foundBooks: books.length > 0, books }
-    } catch (error) {
-      console.error(error)
-      throw error
-    }
-  } */
-
   async getAll(page: number = 1, limit: number = 9) {
     try {
       const offset = (page - 1) * limit
@@ -79,7 +59,7 @@ export class BookService {
                  users.username AS publisherName 
           FROM books 
           JOIN users ON books.publisherId = users.id
-          LIMIT ${limit} OFFSET ${offset};
+          LIMIT ? OFFSET ?;
         `
 
       // Consulta para contar el número total de libros
@@ -88,13 +68,9 @@ export class BookService {
           FROM books;
         `
 
-      const books = await selectQuery<IBookRow>(query)
+      const books = await pool.execute<RowDataPacket[]>(query, [limit, offset])
       const totalBooksResult = await selectQuery<{ totalBooks: number }>(countQuery)
       const totalBooks = totalBooksResult[0].totalBooks
-
-      if (books.length === 0) {
-        throw new Error('No se encontraron libros')
-      }
 
       return {
         foundBooks: books.length > 0,
@@ -174,7 +150,7 @@ export class BookService {
     }
   }
 
-  //Actualizar un libro___________________________
+  //➡️Actualizar un libro___________________________
 
   async update(userId: string, bookId: string, changes: Partial<IBookRow>) {
     try {
@@ -204,11 +180,6 @@ export class BookService {
       if (columnsToUpdate.length === 0) {
         throw new Error('No valid columns to update')
       }
-
-      // Serialización del objeto images
-      /*   if (changes.images) {
-        changes.image = JSON.stringify(changes.images)
-      } */
 
       // Convertir created_at a un formato adecuado para MySQL
       if (changes.created_at) {
