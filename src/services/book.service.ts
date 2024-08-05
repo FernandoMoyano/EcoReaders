@@ -44,24 +44,12 @@ export class BookService {
     try {
       const offset = (page - 1) * limit
 
-      // Consulta para obtener los libros paginados
-      const query = `
-          SELECT books.*, 
-                 users.username AS publisherName 
-          FROM books 
-          JOIN users ON books.publisherId = users.id
-          LIMIT ? OFFSET ?;
-        `
+      const books = await BookRepository.getAllBooks(limit, offset)
+      const totalBooks = await BookRepository.countTotalBooks()
 
-      // Consulta para contar el número total de libros
-      const countQuery = `
-          SELECT COUNT(*) as totalBooks 
-          FROM books;
-        `
-
-      const books = await pool.execute<RowDataPacket[]>(query, [limit, offset])
-      const totalBooksResult = await selectQuery<{ totalBooks: number }>(countQuery)
-      const totalBooks = totalBooksResult[0].totalBooks
+      if (books.length === 0) {
+        throw new Error('No se encontraron libros')
+      }
 
       return {
         foundBooks: books.length > 0,
