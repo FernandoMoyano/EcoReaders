@@ -1,7 +1,6 @@
 //BOOKSERVICE.ts
 import { ResultSetHeader, RowDataPacket } from 'mysql2'
 import { pool } from '../db/connection'
-import { selectQuery } from '../db/queryUtils'
 import { BookId, CreateBook, IBookRow } from '../interfaces/Book.interface'
 import { v4 as uuidv4 } from 'uuid'
 import { CreateResult } from '../interfaces/CreateResult.interface'
@@ -64,11 +63,9 @@ export class BookService {
 
   //➡️Eliminar un libro________________________
 
-  async delete(id: BookId): Promise<ResultSetHeader> {
+  async delete(id: BookId) {
     try {
-      const query = 'DELETE FROM books WHERE id = ?;'
-      const [results] = await pool.execute(query, [id])
-      return results as ResultSetHeader
+      await BookRepository.deleteBook(id)
     } catch (error) {
       console.error(error)
       throw error

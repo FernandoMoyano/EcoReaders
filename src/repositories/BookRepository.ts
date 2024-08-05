@@ -56,7 +56,7 @@ export class BookRepository {
 
   //➡️ Query para eliminar un libro
 
-  static async deleteBook(bookId: string): Promise<void> {
+  static async deleteBook(bookId: BookId): Promise<void> {
     const query = 'DELETE FROM books WHERE id = ?;'
     await pool.execute(query, [bookId])
   }
