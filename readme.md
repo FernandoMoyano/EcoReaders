@@ -10,8 +10,6 @@ Facilitamos el intercambio de libros usados para promover la reutilización. �
 
 ---
 
-![Estructura general API](./src/assets/estructura-api.jpg)
-
 # 🚀Para probar la API sigue los siguientes pasos
 
 ### 1️⃣Clona el repositorio👇
