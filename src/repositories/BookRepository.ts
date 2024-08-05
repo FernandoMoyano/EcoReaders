@@ -1,7 +1,8 @@
 // BookRepository.ts
 import { pool } from '../db/connection'
-import { BookId, IBookRow } from '../interfaces/Book.interface'
-import { RowDataPacket } from 'mysql2'
+import { BookId, CreateBook, IBookRow } from '../interfaces/Book.interface'
+import { ResultSetHeader, RowDataPacket } from 'mysql2'
+import { CreateResult } from '../interfaces/CreateResult.interface'
 
 export class BookRepository {
   //➡️Query para obtener un libro por Id
@@ -59,5 +60,18 @@ export class BookRepository {
   static async deleteBook(bookId: BookId): Promise<void> {
     const query = 'DELETE FROM books WHERE id = ?;'
     await pool.execute(query, [bookId])
+  }
+
+  //➡️Query para insertar un libro
+
+  insertBook = async (bookValues: CreateBook): Promise<ResultSetHeader> => {
+    const query = `
+        INSERT INTO books
+            (id, title, author, description, price, image, bookCondition, category, publisherId, status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `
+
+    const [insertedBookResult] = await pool.execute(query, bookValues)
+    return insertedBookResult as ResultSetHeader
   }
 }
