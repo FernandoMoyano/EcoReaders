@@ -45,11 +45,19 @@ export class BookController {
   async getBooks(req: Request, res: Response) {
     try {
       // Obtener los parámetros de paginación de la solicitud (con valores por defecto)
-      const page = parseInt(req.query.page as string) || 1
+      /*   const page = parseInt(req.query.page as string) || 1
       const limit = parseInt(req.query.limit as string) || 9
 
-      const booksData = await bookService.getAll(page, limit)
+      const booksData = await bookService.getAll(page, limit) */
 
+      const limit = parseInt(req.query.limit as string, 10)
+      const offset = parseInt(req.query.offset as string, 10)
+
+      if (!Number.isInteger(limit) || !Number.isInteger(offset)) {
+        return res.status(400).json({ message: 'Limit and offset must be valid integers.' })
+      }
+
+      const booksData = await bookService.getAll(limit, offset)
       //DEBUG:
       console.log(booksData)
 

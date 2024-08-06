@@ -1,4 +1,5 @@
 import { pool } from './connection'
+import { IBookRow } from '../interfaces/Book.interface'
 
 //Get
 export const selectQuery = async <T>(queryString: string): Promise<Partial<T>[]> => {
@@ -6,9 +7,12 @@ export const selectQuery = async <T>(queryString: string): Promise<Partial<T>[]>
   return results as T[]
 }
 
-//Funcion que prepara las columnas a actualizar
+export const insertQuery = async <T>(queryString: string, values: unknown[]): Promise<T> => {
+  const [result] = await pool.execute(queryString, values)
+  return result as T
+}
 
-import { IBookRow } from '../interfaces/Book.interface'
+//Funcion que prepara las columnas a actualizar
 
 export function prepareUpdateQuery(
   changes: Partial<IBookRow>,
@@ -39,9 +43,3 @@ export function prepareUpdateQuery(
 
   return { columnsToUpdate, filteredChanges }
 }
-
-//POST
-/* export const modifyQuery = async (queryString: string, values?: CreateBook): Promise<ResultSetHeader> => {
-  const [result] = await pool.execute(queryString, values)
-  return result as ResultSetHeader
-} */

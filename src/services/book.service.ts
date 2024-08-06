@@ -119,11 +119,6 @@ export class BookService {
 
   async update(userId: string, bookId: string, changes: Partial<IBookRow>) {
     try {
-      //DEBUG:
-      console.log('datos del usuario ', userId)
-      console.log('ID del libro:', bookId)
-      console.log('Cambios:', changes)
-
       const validColumns = [
         'title',
         'author',
@@ -148,6 +143,7 @@ export class BookService {
         userId,
       )
 
+      //DEBUG:
       console.log('Resultado de la actualización:', result)
 
       return result
