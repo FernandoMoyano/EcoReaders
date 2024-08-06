@@ -7,12 +7,21 @@ export const selectQuery = async <T>(queryString: string): Promise<Partial<T>[]>
   return results as T[]
 }
 
+//Crear - Actualizar
 export const insertQuery = async <T>(queryString: string, values: unknown[]): Promise<T> => {
   const [result] = await pool.execute(queryString, values)
   return result as T
 }
 
 //Funcion que prepara las columnas a actualizar
+// changes -> Cambios parciales objeto IBookRow.
+// validColumns -> representa las columnas que pueden ser actualizadas
+
+/* retorno{
+  columnsToUpdate -> columnas a actualizar `column1=?`
+  filteredChanges ->Un objeto parcial de tipo `IBookRow` que 
+  contiene solo los valores que se deben actualizar 
+} */
 
 export function prepareUpdateQuery(
   changes: Partial<IBookRow>,
